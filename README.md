@@ -1,24 +1,10 @@
-# WCDebugKit
+## WCDebugKit
 
-## Example
+### Tool Components
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
-
-## Installation
-
-WCDebugKit is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'WCDebugKit'
-```
-
-## Author
-
-wesley chen, wesley4chen@gmail.com
-
-## License
-
-WCDebugKit is available under the MIT license. See the LICENSE file for more info.
+* Debug Panel, a handy panel for present your debug tool
+* App Info Viewer, check app information
+* Device Info Viewer, check iOS device information (in development)
+* File Explorer, a handy file explorer for brwosing sanbox or main bundle
+* View Inspector, a tool for checking views
+* Integrated Tools, present third-party tools
