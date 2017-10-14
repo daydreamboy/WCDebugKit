@@ -1,0 +1,12 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'WCDebugKit_Example' do
+  pod 'WCDebugKit', :path => '../'
+
+  #pod 'WCDebugKit/AppInfoViewer', :path => '../'
+  #pod 'WCDebugKit/DebugPanel', :path => '../'
+  #pod 'WCDebugKit/FileExplorer', :path => '../'
+  #pod 'WCDebugKit/IntegratedTools', :path => '../'
+end
