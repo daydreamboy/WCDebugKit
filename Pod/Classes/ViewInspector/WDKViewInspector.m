@@ -9,6 +9,7 @@
 #import "WDKViewInspector.h"
 #import "WDKUserInterfaceInspector.h"
 #import "WDKDebugGroup_Internal.h"
+#import "WDKViewExplorerWindow.h"
 
 @implementation WDKViewInspector
 
@@ -24,6 +25,11 @@
     
     action = [WDKToggleAction actionWithName:NSLocalizedString(@"Show View Frames", nil) enabled:[WDKUserInterfaceInspector sharedInstance].colorizedViewBorderEnabled toggleBlock:^(BOOL enabled) {
         [[WDKUserInterfaceInspector sharedInstance] setColorizedViewBorderEnabled:enabled];
+    }];
+    [arrM addObject:action];
+    
+    action = [WDKDebugAction actionWithName:NSLocalizedString(@"View Explorer", nil) actionBlock:^{
+        [WDKViewExplorerWindow enableViewExplorerWindow:YES];
     }];
     [arrM addObject:action];
     

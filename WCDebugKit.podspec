@@ -49,6 +49,11 @@ A debug kit for iOS
       'Pod/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
       'Pod/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
     ]
+    # Note: exclude_files will remove files
+    # ss.exclude_files = [
+    #   'Pod/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
+    #   'Pod/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
+    # ]
 		ss.resource_bundles = {
     	'WCDebugKit' => ['Pod/Assets/**/*']
   	}
@@ -93,10 +98,10 @@ A debug kit for iOS
   end
 
   # subspec 'IntegratedTools'
-	s.subspec 'IntegratedTools' do |ss|
-		ss.dependency 'WCDebugKit/DebugPanel'
+  s.subspec 'IntegratedTools' do |ss|
+    ss.dependency 'WCDebugKit/DebugPanel'
     ss.dependency 'FLEX', '= 2.4.0'
-		ss.source_files = [
+    ss.source_files = [
   		'Pod/Classes/IntegratedTools/**/*',
   	]
 	end
