@@ -299,14 +299,28 @@ static WDKDebugPanel *WDK_sharedPanel;
             self.enterBlock(actionsViewController);
         }
         else {
+            // try to get hostViewController from tapped view's window, if not found use AppDelegate's window
             UIWindow *window = WDK_UIViewResideInUIWindow(sender.view);
             UIViewController *hostViewController = window.rootViewController;
+            
             if (!hostViewController) {
                 hostViewController = [[[UIApplication sharedApplication].delegate window] rootViewController];
             }
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:actionsViewController];
-            [hostViewController presentViewController:navController animated:YES completion:nil];
+            
+            if (hostViewController.isViewLoaded && hostViewController.view.window) {
+                // if hostViewController is visible, use it to present
+                // @see https://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
+                [hostViewController presentViewController:navController animated:YES completion:nil];
+            }
+            else if (hostViewController.presentedViewController) {
+                // check hostViewController has presented view controller, if it has, use the presented view controller to present
+                [hostViewController.presentedViewController presentViewController:navController animated:YES completion:nil];
+            }
+            else {
+                NSLog(@"Show debug panel from status bar failed, please check reason");
+            }
             
             self.navController = navController;
         }
