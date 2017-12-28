@@ -173,6 +173,10 @@ static WDKDebugPanel *WDK_sharedPanel;
 
 + (void)installDebugPanelOnStatusBar {
     UIView *statusBar = [UIView odt_statusBarInstance];
+    if (!statusBar) {
+        // @see https://stackoverflow.com/a/26451989
+        statusBar = (UIView *)[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
+    }
     if (statusBar) {
 #if DEBUG
         NSLog(@"install DebugPanel on statusBar successfully");
