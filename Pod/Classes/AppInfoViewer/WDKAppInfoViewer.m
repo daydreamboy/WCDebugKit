@@ -13,6 +13,10 @@
 #import "WDKDebugPanelGerenalViewController.h"
 #import "WDKDebugGroup_Internal.h"
 
+#import "WCMobileProvisionTool.h"
+#import "WCInfoPlistTool.h"
+#import "WCNSObjectTool.h"
+
 #define wdk_tagColor        [UIColor orangeColor]
 #define wdk_versionColor    [UIColor blueColor]
 #define wdk_branchColor     [UIColor greenColor]
@@ -49,8 +53,12 @@
         [panelViewController.navigationController pushViewController:vc animated:YES];
     }];
     
+    WDKSubMenuAction *action4 = [WDKSubMenuAction actionWithName:NSLocalizedString(@"Class Explorer", nil) subMenuBlock:^NSArray<WDKDebugGroup *> *{
+        return [self createClassList];
+    }];
+    
     WDKDebugGroup *group = [WDKDebugGroup groupWithName:NSLocalizedString(@"App信息查看", nil) actionsBlock:^NSArray<WDKDebugAction *> *{
-        return @[action1, action2, action3];
+        return @[action1, action2, action3, action4];
     }];
     group.nameColor = [UIColor brownColor];
     
@@ -114,129 +122,79 @@
              ] mutableCopy];
 }
 
+#define kTitle          @"title"
+#define kSubtitle       @"subtitle"
+#define kAlertMessage   @"alertMessage"
+
+#define NILABLE(var)                                                                                        \
+    ({                                                                                                      \
+        id ret;                                                                                             \
+        static NSString *__nilString__ = @"(null)";                                                         \
+        if (var == nil) {                                                                                   \
+            ret = __nilString__;                                                                            \
+        }                                                                                                   \
+        else if ([var isKindOfClass:[NSString class]] && [(NSString *)var isEqualToString:__nilString__]) { \
+            ret = nil;                                                                                      \
+        }                                                                                                   \
+        else {                                                                                              \
+            ret = var;                                                                                      \
+        }                                                                                                   \
+        ret;                                                                                                \
+    })
+
+
 - (NSMutableArray<NSMutableArray<WDKDebugPanelCellItem*> *> *)createIdentifiersList {
+    
     // Section 1
-    WDKDebugPanelCellItem *item1 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item1.title = @"Bundle ID";
-    item1.subtitle = [[self.class plistInfo] objectForKey:@"CFBundleIdentifier"];
-    item1.alertMessage = [item1.subtitle copy];
-    
-    WDKDebugPanelCellItem *item2 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item2.title = @"Bundle Name";
-    item2.subtitle = [[self.class plistInfo] objectForKey:@"CFBundleName"];
-    item2.alertMessage = [item2.subtitle copy];
-    
-    WDKDebugPanelCellItem *item3 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item3.title = @"Bundle Display Name";
-    item3.subtitle = [[self.class plistInfo] objectForKey:@"CFBundleDisplayName"];
-    item3.alertMessage = [item3.subtitle copy];
-    
-    WDKDebugPanelCellItem *item4 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item4.title = @"Build Number";
-    item4.subtitle = [[self.class plistInfo] objectForKey:@"CFBundleVersion"];
-    item4.alertMessage = [item4.subtitle copy];
-    
-    WDKDebugPanelCellItem *item5 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item5.title = @"Minimum supported iOS Version";
-    item5.subtitle = [[self.class plistInfo] objectForKey:@"MinimumOSVersion"];
-    item5.alertMessage = [item5.subtitle copy];
-    
-    WDKDebugPanelCellItem *item6 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    item6.title = @"IdentifierForVendor";
-    item6.subtitle = [[UIDevice currentDevice] identifierForVendor].UUIDString;
-    item6.alertMessage = [item6.subtitle copy];
+    NSArray<NSDictionary *> *section1 = @[
+        @{ kTitle: @"Bundle ID", kSubtitle: [WCInfoPlistTool bundleID], },
+        @{ kTitle: @"Bundle Name", kSubtitle: [WCInfoPlistTool bundleName], },
+        @{ kTitle: @"Bundle Display Name", kSubtitle: [WCInfoPlistTool bundleDisplayName], },
+        @{ kTitle: @"Build Number", kSubtitle: [WCInfoPlistTool buildNumber], },
+        @{ kTitle: @"Minimum supported iOS Version", kSubtitle: [WCInfoPlistTool minimumSupportediOSVersion], },
+        @{ kTitle: @"IdentifierForVendor", kSubtitle: [[UIDevice currentDevice] identifierForVendor].UUIDString, },
+    ];
     
     // Section 2
-    WDKDebugPanelCellItem *section2Item;
-    NSMutableArray *arrM = [NSMutableArray array];
+    NSArray<NSDictionary *> *section2 = @[
+        @{ kTitle: @"App Release Mode", kSubtitle: [WCMobileProvisionTool appReleaseMode], },
+        @{ kTitle: @"AppID Name", kSubtitle: [WCMobileProvisionTool appIDName], },
+        @{ kTitle: @"AppID Prefix", kSubtitle: [WCMobileProvisionTool appIDPrefix], },
+        @{ kTitle: @"Entitlements - Apple Push", kSubtitle: ([WCMobileProvisionTool entitlementsAPSEnv].length ? [WCMobileProvisionTool entitlementsAPSEnv] : @"(not enabled)"), },
+        @{ kTitle: @"Entitlements - App ID", kSubtitle: [WCMobileProvisionTool entitlementsAppID], },
+        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WCMobileProvisionTool entitlementsSiriEnabled], },
+        @{ kTitle: @"Entitlements - TeamID", kSubtitle: [WCMobileProvisionTool entitlementsTeamID], },
+        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WCMobileProvisionTool entitlementsSiriEnabled], },
+        @{ kTitle: @"Entitlements - Debug Enabled", kSubtitle: [WCMobileProvisionTool entitlementsDebugEnabled], },
+        @{ kTitle: @"Entitlements - App Groups", kSubtitle: ([WCMobileProvisionTool entitlementsAppGroups].count ? @"(click to see more)" : @"(not enabled)"), kAlertMessage: ([WCMobileProvisionTool entitlementsAppGroups].count ? [[WCMobileProvisionTool entitlementsAppGroups] componentsJoinedByString:@"\n"]: @"(not enabled)") },
+        @{ kTitle: @"Entitlements - Keychain Sharing", kSubtitle: @"(click to see more)", kAlertMessage: NILABLE([[WCMobileProvisionTool entitlementsKeychainSharingBundleIDs] componentsJoinedByString:@"\n"]) },
+        @{ kTitle: @"Provision Profile Name", kSubtitle: [WCMobileProvisionTool provisionName], },
+        @{ kTitle: @"Provision Profile Expire Date", kSubtitle: [WCMobileProvisionTool provisionExpirationDate], },
+        @{ kTitle: @"Team Name", kSubtitle: [WCMobileProvisionTool teamName], },
+        @{ kTitle: @"UUID", kSubtitle: [WCMobileProvisionTool UUID], },
+    ];
     
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"App Release Mode";
-    section2Item.subtitle = [self.class appReleaseMode];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
+    NSArray * (^convertDictionaryToItem)(NSArray<NSDictionary *> *) = ^NSArray*(NSArray<NSDictionary *> *arr) {
+        
+        NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:arr.count];
+        
+        for (NSDictionary *dict in arr) {
+            WDKDebugPanelCellItem *item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
+            item.title = dict[kTitle];
+            item.subtitle = dict[kSubtitle];
+            item.alertMessage = dict[kAlertMessage] == nil ? [item.subtitle copy] : dict[kAlertMessage];
+            
+            [arrM addObject:item];
+        }
+        
+        return arrM;
+    };
     
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"AppID Name";
-    section2Item.subtitle = [self.class appIDName];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"AppID Prefix";
-    section2Item.subtitle = [self.class appIDPrefix];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - Apple Push";
-    section2Item.subtitle = [self.class entitlementsAPSEnv].length ? [self.class entitlementsAPSEnv] : @"(not enabled)";
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - App ID";
-    section2Item.subtitle = [self.class entitlementsAppID];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - Siri Enabled";
-    section2Item.subtitle = [self.class entitlementsSiriEnabled];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - TeamID";
-    section2Item.subtitle = [self.class entitlementsTeamID];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - Debug Enabled";
-    section2Item.subtitle = [self.class entitlementsDebugEnabled];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - App Groups";
-    section2Item.subtitle = [self.class entitlementsAppGroups].count ? @"(click to see more)" : @"(not enabled)";
-    section2Item.alertMessage = [self.class entitlementsAppGroups].count ? [[self.class entitlementsAppGroups] componentsJoinedByString:@"\n"]: @"(not enabled)";
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Entitlements - Keychain Sharing";
-    section2Item.subtitle = @"(click to see more)";
-    section2Item.alertMessage = [[self.class entitlementsKeychainSharingBundleIDs] componentsJoinedByString:@"\n"];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Provision Profile Name";
-    section2Item.subtitle = [self.class provisionName];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Provision Profile Expire Date";
-    section2Item.subtitle = [self.class provisionExpirationDate];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"Team Name";
-    section2Item.subtitle = [self.class teamName];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
-    
-    section2Item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
-    section2Item.title = @"UUID";
-    section2Item.subtitle = [self.class UUID];
-    section2Item.alertMessage = [section2Item.subtitle copy];
-    [arrM addObject:section2Item];
+    NSArray *section1Items = convertDictionaryToItem(section1);
+    NSArray *section2Items = convertDictionaryToItem(section2);
     
     return [@[
-             [@[item1, item2, item3, item4, item5, item6] mutableCopy],
-             arrM
+             section1Items, section2Items
              ] mutableCopy];
 }
 
@@ -261,6 +219,9 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/%@", path, filename];
     
     NSData *data = [NSData dataWithContentsOfFile:filePath];
+    if (!data) {
+        return nil;
+    }
     NSMutableDictionary *dictM = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
     NSLog(@"%@", dictM);
     
@@ -305,6 +266,106 @@
     return allVersions;
 }
 
+- (NSArray<WDKDebugGroup *> *)createClassList {
+    NSArray<NSString *> *classes = [WCNSObjectTool allClasses];
+    
+    NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:classes.count];
+    for (NSString *className in classes) {
+        WDKSubMenuAction *action = [WDKSubMenuAction actionWithName:className subMenuBlock:^NSArray<WDKDebugGroup *> *{
+            
+            NSMutableArray<WDKDebugAction *> *(^convertToActions)(NSArray *) = ^NSMutableArray<WDKDebugAction *> *(NSArray<NSString *> *arr) {
+                
+                NSMutableArray<WDKDebugAction *> *actions = [NSMutableArray arrayWithCapacity:arr.count];
+                
+                for (NSString *title in arr) {
+                    WDKDebugAction *action = [WDKDebugAction actionWithName:title actionBlock:nil];
+                    action.titleFont = [UIFont systemFontOfSize:12];
+                    action.shouldDismissPanel = NO;
+                    [actions addObject:action];
+                }
+                
+                return actions;
+            };
+            
+            WDKDebugGroup *propertiesGroup = [WDKDebugGroup groupWithName:@"@property" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSArray *properties = [WCNSObjectTool propertiesWithClassName:className];
+                return convertToActions(properties);
+            }];
+            
+            WDKDebugGroup *ivarsGroup = [WDKDebugGroup groupWithName:@"ivars" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSArray *ivars = [WCNSObjectTool ivarsWithClassName:className];
+                return convertToActions(ivars);
+            }];
+            
+            WDKDebugGroup *instanceMethodsGroup = [WDKDebugGroup groupWithName:@"-instanceMethods" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSArray *instanceMethods = [WCNSObjectTool instanceMethodsWithClassName:className];
+                return convertToActions(instanceMethods);
+            }];
+            
+            WDKDebugGroup *classMethodsGroup = [WDKDebugGroup groupWithName:@"+classMethods" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSArray *classMethods = [WCNSObjectTool classMethodsWithClassName:className];
+                return convertToActions(classMethods);
+            }];
+            
+            WDKDebugGroup *protocolsGroup = [WDKDebugGroup groupWithName:@"@protocols" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSArray *protocols = [WCNSObjectTool protocolsWithClassName:className];
+                
+                NSMutableArray<WDKSubMenuAction *> *actions = [NSMutableArray arrayWithCapacity:protocols.count];
+                
+                for (NSString *protocol in protocols) {
+                    NSString *firstLevelProtocol = [[protocol componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<,> "]] firstObject];
+                    
+                    WDKSubMenuAction *action = [WDKSubMenuAction actionWithName:protocol subMenuBlock:^NSArray<WDKDebugGroup *> *{
+                        WDKDebugGroup *section1 = [WDKDebugGroup groupWithName:@"required methods" actionsBlock:^NSArray<WDKDebugAction *> *{
+                            NSArray *requiredMethods = [WCNSObjectTool protocolRequiredMethodsWithProtocolName:firstLevelProtocol className:className];
+                            return convertToActions(requiredMethods);
+                        }];
+                        
+                        WDKDebugGroup *section2 = [WDKDebugGroup groupWithName:@"optional methods" actionsBlock:^NSArray<WDKDebugAction *> *{
+                            NSArray *optionalMethods = [WCNSObjectTool protocolOptionalMethodsWithProtocolName:firstLevelProtocol className:className];
+                            return convertToActions(optionalMethods);
+                        }];
+                        
+                        WDKDebugGroup *section3 = [WDKDebugGroup groupWithName:@"properties" actionsBlock:^NSArray<WDKDebugAction *> *{
+                            NSArray *properties = [WCNSObjectTool protocolPropertiesWithProtocolName:firstLevelProtocol className:className];
+                            return convertToActions(properties);
+                        }];
+                        
+                        return @[section1, section2, section3];
+                    }];
+                    action.titleFont = [UIFont systemFontOfSize:12];
+                    action.shouldDismissPanel = NO;
+                    [actions addObject:action];
+                }
+                
+                return actions;
+            }];
+            
+            WDKDebugGroup *parentClassesGroup = [WDKDebugGroup groupWithName:@"class hierarchy" actionsBlock:^NSArray<WDKDebugAction *> *{
+                NSMutableArray *classNames = [NSMutableArray arrayWithArray:[WCNSObjectTool wdk_parentClassHierarchyWithClassName:className]];
+                
+                for (NSInteger i = 0; i < classNames.count; i++) {
+                    
+                    NSMutableString *indent = [[NSMutableString alloc] initWithString:@""];
+                    for (NSInteger j = 0; j < i; j++) {
+                        [indent appendString:@"  "];
+                    }
+                    
+                    classNames[i] = [NSString stringWithFormat:@"%@ - %@", indent, classNames[i]];
+                }
+                
+                return convertToActions(classNames);
+            }];
+            
+            return @[propertiesGroup, ivarsGroup, instanceMethodsGroup, classMethodsGroup, protocolsGroup, parentClassesGroup];
+        }];
+        action.shouldDismissPanel = NO;
+        [arrM addObject:action];
+    }
+    
+    return @[[WDKDebugGroup groupWithName:@"Class Info" actions:arrM]];
+}
+
 - (void)configureItem:(WDKDebugPanelCellItem *)item  attributes:(NSDictionary *)attributes {
     
     if ([attributes isKindOfClass:[NSDictionary class]]) {
@@ -342,8 +403,8 @@
 #pragma mark - 
 
 #define FOOTER_HEIGHT 30.0f
+#define HEADER_HEIGHT 20.0f
 
-// Only has footer view
 - (NSArray<WDKDebugPanelSectionItem *> *)createSectionFooterItemsWithListData:(NSArray<NSArray<WDKDebugPanelCellItem*> *> *)listData {
     
     NSMutableArray *sectionItems = [NSMutableArray array];
@@ -351,6 +412,7 @@
     for (NSInteger i = 0; i < listData.count; i++) {
         WDKDebugPanelSectionItem *item = [WDKDebugPanelSectionItem new];
         item.sectionFooterViewHeight = FOOTER_HEIGHT;
+        item.sectionHeaderViewHeight = HEADER_HEIGHT;
         item.sectionFooterView = ^UIView *(NSInteger section) {
             
             NSArray *items = listData[section];
@@ -385,6 +447,7 @@
     for (NSInteger i = 0; i < listData.count; i++) {
         WDKDebugPanelSectionItem *item = [WDKDebugPanelSectionItem new];
         item.sectionFooterViewHeight = FOOTER_HEIGHT;
+        item.sectionHeaderViewHeight = HEADER_HEIGHT;
         item.sectionFooterView = ^UIView *(NSInteger section) {
             
             NSArray *items = listData[section];
@@ -449,138 +512,6 @@
     }
     
     return sectionItems;
-}
-
-#pragma mark - Utility
-
-#pragma mark > Info.plist
-
-+ (NSDictionary *)plistInfo {
-    static dispatch_once_t onceToken;
-    static NSDictionary *info;
-    dispatch_once(&onceToken, ^{
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Info" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:filePath];
-        info = dict ?: [NSBundle mainBundle].infoDictionary;
-    });
-    
-    return info;
-}
-
-#pragma mark > embedded.mobileprovision
-
-+ (NSDictionary *)mobileprovisionInfo {
-    static NSDictionary *infoDict = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSString *provisioningPath = [[NSBundle mainBundle] pathForResource:@"embedded" ofType:@"mobileprovision"];
-        NSString *binaryString = [NSString stringWithContentsOfFile:provisioningPath encoding:NSISOLatin1StringEncoding error:NULL];
-        NSString *plistString = nil;
-        
-        if (binaryString.length) {
-            NSScanner *scanner = [NSScanner scannerWithString:binaryString];
-            BOOL hasStart = [scanner scanUpToString:@"<plist" intoString:nil];
-            if (hasStart) {
-                BOOL hasEnd = [scanner scanUpToString:@"</plist>" intoString:&plistString];
-                plistString = hasEnd ? [NSString stringWithFormat:@"%@</plist>", plistString] : nil;
-            }
-            
-            if (plistString) {
-                NSData *plistData = [plistString dataUsingEncoding:NSISOLatin1StringEncoding];
-                NSError *error = nil;
-                infoDict = [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:NULL error:&error];
-            }
-        }
-    });
-    
-    return infoDict;
-}
-
-+ (NSString *)appReleaseMode {
-    NSDictionary *info = [self mobileprovisionInfo];
-    
-    if (!info.count) {
-#if TARGET_IPHONE_SIMULATOR
-        return @"Simulator";
-#else
-        return @"AppStore";
-#endif
-    }
-    else if ([info[@"ProvisionsAllDevices"] boolValue]) {
-        return @"Enterpise";
-    }
-    else if ([info[@"ProvisionedDevices"] count] > 0) {
-        NSDictionary *entitlements = info[@"Entitlements"];
-        return [entitlements[@"get-task-allow"] boolValue] ? @"Development" : @"AdHoc";
-    }
-    else {
-        return @"Unknown";
-    }
-}
-
-+ (NSString *)appIDName {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"AppIDName"];
-}
-
-+ (NSString *)appIDPrefix {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return [info[@"ApplicationIdentifierPrefix"] firstObject];
-}
-
-+ (NSString *)entitlementsAPSEnv {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"aps-environment"];
-}
-
-+ (NSString *)entitlementsAppID {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"application-identifier"];
-}
-
-+ (NSString *)entitlementsSiriEnabled {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"com.apple.developer.siri"] ? @"YES" : @"NO";
-}
-
-+ (NSString *)entitlementsTeamID {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"com.apple.developer.team-identifier"];
-}
-
-+ (NSString *)entitlementsDebugEnabled {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"get-task-allow"] ? @"YES": @"NO";
-}
-
-+ (NSArray<NSString *> *)entitlementsAppGroups {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"com.apple.security.application-groups"];
-}
-
-+ (NSArray<NSString *> *)entitlementsKeychainSharingBundleIDs {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Entitlements"][@"keychain-access-groups"];
-}
-
-+ (NSString *)provisionName {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"Name"];
-}
-
-+ (NSString *)provisionExpirationDate {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return [info[@"ExpirationDate"] descriptionWithLocale:[NSLocale currentLocale]];
-}
-
-+ (NSString *)teamName {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"TeamName"];
-}
-
-+ (NSString *)UUID {
-    NSDictionary *info = [self mobileprovisionInfo];
-    return info[@"UUID"];
 }
 
 @end

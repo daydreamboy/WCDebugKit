@@ -1,11 +1,9 @@
 PODS:
-  - FLEX (2.4.0)
   - WCDebugKit (0.1.0):
     - WCDebugKit/AppInfoViewer (= 0.1.0)
     - WCDebugKit/DebugPanel (= 0.1.0)
     - WCDebugKit/DeviceInfoViewer (= 0.1.0)
     - WCDebugKit/FileExplorer (= 0.1.0)
-    - WCDebugKit/IntegratedTools (= 0.1.0)
     - WCDebugKit/ViewInspector (= 0.1.0)
   - WCDebugKit/AppInfoViewer (0.1.0):
     - WCDebugKit/DebugPanel
@@ -13,9 +11,6 @@ PODS:
   - WCDebugKit/DeviceInfoViewer (0.1.0):
     - WCDebugKit/DebugPanel
   - WCDebugKit/FileExplorer (0.1.0):
-    - WCDebugKit/DebugPanel
-  - WCDebugKit/IntegratedTools (0.1.0):
-    - FLEX (= 2.4.0)
     - WCDebugKit/DebugPanel
   - WCDebugKit/ViewInspector (0.1.0):
     - WCDebugKit/DebugPanel
@@ -28,8 +23,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  WCDebugKit: 8857a373a4cbd2e3eefe707999f930b3481e66d5
+  WCDebugKit: 0099ab73d6ac3cf50d42bfd20a8c7bc3185bb48d
 
 PODFILE CHECKSUM: 56b073bea031102fd05d49cbef016ebb536042f5
 

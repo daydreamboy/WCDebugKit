@@ -9,6 +9,7 @@
 #import "WDKPlistViewController.h"
 #import "WDKContextMenuCell.h"
 #import "UIAlertView+WDK.h"
+#import "WCMobileProvisionTool.h"
 
 #ifndef IOS8_OR_LATER
 #define IOS8_OR_LATER          ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)
@@ -447,67 +448,6 @@ typedef NS_ENUM(NSUInteger, WCPlistEditViewControllerMode) {
 
 @end
 
-#pragma mark - WCMobileProvisionHelper
-
-@interface WCMobileProvisionHelper : NSObject
-+ (NSDictionary *)mobileprovisionInfo;
-+ (NSString *)appReleaseMode;
-@end
-
-@implementation WCMobileProvisionHelper
-
-+ (NSDictionary *)mobileprovisionInfo {
-    static NSDictionary *infoDict = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        NSString *provisioningPath = [[NSBundle mainBundle] pathForResource:@"embedded" ofType:@"mobileprovision"];
-        // NSISOLatin1 keeps the binary wrapper from being parsed as unicode and dropped as invalid
-        NSString *binaryString = [NSString stringWithContentsOfFile:provisioningPath encoding:NSISOLatin1StringEncoding error:NULL];
-        NSString *plistString = nil;
-        
-        if (binaryString.length) {
-            NSScanner *scanner = [NSScanner scannerWithString:binaryString];
-            BOOL hasStart = [scanner scanUpToString:@"<plist" intoString:nil];
-            if (hasStart) {
-                BOOL hasEnd = [scanner scanUpToString:@"</plist>" intoString:&plistString];
-                plistString = hasEnd ? [NSString stringWithFormat:@"%@</plist>", plistString] : nil;
-            }
-            
-            if (plistString) {
-                NSData *plistData = [plistString dataUsingEncoding:NSISOLatin1StringEncoding];
-                NSError *error = nil;
-                infoDict = [NSPropertyListSerialization propertyListWithData:plistData options:NSPropertyListImmutable format:NULL error:&error];
-            }
-        }
-    });
-    
-    return infoDict;
-}
-
-+ (NSString *)appReleaseMode {
-    NSDictionary *info = [self mobileprovisionInfo];
-    
-    if (!info.count) {
-#if TARGET_IPHONE_SIMULATOR
-        return @"Simulator";
-#else
-        return @"AppStore";
-#endif
-    }
-    else if ([info[@"ProvisionsAllDevices"] boolValue]) {
-        return @"Enterpise";
-    }
-    else if ([info[@"ProvisionedDevices"] count] > 0) {
-        NSDictionary *entitlements = info[@"Entitlements"];
-        return [entitlements[@"get-task-allow"] boolValue] ? @"Development" : @"AdHoc";
-    }
-    else {
-        return @"Unknown";
-    }
-}
-
-@end
-
 #pragma mark - WDKPlistViewController
 
 #define kFilePath       @"kFilePath"
@@ -588,7 +528,7 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
         id rootJSONObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
         
         if ([[filePath lastPathComponent] isEqualToString:@"embedded.mobileprovision"]) {
-            rootPlistObj = [WCMobileProvisionHelper mobileprovisionInfo];
+            rootPlistObj = [WCMobileProvisionTool mobileprovisionInfo];
         }
         
         if (rootPlistObj) {

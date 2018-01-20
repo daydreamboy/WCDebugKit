@@ -103,7 +103,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = nil;
+    UIView *headerView = [UIView new];
     
     WDKDebugPanelSectionItem *sectionItem = self.listSection[section];
     
@@ -121,7 +121,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footerView = nil;
+    UIView *footerView = [UIView new];
     
     WDKDebugPanelSectionItem *sectionItem = self.listSection[section];
     

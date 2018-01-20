@@ -63,7 +63,10 @@ A debug kit for iOS
   s.subspec 'AppInfoViewer' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
-  		'Pod/Classes/AppInfoViewer/**/*',
+      'Pod/Classes/AppInfoViewer/**/*', 
+      'Pod/Classes/CommonTools/WCInfoPlistTool.{h,m}',
+      'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
+      'Pod/Classes/CommonTools/WCNSObjectTool.{h,m}'
   	]
   	ss.public_header_files = [
 			'Pod/Classes/AppInfoViewer/WDKAppInfoViewer.h',
@@ -85,7 +88,8 @@ A debug kit for iOS
   s.subspec 'FileExplorer' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
-  		'Pod/Classes/FileExplorer/**/*',
+      'Pod/Classes/FileExplorer/**/*',
+      'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
   	]
   end
 
@@ -98,12 +102,12 @@ A debug kit for iOS
   end
 
   # subspec 'IntegratedTools'
-  s.subspec 'IntegratedTools' do |ss|
-    ss.dependency 'WCDebugKit/DebugPanel'
-    ss.dependency 'FLEX', '= 2.4.0'
-    ss.source_files = [
-  		'Pod/Classes/IntegratedTools/**/*',
-  	]
-	end
+#  s.subspec 'IntegratedTools' do |ss|
+#    ss.dependency 'WCDebugKit/DebugPanel'
+#    ss.dependency 'FLEX', '= 2.4.0'
+#    ss.source_files = [
+#          'Pod/Classes/IntegratedTools/**/*',
+#      ]
+#    end
 
 end

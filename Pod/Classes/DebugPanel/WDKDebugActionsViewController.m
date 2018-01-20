@@ -24,7 +24,7 @@
 #import "WDKNavBackButtonItem.h"
 #import "WDKDebugPanelCellItem.h"
 #import "WDKDebugPanelCell.h"
-
+#import "WDKExpandableHeaderView.h"
 
 #define STATUS_BAR_H            (CGRectGetHeight([UIApplication sharedApplication].statusBarFrame))
 #define NAV_BAR_H               (CGRectGetHeight(self.navigationController.navigationBar.frame))
@@ -138,6 +138,7 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
         tableView.backgroundColor = [UIColor whiteColor];
         tableView.delegate = self;
         tableView.dataSource = self;
+        tableView.expandableHeaderView_delegate = self;
         
         _tableView = tableView;
     }
@@ -321,6 +322,13 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
     [self.refreshControl endRefreshing];
 }
 
+#pragma mark - WDKExpandableHeaderViewDelegate
+
+- (NSInteger)WDKExpandableHeaderView_tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    WDKDebugGroup *group = self.actionGroupsFiltered[section];
+    return [group.actions count];
+}
+
 #pragma mark - UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -330,30 +338,30 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     WDKDebugGroup *group = self.actionGroupsFiltered[section];
     
-    return [group.actions count];
+    WDKExpandableHeaderView *headerView = [self.tableView expandableHeaderViewAtSectionIndex:section];
+    return headerView.closed ? 0 : [group.actions count];
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    WDKDebugGroup *group = self.actionGroupsFiltered[section];
-//    
-//    return group.name;
-//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     WDKDebugGroup *group = self.actionGroupsFiltered[section];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SECTION_HEADER_H)];
-    view.backgroundColor = [UIColor colorWithRed:0.97f green:0.97f blue:0.97f alpha:1.0f];
+    WDKExpandableHeaderView *headerView = [self.tableView expandableHeaderViewAtSectionIndex:section];
+    if (!headerView) {
+        headerView = [[WDKExpandableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SECTION_HEADER_H)];
+        headerView.backgroundColor = [UIColor colorWithRed:0.97f green:0.97f blue:0.97f alpha:1.0f];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, SECTION_HEADER_H)];
+        label.backgroundColor = [UIColor clearColor];
+        label.text = group.name;
+        label.font = [UIFont boldSystemFontOfSize:17.0f];
+        label.textColor = group.nameColor ? group.nameColor : [UIColor colorWithRed:0.137f green:0.137f blue:0.137f alpha:1.0f];
+        
+        [headerView addSubview:label];
+        
+        [self.tableView recordExpandableHeaderView:headerView atSectionIndex:section];
+    }
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, SECTION_HEADER_H)];
-    label.backgroundColor = [UIColor clearColor];
-    label.text = group.name;
-    label.font = [UIFont boldSystemFontOfSize:17.0f];
-    label.textColor = group.nameColor ? group.nameColor : [UIColor colorWithRed:0.137f green:0.137f blue:0.137f alpha:1.0f];
-    
-    [view addSubview:label];
-    
-    return view;
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -381,10 +389,20 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
 #pragma mark - Configuration Methods
 
 - (void)configureCell:(UITableViewCell *)cell forAction:(WDKDebugAction *)action {
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:action.name];
+    if (action.titleFont) {
+        [attrString addAttribute:NSFontAttributeName value:action.titleFont range:NSMakeRange(0, attrString.length)];
+    }
+    
+    if (self.searchBar.text.length) {
+        NSRange range = [action.name rangeOfString:self.searchBar.text options:NSCaseInsensitiveSearch];
+        [attrString addAttribute:NSBackgroundColorAttributeName value:[UIColor yellowColor] range:range];
+    }
+    
     if ([action isKindOfClass:[WDKToggleAction class]]) {
         WDKToggleAction *toggle = (WDKToggleAction *)action;
         
-        cell.textLabel.text = action.name;
+        cell.textLabel.attributedText = attrString;
         cell.detailTextLabel.text = toggle.enabled ? @"On" : @"Off";
         cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:14.0f];
         cell.detailTextLabel.textColor = toggle.enabled ? [UIColor orangeColor] : [UIColor darkGrayColor];
@@ -393,7 +411,7 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
     else if ([action isKindOfClass:[WDKEnumAction class]]) {
         WDKEnumAction *enumAction = (WDKEnumAction *)action;
         
-        cell.textLabel.text = enumAction.name;
+        cell.textLabel.attributedText = attrString;
         id enumValue;
         if (enumAction.index < [enumAction.enums count]) {
             enumValue = enumAction.enums[enumAction.index];
@@ -404,12 +422,15 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     else if ([action isKindOfClass:[WDKSubMenuAction class]] || [action isKindOfClass:[WDKCustomPanelAction class]]) {
-        cell.textLabel.text = action.name;
+        cell.textLabel.attributedText = attrString;
         cell.detailTextLabel.text = action.desc;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
-        cell.textLabel.text = action.name;
+        cell.textLabel.attributedText = attrString;
+        // @see https://stackoverflow.com/a/905565
+        cell.textLabel.numberOfLines = 0;
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.detailTextLabel.text = action.desc;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }

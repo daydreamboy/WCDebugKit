@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface WDKDebugAction : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *name; /**< Title */
+@property (nonatomic, strong) UIFont *titleFont;
 
 @property (nonatomic, copy) NSString *desc; /**< Subtitle */
 @property (nonatomic, assign) BOOL shouldDismissPanel; /**< Default is YES */
