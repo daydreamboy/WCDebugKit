@@ -33,6 +33,11 @@
     }];
     [arrM addObject:action];
     
+    action = [WDKToggleAction actionWithName:NSLocalizedString(@"Show Touch", nil) enabled:[WDKUserInterfaceInspector sharedInstance].colorizedViewBorderEnabled toggleBlock:^(BOOL enabled) {
+        [[WDKUserInterfaceInspector sharedInstance] setColorizedViewBorderEnabled:enabled];
+    }];
+    [arrM addObject:action];
+    
     WDKDebugGroup *group = [WDKDebugGroup groupWithName:NSLocalizedString(@"UI检查器", nil) actions:arrM];
     group.nameColor = [UIColor brownColor];
     

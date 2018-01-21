@@ -30,4 +30,16 @@
     }
 }
 
++ (void)exchangeSelectorForClass:(Class)cls origin:(SEL)origin substitute:(SEL)substitute {
+    Method origMethod = class_getInstanceMethod(cls, origin);
+    Method replaceMethod = class_getInstanceMethod(cls, substitute);
+    
+    if (class_addMethod(cls, origin, method_getImplementation(replaceMethod), method_getTypeEncoding(replaceMethod))) {
+        class_replaceMethod(cls, substitute, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+    }
+    else {
+        method_exchangeImplementations(origMethod, replaceMethod);
+    }
+}
+
 @end

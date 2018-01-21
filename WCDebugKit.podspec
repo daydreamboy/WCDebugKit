@@ -66,7 +66,8 @@ A debug kit for iOS
       'Pod/Classes/AppInfoViewer/**/*', 
       'Pod/Classes/CommonTools/WCInfoPlistTool.{h,m}',
       'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
-      'Pod/Classes/CommonTools/WCNSObjectTool.{h,m}'
+      'Pod/Classes/CommonTools/WCNSObjectTool.{h,m}',
+      'Pod/Classes/CommonTools/WDKRuntimeUtility.{h,m}',
   	]
   	ss.public_header_files = [
 			'Pod/Classes/AppInfoViewer/WDKAppInfoViewer.h',
@@ -97,7 +98,8 @@ A debug kit for iOS
   s.subspec 'ViewInspector' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
-  		'Pod/Classes/ViewInspector/**/*',
+      'Pod/Classes/ViewInspector/**/*',
+      'Pod/Classes/CommonTools/WDKRuntimeUtility.{h,m}',
   	]
   end
 

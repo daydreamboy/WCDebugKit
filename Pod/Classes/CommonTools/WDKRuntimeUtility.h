@@ -10,4 +10,5 @@
 
 @interface WDKRuntimeUtility : NSObject
 + (IMP)replaceMethodWithSelector:(SEL)originalSelector onClass:(Class)class withBlock:(id)block;
++ (void)exchangeSelectorForClass:(Class)cls origin:(SEL)origin substitute:(SEL)substitute;
 @end

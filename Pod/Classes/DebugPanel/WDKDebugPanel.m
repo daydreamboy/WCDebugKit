@@ -9,7 +9,7 @@
 #import "WDKDebugPanel.h"
 #import "WDKDebugPanel_Internal.h"
 #import "WDKDebugActionsViewController.h"
-
+#import "WDKRuntimeUtility.h"
 #import <objc/runtime.h>
 
 #define WDK_RESOURCE_BUNDLE     @"WCDebugKit.bundle"
@@ -73,8 +73,10 @@ static UIView *WDK_statusBarInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class statusBarClass = NSClassFromString(@"UIStatusBar");
-        [self exchangeSelectorForClass:statusBarClass origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:)];
-        [self exchangeSelectorForClass:statusBarClass origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted)];
+        [WDKRuntimeUtility exchangeSelectorForClass:statusBarClass origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:)];
+        [WDKRuntimeUtility exchangeSelectorForClass:statusBarClass origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted)];
+        
+        
 #if TARGET_OS_SIMULATOR
         dispatch_async(dispatch_get_main_queue(), ^{
             Class managerClass = NSClassFromString(@"FLEXKeyboardShortcutManager");
@@ -124,18 +126,6 @@ static UIView *WDK_statusBarInstance = nil;
 - (void)dealloc_intercepted {
     WDK_statusBarInstance = nil;
     [self dealloc_intercepted];
-}
-
-+ (void)exchangeSelectorForClass:(Class)cls origin:(SEL)origin substitute:(SEL)substitute {
-    Method origMethod = class_getInstanceMethod(cls, origin);
-    Method replaceMethod = class_getInstanceMethod(cls, substitute);
-    
-    if (class_addMethod(cls, origin, method_getImplementation(replaceMethod), method_getTypeEncoding(replaceMethod))) {
-        class_replaceMethod(cls, substitute, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-    }
-    else {
-        method_exchangeImplementations(origMethod, replaceMethod);
-    }
 }
 
 #endif

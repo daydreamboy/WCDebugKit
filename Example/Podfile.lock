@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  WCDebugKit: 0099ab73d6ac3cf50d42bfd20a8c7bc3185bb48d
+  WCDebugKit: 36eb43ff3b0ecc22af30dc9fdfd13ab1da0d1a24
 
 PODFILE CHECKSUM: 56b073bea031102fd05d49cbef016ebb536042f5
 
