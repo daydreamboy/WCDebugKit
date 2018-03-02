@@ -6,6 +6,8 @@
 //
 //
 
+@import UIKit;
+
 #import "WDKDebugPanelCellItem.h"
 
 @implementation WDKDebugPanelCellItem

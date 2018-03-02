@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@import UIKit;
+
 @interface WDKDebugPanelSectionItem : NSObject
 
 @property (nonatomic, assign) CGFloat sectionHeaderViewHeight;

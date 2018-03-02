@@ -171,10 +171,16 @@ static WDKDebugPanel *WDK_sharedPanel;
 #if DEBUG
         NSLog(@"install DebugPanel on statusBar successfully");
 #endif
-        
+        // one finger with five taps
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:[WDKDebugPanel sharedPanel] action:@selector(showDebugPanelFromStatusBar:)];
-        tapRecognizer.numberOfTapsRequired = 3;
+        tapRecognizer.numberOfTapsRequired = 5;
         [statusBar addGestureRecognizer:tapRecognizer];
+        
+        // two fingers with two taps
+        UITapGestureRecognizer *twoFingersTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:[WDKDebugPanel sharedPanel] action:@selector(showDebugPanelFromStatusBar:)];
+        twoFingersTapRecognizer.numberOfTapsRequired = 2;
+        twoFingersTapRecognizer.numberOfTouchesRequired = 2;
+        [statusBar addGestureRecognizer:twoFingersTapRecognizer];
     }
 }
 

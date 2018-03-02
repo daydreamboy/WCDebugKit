@@ -6,6 +6,7 @@
 //
 //
 
+@import UIKit;
 #import <Foundation/Foundation.h>
 
 @interface WDKUserInterfaceInspector : NSObject

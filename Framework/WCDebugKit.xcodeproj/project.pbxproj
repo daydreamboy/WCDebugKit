@@ -1,0 +1,953 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F948DAA2015C89D0030BC4A /* WDKIntegratedTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D4B2015C89D0030BC4A /* WDKIntegratedTools.h */; };
+		4F948DAB2015C89D0030BC4A /* WDKIntegratedTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D4C2015C89D0030BC4A /* WDKIntegratedTools.m */; };
+		4F948DAC2015C89D0030BC4A /* WCDebugKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D4D2015C89D0030BC4A /* WCDebugKit.h */; };
+		4F948DAD2015C89D0030BC4A /* WDKDeviceInfoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D4F2015C89D0030BC4A /* WDKDeviceInfoViewer.m */; };
+		4F948DAE2015C89D0030BC4A /* WDKDeviceInfoViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D502015C89D0030BC4A /* WDKDeviceInfoViewer.h */; };
+		4F948DB02015C89D0030BC4A /* WDKDebugPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D532015C89D0030BC4A /* WDKDebugPanel.m */; };
+		4F948DB12015C89D0030BC4A /* WDKDebugPanel_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D542015C89D0030BC4A /* WDKDebugPanel_Internal.h */; };
+		4F948DB22015C89D0030BC4A /* WDKDebugPanelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D562015C89D0030BC4A /* WDKDebugPanelCell.h */; };
+		4F948DB32015C89D0030BC4A /* WDKDebugPanelCellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D572015C89D0030BC4A /* WDKDebugPanelCellItem.m */; };
+		4F948DB42015C89D0030BC4A /* WDKDebugPanelGerenalViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D582015C89D0030BC4A /* WDKDebugPanelGerenalViewController.h */; };
+		4F948DB52015C89D0030BC4A /* WDKDebugPanelAboutViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D592015C89D0030BC4A /* WDKDebugPanelAboutViewController.h */; };
+		4F948DB62015C89D0030BC4A /* WDKNavBackButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D5A2015C89D0030BC4A /* WDKNavBackButtonItem.h */; };
+		4F948DB72015C89D0030BC4A /* WDKExpandableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D5B2015C89D0030BC4A /* WDKExpandableHeaderView.m */; };
+		4F948DB82015C89D0030BC4A /* WDKDebugPanelSectionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D5C2015C89D0030BC4A /* WDKDebugPanelSectionItem.m */; };
+		4F948DB92015C89D0030BC4A /* WDKDebugPanelAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D5D2015C89D0030BC4A /* WDKDebugPanelAboutViewController.m */; };
+		4F948DBA2015C89D0030BC4A /* WDKDebugPanelGerenalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D5E2015C89D0030BC4A /* WDKDebugPanelGerenalViewController.m */; };
+		4F948DBB2015C89D0030BC4A /* WDKDebugPanelCellItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D5F2015C89D0030BC4A /* WDKDebugPanelCellItem.h */; };
+		4F948DBC2015C89D0030BC4A /* WDKDebugPanelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D602015C89D0030BC4A /* WDKDebugPanelCell.m */; };
+		4F948DBD2015C89D0030BC4A /* WDKNavBackButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D612015C89D0030BC4A /* WDKNavBackButtonItem.m */; };
+		4F948DBE2015C89D0030BC4A /* WDKExpandableHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D622015C89D0030BC4A /* WDKExpandableHeaderView.h */; };
+		4F948DBF2015C89D0030BC4A /* WDKDebugPanelSectionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D632015C89D0030BC4A /* WDKDebugPanelSectionItem.h */; };
+		4F948DC02015C89D0030BC4A /* WDKDebugPanelPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D642015C89D0030BC4A /* WDKDebugPanelPod.h */; };
+		4F948DC12015C89D0030BC4A /* WDKDebugActionsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D652015C89D0030BC4A /* WDKDebugActionsViewController.h */; };
+		4F948DC22015C89D0030BC4A /* WDKDebugPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D662015C89D0030BC4A /* WDKDebugPanel.h */; };
+		4F948DC32015C89D0030BC4A /* WDKDebugActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D672015C89D0030BC4A /* WDKDebugActionsViewController.m */; };
+		4F948DC42015C89D0030BC4A /* WDKCustomPanelAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D692015C89D0030BC4A /* WDKCustomPanelAction.h */; };
+		4F948DC52015C89D0030BC4A /* WDKDebugGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D6A2015C89D0030BC4A /* WDKDebugGroup.m */; };
+		4F948DC62015C89D0030BC4A /* WDKEnumAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D6B2015C89D0030BC4A /* WDKEnumAction.h */; };
+		4F948DC72015C89D0030BC4A /* WDKDebugAction_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D6C2015C89D0030BC4A /* WDKDebugAction_Internal.h */; };
+		4F948DC82015C89D0030BC4A /* WDKToggleAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D6D2015C89D0030BC4A /* WDKToggleAction.h */; };
+		4F948DC92015C89D0030BC4A /* WDKDebugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D6E2015C89D0030BC4A /* WDKDebugAction.m */; };
+		4F948DCA2015C89D0030BC4A /* WDKDebugGroup_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D6F2015C89D0030BC4A /* WDKDebugGroup_Internal.h */; };
+		4F948DCB2015C89D0030BC4A /* WDKSubMenuAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D702015C89D0030BC4A /* WDKSubMenuAction.h */; };
+		4F948DCC2015C89D0030BC4A /* WDKDebugGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D712015C89D0030BC4A /* WDKDebugGroup.h */; };
+		4F948DCD2015C89D0030BC4A /* WDKCustomPanelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D722015C89D0030BC4A /* WDKCustomPanelAction.m */; };
+		4F948DCE2015C89D0030BC4A /* WDKEnumAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D732015C89D0030BC4A /* WDKEnumAction.m */; };
+		4F948DCF2015C89D0030BC4A /* WDKDebugAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D742015C89D0030BC4A /* WDKDebugAction.h */; };
+		4F948DD02015C89D0030BC4A /* WDKToggleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D752015C89D0030BC4A /* WDKToggleAction.m */; };
+		4F948DD12015C89D0030BC4A /* WDKSubMenuAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D762015C89D0030BC4A /* WDKSubMenuAction.m */; };
+		4F948DD22015C89D0030BC4A /* WDKAppInfoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D782015C89D0030BC4A /* WDKAppInfoViewer.m */; };
+		4F948DD32015C89D0030BC4A /* WDKAppInfoViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D792015C89D0030BC4A /* WDKAppInfoViewer.h */; };
+		4F948DD42015C89D0030BC4A /* WDKDirectoryBrowserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D7B2015C89D0030BC4A /* WDKDirectoryBrowserViewController.h */; };
+		4F948DD52015C89D0030BC4A /* WDKImageBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D7C2015C89D0030BC4A /* WDKImageBrowserViewController.m */; };
+		4F948DD62015C89D0030BC4A /* WDKFileExplorer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D7D2015C89D0030BC4A /* WDKFileExplorer.m */; };
+		4F948DD72015C89D0030BC4A /* WDKTextEditViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D7E2015C89D0030BC4A /* WDKTextEditViewController.h */; };
+		4F948DD82015C89D0030BC4A /* WDKPlistViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D7F2015C89D0030BC4A /* WDKPlistViewController.h */; };
+		4F948DD92015C89D0030BC4A /* WDKInteractiveLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D812015C89D0030BC4A /* WDKInteractiveLabel.h */; };
+		4F948DDA2015C89D0030BC4A /* WDKContextMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D822015C89D0030BC4A /* WDKContextMenuCell.m */; };
+		4F948DDB2015C89D0030BC4A /* WDKImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D832015C89D0030BC4A /* WDKImageZoomView.m */; };
+		4F948DDC2015C89D0030BC4A /* WDKContextMenuItemDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D842015C89D0030BC4A /* WDKContextMenuItemDefines.h */; };
+		4F948DDD2015C89D0030BC4A /* WDKInteractiveLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D852015C89D0030BC4A /* WDKInteractiveLabel.m */; };
+		4F948DDE2015C89D0030BC4A /* WDKContextMenuCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D862015C89D0030BC4A /* WDKContextMenuCell.h */; };
+		4F948DDF2015C89D0030BC4A /* WDKImageZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D872015C89D0030BC4A /* WDKImageZoomView.h */; };
+		4F948DE02015C89D0030BC4A /* WDKImageBrowserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D882015C89D0030BC4A /* WDKImageBrowserViewController.h */; };
+		4F948DE12015C89D0030BC4A /* WDKDirectoryBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D892015C89D0030BC4A /* WDKDirectoryBrowserViewController.m */; };
+		4F948DE22015C89D0030BC4A /* WDKTextEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D8A2015C89D0030BC4A /* WDKTextEditViewController.m */; };
+		4F948DE32015C89D0030BC4A /* WDKFileExplorer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D8B2015C89D0030BC4A /* WDKFileExplorer.h */; };
+		4F948DE42015C89D0030BC4A /* WDKPlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D8C2015C89D0030BC4A /* WDKPlistViewController.m */; };
+		4F948DE52015C89D0030BC4A /* UIAlertView+WDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D8E2015C89D0030BC4A /* UIAlertView+WDK.h */; };
+		4F948DE62015C89D0030BC4A /* UIAlertView+WDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D8F2015C89D0030BC4A /* UIAlertView+WDK.m */; };
+		4F948DE72015C89D0030BC4A /* WCInfoPlistTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D912015C89D0030BC4A /* WCInfoPlistTool.h */; };
+		4F948DE82015C89D0030BC4A /* WCMobileProvisionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D922015C89D0030BC4A /* WCMobileProvisionTool.m */; };
+		4F948DE92015C89D0030BC4A /* WDKRuntimeUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D932015C89D0030BC4A /* WDKRuntimeUtility.h */; };
+		4F948DEA2015C89D0030BC4A /* WCNSObjectTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D942015C89D0030BC4A /* WCNSObjectTool.m */; };
+		4F948DEB2015C89D0030BC4A /* WDKRuntimeUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D952015C89D0030BC4A /* WDKRuntimeUtility.m */; };
+		4F948DEC2015C89D0030BC4A /* WCMobileProvisionTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D962015C89D0030BC4A /* WCMobileProvisionTool.h */; };
+		4F948DED2015C89D0030BC4A /* WCInfoPlistTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D972015C89D0030BC4A /* WCInfoPlistTool.m */; };
+		4F948DEE2015C89D0030BC4A /* WCNSObjectTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D982015C89D0030BC4A /* WCNSObjectTool.h */; };
+		4F948DEF2015C89D0030BC4A /* WDKViewExplorerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D9A2015C89D0030BC4A /* WDKViewExplorerWindow.m */; };
+		4F948DF02015C89D0030BC4A /* WDKUserInterfaceInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D9B2015C89D0030BC4A /* WDKUserInterfaceInspector.h */; };
+		4F948DF12015C89D0030BC4A /* WDKViewInspector.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D9C2015C89D0030BC4A /* WDKViewInspector.h */; };
+		4F948DF22015C89D0030BC4A /* WDKViewExplorerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D9D2015C89D0030BC4A /* WDKViewExplorerViewController.m */; };
+		4F948DF32015C89D0030BC4A /* WDKViewExplorerWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948D9E2015C89D0030BC4A /* WDKViewExplorerWindow.h */; };
+		4F948DF42015C89D0030BC4A /* WDKViewInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948D9F2015C89D0030BC4A /* WDKViewInspector.m */; };
+		4F948DF52015C89D0030BC4A /* WDKUserInterfaceInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948DA02015C89D0030BC4A /* WDKUserInterfaceInspector.m */; };
+		4F948DF62015C89D0030BC4A /* WDKViewExplorerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948DA12015C89D0030BC4A /* WDKViewExplorerViewController.h */; };
+		4F948DF72015C89D0030BC4A /* UIApplication+WDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F948DA32015C89D0030BC4A /* UIApplication+WDK.h */; };
+		4F948DF82015C89D0030BC4A /* UIApplication+WDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F948DA42015C89D0030BC4A /* UIApplication+WDK.m */; };
+		4F948E092015CB0D0030BC4A /* plugin_tools_path.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F948DA62015C89D0030BC4A /* plugin_tools_path.plist */; };
+		4F948E0A2015CB0D0030BC4A /* tag_summary.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F948DA72015C89D0030BC4A /* tag_summary.json */; };
+		4F948E0B2015CB0D0030BC4A /* builtin_tools.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F948DA92015C89D0030BC4A /* builtin_tools.plist */; };
+		4F948E0C2015CB8D0030BC4A /* WCDebugKit.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4F948E012015CAF10030BC4A /* WCDebugKit.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4F948E072015CAFF0030BC4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F948AF72015C0210030BC4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F948E002015CAF10030BC4A;
+			remoteInfo = "WCDebugKit-Resource";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4F948B022015C04F0030BC4A /* WCDebugKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WCDebugKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F948D4B2015C89D0030BC4A /* WDKIntegratedTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKIntegratedTools.h; sourceTree = "<group>"; };
+		4F948D4C2015C89D0030BC4A /* WDKIntegratedTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKIntegratedTools.m; sourceTree = "<group>"; };
+		4F948D4D2015C89D0030BC4A /* WCDebugKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCDebugKit.h; sourceTree = "<group>"; };
+		4F948D4F2015C89D0030BC4A /* WDKDeviceInfoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDeviceInfoViewer.m; sourceTree = "<group>"; };
+		4F948D502015C89D0030BC4A /* WDKDeviceInfoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDeviceInfoViewer.h; sourceTree = "<group>"; };
+		4F948D532015C89D0030BC4A /* WDKDebugPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanel.m; sourceTree = "<group>"; };
+		4F948D542015C89D0030BC4A /* WDKDebugPanel_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanel_Internal.h; sourceTree = "<group>"; };
+		4F948D562015C89D0030BC4A /* WDKDebugPanelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelCell.h; sourceTree = "<group>"; };
+		4F948D572015C89D0030BC4A /* WDKDebugPanelCellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanelCellItem.m; sourceTree = "<group>"; };
+		4F948D582015C89D0030BC4A /* WDKDebugPanelGerenalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelGerenalViewController.h; sourceTree = "<group>"; };
+		4F948D592015C89D0030BC4A /* WDKDebugPanelAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelAboutViewController.h; sourceTree = "<group>"; };
+		4F948D5A2015C89D0030BC4A /* WDKNavBackButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKNavBackButtonItem.h; sourceTree = "<group>"; };
+		4F948D5B2015C89D0030BC4A /* WDKExpandableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKExpandableHeaderView.m; sourceTree = "<group>"; };
+		4F948D5C2015C89D0030BC4A /* WDKDebugPanelSectionItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanelSectionItem.m; sourceTree = "<group>"; };
+		4F948D5D2015C89D0030BC4A /* WDKDebugPanelAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanelAboutViewController.m; sourceTree = "<group>"; };
+		4F948D5E2015C89D0030BC4A /* WDKDebugPanelGerenalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanelGerenalViewController.m; sourceTree = "<group>"; };
+		4F948D5F2015C89D0030BC4A /* WDKDebugPanelCellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelCellItem.h; sourceTree = "<group>"; };
+		4F948D602015C89D0030BC4A /* WDKDebugPanelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugPanelCell.m; sourceTree = "<group>"; };
+		4F948D612015C89D0030BC4A /* WDKNavBackButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKNavBackButtonItem.m; sourceTree = "<group>"; };
+		4F948D622015C89D0030BC4A /* WDKExpandableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKExpandableHeaderView.h; sourceTree = "<group>"; };
+		4F948D632015C89D0030BC4A /* WDKDebugPanelSectionItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelSectionItem.h; sourceTree = "<group>"; };
+		4F948D642015C89D0030BC4A /* WDKDebugPanelPod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanelPod.h; sourceTree = "<group>"; };
+		4F948D652015C89D0030BC4A /* WDKDebugActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugActionsViewController.h; sourceTree = "<group>"; };
+		4F948D662015C89D0030BC4A /* WDKDebugPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugPanel.h; sourceTree = "<group>"; };
+		4F948D672015C89D0030BC4A /* WDKDebugActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugActionsViewController.m; sourceTree = "<group>"; };
+		4F948D692015C89D0030BC4A /* WDKCustomPanelAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKCustomPanelAction.h; sourceTree = "<group>"; };
+		4F948D6A2015C89D0030BC4A /* WDKDebugGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugGroup.m; sourceTree = "<group>"; };
+		4F948D6B2015C89D0030BC4A /* WDKEnumAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKEnumAction.h; sourceTree = "<group>"; };
+		4F948D6C2015C89D0030BC4A /* WDKDebugAction_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugAction_Internal.h; sourceTree = "<group>"; };
+		4F948D6D2015C89D0030BC4A /* WDKToggleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKToggleAction.h; sourceTree = "<group>"; };
+		4F948D6E2015C89D0030BC4A /* WDKDebugAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDebugAction.m; sourceTree = "<group>"; };
+		4F948D6F2015C89D0030BC4A /* WDKDebugGroup_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugGroup_Internal.h; sourceTree = "<group>"; };
+		4F948D702015C89D0030BC4A /* WDKSubMenuAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKSubMenuAction.h; sourceTree = "<group>"; };
+		4F948D712015C89D0030BC4A /* WDKDebugGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugGroup.h; sourceTree = "<group>"; };
+		4F948D722015C89D0030BC4A /* WDKCustomPanelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKCustomPanelAction.m; sourceTree = "<group>"; };
+		4F948D732015C89D0030BC4A /* WDKEnumAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKEnumAction.m; sourceTree = "<group>"; };
+		4F948D742015C89D0030BC4A /* WDKDebugAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDebugAction.h; sourceTree = "<group>"; };
+		4F948D752015C89D0030BC4A /* WDKToggleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKToggleAction.m; sourceTree = "<group>"; };
+		4F948D762015C89D0030BC4A /* WDKSubMenuAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKSubMenuAction.m; sourceTree = "<group>"; };
+		4F948D782015C89D0030BC4A /* WDKAppInfoViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKAppInfoViewer.m; sourceTree = "<group>"; };
+		4F948D792015C89D0030BC4A /* WDKAppInfoViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKAppInfoViewer.h; sourceTree = "<group>"; };
+		4F948D7B2015C89D0030BC4A /* WDKDirectoryBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKDirectoryBrowserViewController.h; sourceTree = "<group>"; };
+		4F948D7C2015C89D0030BC4A /* WDKImageBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKImageBrowserViewController.m; sourceTree = "<group>"; };
+		4F948D7D2015C89D0030BC4A /* WDKFileExplorer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKFileExplorer.m; sourceTree = "<group>"; };
+		4F948D7E2015C89D0030BC4A /* WDKTextEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKTextEditViewController.h; sourceTree = "<group>"; };
+		4F948D7F2015C89D0030BC4A /* WDKPlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKPlistViewController.h; sourceTree = "<group>"; };
+		4F948D812015C89D0030BC4A /* WDKInteractiveLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKInteractiveLabel.h; sourceTree = "<group>"; };
+		4F948D822015C89D0030BC4A /* WDKContextMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKContextMenuCell.m; sourceTree = "<group>"; };
+		4F948D832015C89D0030BC4A /* WDKImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKImageZoomView.m; sourceTree = "<group>"; };
+		4F948D842015C89D0030BC4A /* WDKContextMenuItemDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKContextMenuItemDefines.h; sourceTree = "<group>"; };
+		4F948D852015C89D0030BC4A /* WDKInteractiveLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKInteractiveLabel.m; sourceTree = "<group>"; };
+		4F948D862015C89D0030BC4A /* WDKContextMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKContextMenuCell.h; sourceTree = "<group>"; };
+		4F948D872015C89D0030BC4A /* WDKImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKImageZoomView.h; sourceTree = "<group>"; };
+		4F948D882015C89D0030BC4A /* WDKImageBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKImageBrowserViewController.h; sourceTree = "<group>"; };
+		4F948D892015C89D0030BC4A /* WDKDirectoryBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKDirectoryBrowserViewController.m; sourceTree = "<group>"; };
+		4F948D8A2015C89D0030BC4A /* WDKTextEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKTextEditViewController.m; sourceTree = "<group>"; };
+		4F948D8B2015C89D0030BC4A /* WDKFileExplorer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKFileExplorer.h; sourceTree = "<group>"; };
+		4F948D8C2015C89D0030BC4A /* WDKPlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKPlistViewController.m; sourceTree = "<group>"; };
+		4F948D8E2015C89D0030BC4A /* UIAlertView+WDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+WDK.h"; sourceTree = "<group>"; };
+		4F948D8F2015C89D0030BC4A /* UIAlertView+WDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+WDK.m"; sourceTree = "<group>"; };
+		4F948D912015C89D0030BC4A /* WCInfoPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCInfoPlistTool.h; sourceTree = "<group>"; };
+		4F948D922015C89D0030BC4A /* WCMobileProvisionTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCMobileProvisionTool.m; sourceTree = "<group>"; };
+		4F948D932015C89D0030BC4A /* WDKRuntimeUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKRuntimeUtility.h; sourceTree = "<group>"; };
+		4F948D942015C89D0030BC4A /* WCNSObjectTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCNSObjectTool.m; sourceTree = "<group>"; };
+		4F948D952015C89D0030BC4A /* WDKRuntimeUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKRuntimeUtility.m; sourceTree = "<group>"; };
+		4F948D962015C89D0030BC4A /* WCMobileProvisionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCMobileProvisionTool.h; sourceTree = "<group>"; };
+		4F948D972015C89D0030BC4A /* WCInfoPlistTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCInfoPlistTool.m; sourceTree = "<group>"; };
+		4F948D982015C89D0030BC4A /* WCNSObjectTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCNSObjectTool.h; sourceTree = "<group>"; };
+		4F948D9A2015C89D0030BC4A /* WDKViewExplorerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKViewExplorerWindow.m; sourceTree = "<group>"; };
+		4F948D9B2015C89D0030BC4A /* WDKUserInterfaceInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKUserInterfaceInspector.h; sourceTree = "<group>"; };
+		4F948D9C2015C89D0030BC4A /* WDKViewInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKViewInspector.h; sourceTree = "<group>"; };
+		4F948D9D2015C89D0030BC4A /* WDKViewExplorerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKViewExplorerViewController.m; sourceTree = "<group>"; };
+		4F948D9E2015C89D0030BC4A /* WDKViewExplorerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKViewExplorerWindow.h; sourceTree = "<group>"; };
+		4F948D9F2015C89D0030BC4A /* WDKViewInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKViewInspector.m; sourceTree = "<group>"; };
+		4F948DA02015C89D0030BC4A /* WDKUserInterfaceInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKUserInterfaceInspector.m; sourceTree = "<group>"; };
+		4F948DA12015C89D0030BC4A /* WDKViewExplorerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKViewExplorerViewController.h; sourceTree = "<group>"; };
+		4F948DA32015C89D0030BC4A /* UIApplication+WDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+WDK.h"; sourceTree = "<group>"; };
+		4F948DA42015C89D0030BC4A /* UIApplication+WDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+WDK.m"; sourceTree = "<group>"; };
+		4F948DA62015C89D0030BC4A /* plugin_tools_path.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = plugin_tools_path.plist; sourceTree = "<group>"; };
+		4F948DA72015C89D0030BC4A /* tag_summary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tag_summary.json; sourceTree = "<group>"; };
+		4F948DA92015C89D0030BC4A /* builtin_tools.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = builtin_tools.plist; sourceTree = "<group>"; };
+		4F948E012015CAF10030BC4A /* WCDebugKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WCDebugKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4F948AFE2015C04F0030BC4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F948DFE2015CAF10030BC4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4F948AF62015C0210030BC4A = {
+			isa = PBXGroup;
+			children = (
+				4F948D482015C89D0030BC4A /* Pod */,
+				4F948B032015C04F0030BC4A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4F948B032015C04F0030BC4A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4F948B022015C04F0030BC4A /* WCDebugKit.framework */,
+				4F948E012015CAF10030BC4A /* WCDebugKit.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4F948D482015C89D0030BC4A /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D492015C89D0030BC4A /* Classes */,
+				4F948DA52015C89D0030BC4A /* Assets */,
+			);
+			name = Pod;
+			path = ../Pod;
+			sourceTree = "<group>";
+		};
+		4F948D492015C89D0030BC4A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D4D2015C89D0030BC4A /* WCDebugKit.h */,
+				4F948D4A2015C89D0030BC4A /* IntegratedTools */,
+				4F948D4E2015C89D0030BC4A /* DeviceInfoViewer */,
+				4F948D522015C89D0030BC4A /* DebugPanel */,
+				4F948D772015C89D0030BC4A /* AppInfoViewer */,
+				4F948D7A2015C89D0030BC4A /* FileExplorer */,
+				4F948D902015C89D0030BC4A /* CommonTools */,
+				4F948D992015C89D0030BC4A /* ViewInspector */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4F948D4A2015C89D0030BC4A /* IntegratedTools */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D4B2015C89D0030BC4A /* WDKIntegratedTools.h */,
+				4F948D4C2015C89D0030BC4A /* WDKIntegratedTools.m */,
+			);
+			path = IntegratedTools;
+			sourceTree = "<group>";
+		};
+		4F948D4E2015C89D0030BC4A /* DeviceInfoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D4F2015C89D0030BC4A /* WDKDeviceInfoViewer.m */,
+				4F948D502015C89D0030BC4A /* WDKDeviceInfoViewer.h */,
+			);
+			path = DeviceInfoViewer;
+			sourceTree = "<group>";
+		};
+		4F948D522015C89D0030BC4A /* DebugPanel */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D532015C89D0030BC4A /* WDKDebugPanel.m */,
+				4F948D542015C89D0030BC4A /* WDKDebugPanel_Internal.h */,
+				4F948D552015C89D0030BC4A /* DebugPanelUtility */,
+				4F948D642015C89D0030BC4A /* WDKDebugPanelPod.h */,
+				4F948D652015C89D0030BC4A /* WDKDebugActionsViewController.h */,
+				4F948D662015C89D0030BC4A /* WDKDebugPanel.h */,
+				4F948D672015C89D0030BC4A /* WDKDebugActionsViewController.m */,
+				4F948D682015C89D0030BC4A /* DebugActions */,
+			);
+			path = DebugPanel;
+			sourceTree = "<group>";
+		};
+		4F948D552015C89D0030BC4A /* DebugPanelUtility */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D562015C89D0030BC4A /* WDKDebugPanelCell.h */,
+				4F948D572015C89D0030BC4A /* WDKDebugPanelCellItem.m */,
+				4F948D582015C89D0030BC4A /* WDKDebugPanelGerenalViewController.h */,
+				4F948D592015C89D0030BC4A /* WDKDebugPanelAboutViewController.h */,
+				4F948D5A2015C89D0030BC4A /* WDKNavBackButtonItem.h */,
+				4F948D5B2015C89D0030BC4A /* WDKExpandableHeaderView.m */,
+				4F948D5C2015C89D0030BC4A /* WDKDebugPanelSectionItem.m */,
+				4F948D5D2015C89D0030BC4A /* WDKDebugPanelAboutViewController.m */,
+				4F948D5E2015C89D0030BC4A /* WDKDebugPanelGerenalViewController.m */,
+				4F948D5F2015C89D0030BC4A /* WDKDebugPanelCellItem.h */,
+				4F948D602015C89D0030BC4A /* WDKDebugPanelCell.m */,
+				4F948D612015C89D0030BC4A /* WDKNavBackButtonItem.m */,
+				4F948D622015C89D0030BC4A /* WDKExpandableHeaderView.h */,
+				4F948D632015C89D0030BC4A /* WDKDebugPanelSectionItem.h */,
+			);
+			path = DebugPanelUtility;
+			sourceTree = "<group>";
+		};
+		4F948D682015C89D0030BC4A /* DebugActions */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D692015C89D0030BC4A /* WDKCustomPanelAction.h */,
+				4F948D6A2015C89D0030BC4A /* WDKDebugGroup.m */,
+				4F948D6B2015C89D0030BC4A /* WDKEnumAction.h */,
+				4F948D6C2015C89D0030BC4A /* WDKDebugAction_Internal.h */,
+				4F948D6D2015C89D0030BC4A /* WDKToggleAction.h */,
+				4F948D6E2015C89D0030BC4A /* WDKDebugAction.m */,
+				4F948D6F2015C89D0030BC4A /* WDKDebugGroup_Internal.h */,
+				4F948D702015C89D0030BC4A /* WDKSubMenuAction.h */,
+				4F948D712015C89D0030BC4A /* WDKDebugGroup.h */,
+				4F948D722015C89D0030BC4A /* WDKCustomPanelAction.m */,
+				4F948D732015C89D0030BC4A /* WDKEnumAction.m */,
+				4F948D742015C89D0030BC4A /* WDKDebugAction.h */,
+				4F948D752015C89D0030BC4A /* WDKToggleAction.m */,
+				4F948D762015C89D0030BC4A /* WDKSubMenuAction.m */,
+			);
+			path = DebugActions;
+			sourceTree = "<group>";
+		};
+		4F948D772015C89D0030BC4A /* AppInfoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D782015C89D0030BC4A /* WDKAppInfoViewer.m */,
+				4F948D792015C89D0030BC4A /* WDKAppInfoViewer.h */,
+			);
+			path = AppInfoViewer;
+			sourceTree = "<group>";
+		};
+		4F948D7A2015C89D0030BC4A /* FileExplorer */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D7B2015C89D0030BC4A /* WDKDirectoryBrowserViewController.h */,
+				4F948D7C2015C89D0030BC4A /* WDKImageBrowserViewController.m */,
+				4F948D7D2015C89D0030BC4A /* WDKFileExplorer.m */,
+				4F948D7E2015C89D0030BC4A /* WDKTextEditViewController.h */,
+				4F948D7F2015C89D0030BC4A /* WDKPlistViewController.h */,
+				4F948D802015C89D0030BC4A /* Controls */,
+				4F948D882015C89D0030BC4A /* WDKImageBrowserViewController.h */,
+				4F948D892015C89D0030BC4A /* WDKDirectoryBrowserViewController.m */,
+				4F948D8A2015C89D0030BC4A /* WDKTextEditViewController.m */,
+				4F948D8B2015C89D0030BC4A /* WDKFileExplorer.h */,
+				4F948D8C2015C89D0030BC4A /* WDKPlistViewController.m */,
+				4F948D8D2015C89D0030BC4A /* Addition */,
+			);
+			path = FileExplorer;
+			sourceTree = "<group>";
+		};
+		4F948D802015C89D0030BC4A /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D812015C89D0030BC4A /* WDKInteractiveLabel.h */,
+				4F948D822015C89D0030BC4A /* WDKContextMenuCell.m */,
+				4F948D832015C89D0030BC4A /* WDKImageZoomView.m */,
+				4F948D842015C89D0030BC4A /* WDKContextMenuItemDefines.h */,
+				4F948D852015C89D0030BC4A /* WDKInteractiveLabel.m */,
+				4F948D862015C89D0030BC4A /* WDKContextMenuCell.h */,
+				4F948D872015C89D0030BC4A /* WDKImageZoomView.h */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		4F948D8D2015C89D0030BC4A /* Addition */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D8E2015C89D0030BC4A /* UIAlertView+WDK.h */,
+				4F948D8F2015C89D0030BC4A /* UIAlertView+WDK.m */,
+			);
+			path = Addition;
+			sourceTree = "<group>";
+		};
+		4F948D902015C89D0030BC4A /* CommonTools */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D912015C89D0030BC4A /* WCInfoPlistTool.h */,
+				4F948D922015C89D0030BC4A /* WCMobileProvisionTool.m */,
+				4F948D932015C89D0030BC4A /* WDKRuntimeUtility.h */,
+				4F948D942015C89D0030BC4A /* WCNSObjectTool.m */,
+				4F948D952015C89D0030BC4A /* WDKRuntimeUtility.m */,
+				4F948D962015C89D0030BC4A /* WCMobileProvisionTool.h */,
+				4F948D972015C89D0030BC4A /* WCInfoPlistTool.m */,
+				4F948D982015C89D0030BC4A /* WCNSObjectTool.h */,
+			);
+			path = CommonTools;
+			sourceTree = "<group>";
+		};
+		4F948D992015C89D0030BC4A /* ViewInspector */ = {
+			isa = PBXGroup;
+			children = (
+				4F948D9A2015C89D0030BC4A /* WDKViewExplorerWindow.m */,
+				4F948D9B2015C89D0030BC4A /* WDKUserInterfaceInspector.h */,
+				4F948D9C2015C89D0030BC4A /* WDKViewInspector.h */,
+				4F948D9D2015C89D0030BC4A /* WDKViewExplorerViewController.m */,
+				4F948D9E2015C89D0030BC4A /* WDKViewExplorerWindow.h */,
+				4F948D9F2015C89D0030BC4A /* WDKViewInspector.m */,
+				4F948DA02015C89D0030BC4A /* WDKUserInterfaceInspector.m */,
+				4F948DA12015C89D0030BC4A /* WDKViewExplorerViewController.h */,
+				4F948DA22015C89D0030BC4A /* Addition */,
+			);
+			path = ViewInspector;
+			sourceTree = "<group>";
+		};
+		4F948DA22015C89D0030BC4A /* Addition */ = {
+			isa = PBXGroup;
+			children = (
+				4F948DA32015C89D0030BC4A /* UIApplication+WDK.h */,
+				4F948DA42015C89D0030BC4A /* UIApplication+WDK.m */,
+			);
+			path = Addition;
+			sourceTree = "<group>";
+		};
+		4F948DA52015C89D0030BC4A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4F948DA62015C89D0030BC4A /* plugin_tools_path.plist */,
+				4F948DA72015C89D0030BC4A /* tag_summary.json */,
+				4F948DA92015C89D0030BC4A /* builtin_tools.plist */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4F948AFF2015C04F0030BC4A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F948DD32015C89D0030BC4A /* WDKAppInfoViewer.h in Headers */,
+				4F948DAA2015C89D0030BC4A /* WDKIntegratedTools.h in Headers */,
+				4F948DF02015C89D0030BC4A /* WDKUserInterfaceInspector.h in Headers */,
+				4F948DCF2015C89D0030BC4A /* WDKDebugAction.h in Headers */,
+				4F948DC72015C89D0030BC4A /* WDKDebugAction_Internal.h in Headers */,
+				4F948DAC2015C89D0030BC4A /* WCDebugKit.h in Headers */,
+				4F948DCC2015C89D0030BC4A /* WDKDebugGroup.h in Headers */,
+				4F948DF32015C89D0030BC4A /* WDKViewExplorerWindow.h in Headers */,
+				4F948DE02015C89D0030BC4A /* WDKImageBrowserViewController.h in Headers */,
+				4F948DC12015C89D0030BC4A /* WDKDebugActionsViewController.h in Headers */,
+				4F948DB52015C89D0030BC4A /* WDKDebugPanelAboutViewController.h in Headers */,
+				4F948DE72015C89D0030BC4A /* WCInfoPlistTool.h in Headers */,
+				4F948DC42015C89D0030BC4A /* WDKCustomPanelAction.h in Headers */,
+				4F948DE92015C89D0030BC4A /* WDKRuntimeUtility.h in Headers */,
+				4F948DD92015C89D0030BC4A /* WDKInteractiveLabel.h in Headers */,
+				4F948DD82015C89D0030BC4A /* WDKPlistViewController.h in Headers */,
+				4F948DB62015C89D0030BC4A /* WDKNavBackButtonItem.h in Headers */,
+				4F948DB42015C89D0030BC4A /* WDKDebugPanelGerenalViewController.h in Headers */,
+				4F948DF72015C89D0030BC4A /* UIApplication+WDK.h in Headers */,
+				4F948DB22015C89D0030BC4A /* WDKDebugPanelCell.h in Headers */,
+				4F948DF62015C89D0030BC4A /* WDKViewExplorerViewController.h in Headers */,
+				4F948DDC2015C89D0030BC4A /* WDKContextMenuItemDefines.h in Headers */,
+				4F948DC82015C89D0030BC4A /* WDKToggleAction.h in Headers */,
+				4F948DAE2015C89D0030BC4A /* WDKDeviceInfoViewer.h in Headers */,
+				4F948DDE2015C89D0030BC4A /* WDKContextMenuCell.h in Headers */,
+				4F948DEE2015C89D0030BC4A /* WCNSObjectTool.h in Headers */,
+				4F948DCB2015C89D0030BC4A /* WDKSubMenuAction.h in Headers */,
+				4F948DE52015C89D0030BC4A /* UIAlertView+WDK.h in Headers */,
+				4F948DD42015C89D0030BC4A /* WDKDirectoryBrowserViewController.h in Headers */,
+				4F948DCA2015C89D0030BC4A /* WDKDebugGroup_Internal.h in Headers */,
+				4F948DBE2015C89D0030BC4A /* WDKExpandableHeaderView.h in Headers */,
+				4F948DEC2015C89D0030BC4A /* WCMobileProvisionTool.h in Headers */,
+				4F948DD72015C89D0030BC4A /* WDKTextEditViewController.h in Headers */,
+				4F948DC02015C89D0030BC4A /* WDKDebugPanelPod.h in Headers */,
+				4F948DF12015C89D0030BC4A /* WDKViewInspector.h in Headers */,
+				4F948DBF2015C89D0030BC4A /* WDKDebugPanelSectionItem.h in Headers */,
+				4F948DB12015C89D0030BC4A /* WDKDebugPanel_Internal.h in Headers */,
+				4F948DC22015C89D0030BC4A /* WDKDebugPanel.h in Headers */,
+				4F948DC62015C89D0030BC4A /* WDKEnumAction.h in Headers */,
+				4F948DBB2015C89D0030BC4A /* WDKDebugPanelCellItem.h in Headers */,
+				4F948DE32015C89D0030BC4A /* WDKFileExplorer.h in Headers */,
+				4F948DDF2015C89D0030BC4A /* WDKImageZoomView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4F948B012015C04F0030BC4A /* WCDebugKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F948B0A2015C04F0030BC4A /* Build configuration list for PBXNativeTarget "WCDebugKit" */;
+			buildPhases = (
+				4F948AFD2015C04F0030BC4A /* Sources */,
+				4F948AFE2015C04F0030BC4A /* Frameworks */,
+				4F948AFF2015C04F0030BC4A /* Headers */,
+				4F948B002015C04F0030BC4A /* Resources */,
+				4F948BBF2015C19C0030BC4A /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F948E082015CAFF0030BC4A /* PBXTargetDependency */,
+			);
+			name = WCDebugKit;
+			productName = WCDebugKit;
+			productReference = 4F948B022015C04F0030BC4A /* WCDebugKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4F948E002015CAF10030BC4A /* WCDebugKit-Resource */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F948E042015CAF10030BC4A /* Build configuration list for PBXNativeTarget "WCDebugKit-Resource" */;
+			buildPhases = (
+				4F948DFD2015CAF10030BC4A /* Sources */,
+				4F948DFE2015CAF10030BC4A /* Frameworks */,
+				4F948DFF2015CAF10030BC4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WCDebugKit-Resource";
+			productName = "WCDebugKit-Resource";
+			productReference = 4F948E012015CAF10030BC4A /* WCDebugKit.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4F948AF72015C0210030BC4A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				TargetAttributes = {
+					4F948B012015C04F0030BC4A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					4F948E002015CAF10030BC4A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4F948AFA2015C0210030BC4A /* Build configuration list for PBXProject "WCDebugKit" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4F948AF62015C0210030BC4A;
+			productRefGroup = 4F948B032015C04F0030BC4A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4F948B012015C04F0030BC4A /* WCDebugKit */,
+				4F948E002015CAF10030BC4A /* WCDebugKit-Resource */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4F948B002015C04F0030BC4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F948E0C2015CB8D0030BC4A /* WCDebugKit.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F948DFF2015CAF10030BC4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F948E092015CB0D0030BC4A /* plugin_tools_path.plist in Resources */,
+				4F948E0A2015CB0D0030BC4A /* tag_summary.json in Resources */,
+				4F948E0B2015CB0D0030BC4A /* builtin_tools.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F948BBF2015C19C0030BC4A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/create_universal_framework.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4F948AFD2015C04F0030BC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F948DC52015C89D0030BC4A /* WDKDebugGroup.m in Sources */,
+				4F948DAD2015C89D0030BC4A /* WDKDeviceInfoViewer.m in Sources */,
+				4F948DD02015C89D0030BC4A /* WDKToggleAction.m in Sources */,
+				4F948DD62015C89D0030BC4A /* WDKFileExplorer.m in Sources */,
+				4F948DC32015C89D0030BC4A /* WDKDebugActionsViewController.m in Sources */,
+				4F948DDD2015C89D0030BC4A /* WDKInteractiveLabel.m in Sources */,
+				4F948DEB2015C89D0030BC4A /* WDKRuntimeUtility.m in Sources */,
+				4F948DF42015C89D0030BC4A /* WDKViewInspector.m in Sources */,
+				4F948DE42015C89D0030BC4A /* WDKPlistViewController.m in Sources */,
+				4F948DF82015C89D0030BC4A /* UIApplication+WDK.m in Sources */,
+				4F948DBA2015C89D0030BC4A /* WDKDebugPanelGerenalViewController.m in Sources */,
+				4F948DAB2015C89D0030BC4A /* WDKIntegratedTools.m in Sources */,
+				4F948DD12015C89D0030BC4A /* WDKSubMenuAction.m in Sources */,
+				4F948DB72015C89D0030BC4A /* WDKExpandableHeaderView.m in Sources */,
+				4F948DC92015C89D0030BC4A /* WDKDebugAction.m in Sources */,
+				4F948DBD2015C89D0030BC4A /* WDKNavBackButtonItem.m in Sources */,
+				4F948DE12015C89D0030BC4A /* WDKDirectoryBrowserViewController.m in Sources */,
+				4F948DE22015C89D0030BC4A /* WDKTextEditViewController.m in Sources */,
+				4F948DED2015C89D0030BC4A /* WCInfoPlistTool.m in Sources */,
+				4F948DE82015C89D0030BC4A /* WCMobileProvisionTool.m in Sources */,
+				4F948DB32015C89D0030BC4A /* WDKDebugPanelCellItem.m in Sources */,
+				4F948DB82015C89D0030BC4A /* WDKDebugPanelSectionItem.m in Sources */,
+				4F948DBC2015C89D0030BC4A /* WDKDebugPanelCell.m in Sources */,
+				4F948DB02015C89D0030BC4A /* WDKDebugPanel.m in Sources */,
+				4F948DDA2015C89D0030BC4A /* WDKContextMenuCell.m in Sources */,
+				4F948DEA2015C89D0030BC4A /* WCNSObjectTool.m in Sources */,
+				4F948DE62015C89D0030BC4A /* UIAlertView+WDK.m in Sources */,
+				4F948DD22015C89D0030BC4A /* WDKAppInfoViewer.m in Sources */,
+				4F948DCE2015C89D0030BC4A /* WDKEnumAction.m in Sources */,
+				4F948DF52015C89D0030BC4A /* WDKUserInterfaceInspector.m in Sources */,
+				4F948DF22015C89D0030BC4A /* WDKViewExplorerViewController.m in Sources */,
+				4F948DCD2015C89D0030BC4A /* WDKCustomPanelAction.m in Sources */,
+				4F948DEF2015C89D0030BC4A /* WDKViewExplorerWindow.m in Sources */,
+				4F948DB92015C89D0030BC4A /* WDKDebugPanelAboutViewController.m in Sources */,
+				4F948DDB2015C89D0030BC4A /* WDKImageZoomView.m in Sources */,
+				4F948DD52015C89D0030BC4A /* WDKImageBrowserViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F948DFD2015CAF10030BC4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4F948E082015CAFF0030BC4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4F948E002015CAF10030BC4A /* WCDebugKit-Resource */;
+			targetProxy = 4F948E072015CAFF0030BC4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4F948AFB2015C0210030BC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+			};
+			name = Debug;
+		};
+		4F948AFC2015C0210030BC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+			};
+			name = Release;
+		};
+		4F948B082015C04F0030BC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.WCDebugKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4F948B092015C04F0030BC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wc.WCDebugKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4F948E052015CAF10030BC4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Resource-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.WCDebugKit-Resource";
+				PRODUCT_NAME = WCDebugKit;
+				SDKROOT = iphoneos11.2;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		4F948E062015CAF10030BC4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Resource-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wc.WCDebugKit-Resource";
+				PRODUCT_NAME = WCDebugKit;
+				SDKROOT = iphoneos11.2;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4F948AFA2015C0210030BC4A /* Build configuration list for PBXProject "WCDebugKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F948AFB2015C0210030BC4A /* Debug */,
+				4F948AFC2015C0210030BC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F948B0A2015C04F0030BC4A /* Build configuration list for PBXNativeTarget "WCDebugKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F948B082015C04F0030BC4A /* Debug */,
+				4F948B092015C04F0030BC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4F948E042015CAF10030BC4A /* Build configuration list for PBXNativeTarget "WCDebugKit-Resource" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F948E052015CAF10030BC4A /* Debug */,
+				4F948E062015CAF10030BC4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4F948AF72015C0210030BC4A /* Project object */;
+}
