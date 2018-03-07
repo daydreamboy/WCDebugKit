@@ -342,7 +342,7 @@
             }];
             
             WDKDebugGroup *parentClassesGroup = [WDKDebugGroup groupWithName:@"class hierarchy" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSMutableArray *classNames = [NSMutableArray arrayWithArray:[WCNSObjectTool wdk_parentClassHierarchyWithClassName:className]];
+                NSMutableArray *classNames = [NSMutableArray arrayWithArray:[WCNSObjectTool parentClassHierarchyWithClassName:className]];
                 
                 for (NSInteger i = 0; i < classNames.count; i++) {
                     

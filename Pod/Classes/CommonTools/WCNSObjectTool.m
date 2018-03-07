@@ -203,8 +203,12 @@
     return [[NSClassFromString(className) wdk_descriptionForProtocol:NSProtocolFromString(protocolName)] objectForKey:@"@properties"];
 }
 
-+ (NSArray<NSString *> *)wdk_parentClassHierarchyWithClassName:(NSString *)className {
++ (NSArray<NSString *> *)parentClassHierarchyWithClassName:(NSString *)className {
     return [NSClassFromString(className) wdk_parentClassHierarchy];
+}
+
++ (id)help {
+    return [self classMethodsWithClassName:NSStringFromClass(self)];
 }
 
 #pragma mark - Private Methods

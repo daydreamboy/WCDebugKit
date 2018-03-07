@@ -38,6 +38,9 @@
 + (NSArray<NSString *> *)protocolPropertiesWithProtocolName:(NSString *)protocolName className:(NSString *)className;
 
 // get all super class of a class
-+ (NSArray<NSString *> *)wdk_parentClassHierarchyWithClassName:(NSString *)className;
++ (NSArray<NSString *> *)parentClassHierarchyWithClassName:(NSString *)className;
+
+// print help info by `po [WCNSObjectTool help]`
++ (id)help;
 
 @end
