@@ -9,7 +9,7 @@
 #import "WDKDebugPanel.h"
 #import "WDKDebugPanel_Internal.h"
 #import "WDKDebugActionsViewController.h"
-#import "WDKRuntimeUtility.h"
+#import "WCObjCRuntimeUtility.h"
 #import <objc/runtime.h>
 
 #define WDK_RESOURCE_BUNDLE     @"WCDebugKit.bundle"
@@ -73,8 +73,8 @@ static UIView *WDK_statusBarInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class statusBarClass = NSClassFromString(@"UIStatusBar");
-        [WDKRuntimeUtility exchangeSelectorForClass:statusBarClass origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:)];
-        [WDKRuntimeUtility exchangeSelectorForClass:statusBarClass origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted)];
+        [WCObjCRuntimeUtility exchangeSelectorForClass:statusBarClass origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:) classMethod:NO];
+        [WCObjCRuntimeUtility exchangeSelectorForClass:statusBarClass origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted) classMethod:NO];
         
         
 #if TARGET_OS_SIMULATOR

@@ -57,8 +57,14 @@
         return [self createClassList];
     }];
     
+    WDKCustomPanelAction *action5 = [WDKCustomPanelAction actionWithName:NSLocalizedString(@"Object Explorer", nil) customPanelBlock:^(UIViewController *panelViewController) {
+        UIViewController *vc = [UIViewController new];
+        vc.title = NSLocalizedString(@"Object Explorer", nil);
+        [panelViewController.navigationController pushViewController:vc animated:YES];
+    }];
+    
     WDKDebugGroup *group = [WDKDebugGroup groupWithName:NSLocalizedString(@"App信息查看", nil) actionsBlock:^NSArray<WDKDebugAction *> *{
-        return @[action1, action2, action3, action4];
+        return @[action1, action2, action3, action4, action5];
     }];
     group.nameColor = [UIColor brownColor];
     

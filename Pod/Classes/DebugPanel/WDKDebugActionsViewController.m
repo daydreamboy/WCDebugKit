@@ -60,7 +60,7 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
 @end
 
 
-@interface WDKDebugActionsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIAlertViewDelegate>
+@interface WDKDebugActionsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIAlertViewDelegate, WDKExpandableHeaderViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UITableView *headerInTableView;

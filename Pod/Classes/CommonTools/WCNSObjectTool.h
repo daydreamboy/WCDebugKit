@@ -22,7 +22,7 @@
 @end
 
 @interface WCNSObjectTool : NSObject
-// get all classes registed in runtime
+// get all classes registered in runtime
 + (NSArray<NSString *> *)allClasses;
 
 // get attributes of a class
@@ -39,6 +39,32 @@
 
 // get all super class of a class
 + (NSArray<NSString *> *)parentClassHierarchyWithClassName:(NSString *)className;
+
+/**
+ Check an object's class if override some one method
+
+ @param object the object
+ @param selector the selector of the method
+ @return YES, if override; NO, if not override
+ @see https://stackoverflow.com/a/28737576
+ 
+ @code
+ 
+ @implmentation BaseClass
+ - (void)methodMaybeOverride {
+    BOOL overridden = [WCNSObjectTool checkObject:self overridesSelector:@selector(methodMaybeOverride)];
+    ...
+ }
+ @end
+ @implementation DerivedClass : BaseClass
+ - (void)methodMaybeOverride {
+ 
+ }
+ @end
+ 
+ @endcode
+ */
++ (BOOL)checkObject:(id)object overridesSelector:(SEL)selector;
 
 // print help info by `po [WCNSObjectTool help]`
 + (id)help;

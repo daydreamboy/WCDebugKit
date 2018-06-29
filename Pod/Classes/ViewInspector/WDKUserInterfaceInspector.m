@@ -7,25 +7,10 @@
 //
 
 #import "WDKUserInterfaceInspector.h"
-#import "WDKRuntimeUtility.h"
+#import "WCObjCRuntimeUtility.h"
+#import "WDKMacroUtility.h"
 #import <objc/message.h>
 #import <objc/runtime.h>
-
-#define SYNTHESIZE_ASSOCIATED_PRIMITIVE(getterName, setterName, type)                                           \
-static NSString *WCMacroKit_##getterName = @"WCMacroKit_" #getterName;                                          \
-                                                                                                                \
-- (void)setterName:(type)value {                                                                                \
-    NSValue *nsValue = [NSValue value:&value withObjCType:@encode(type)];                                       \
-    objc_setAssociatedObject(self, &WCMacroKit_##getterName, nsValue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);       \
-}                                                                                                               \
-                                                                                                                \
-- (type)getterName {                                                                                            \
-    type value;                                                                                                 \
-    memset(&value, 0, sizeof(type));                                                                            \
-    NSValue *nsValue = objc_getAssociatedObject(self, &WCMacroKit_##getterName);                                \
-    [nsValue getValue:&value];                                                                                  \
-    return value;                                                                                               \
-}
 
 @interface UIView (WDKUserInterfaceInspector)
 
@@ -170,7 +155,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
         SEL selector2 = @selector(initWithFrame:);
         SEL selector3 = NSSelectorFromString(@"dealloc");// @selector(dealloc); // Error: ARC forbids use of 'dealloc' in a @selector
         
-        __block IMP originalInitWithCoderIMP = [WDKRuntimeUtility replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
+        __block IMP originalInitWithCoderIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
             UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalInitWithCoderIMP)(slf, selector1, coder);
             
             [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
@@ -179,7 +164,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
             return retVal;
         }];
         
-        __block IMP originalInitWithFrameIMP = [WDKRuntimeUtility replaceMethodWithSelector:selector2 onClass:[UIView class] withBlock:^UIView *(UIView *slf, CGRect frame) {
+        __block IMP originalInitWithFrameIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector2 onClass:[UIView class] withBlock:^UIView *(UIView *slf, CGRect frame) {
             UIView *retVal = ((UIView * (*)(UIView *, SEL, CGRect))originalInitWithFrameIMP)(slf, selector2, frame);
             
             [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
@@ -188,7 +173,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
             return retVal;
         }];
         
-        __block IMP originalDeallocIMP = [WDKRuntimeUtility replaceMethodWithSelector:selector3 onClass:[UIView class] withBlock:^void(__unsafe_unretained UIView *slf) {
+        __block IMP originalDeallocIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector3 onClass:[UIView class] withBlock:^void(__unsafe_unretained UIView *slf) {
             [WDKUserInterfaceInspector removeNotificationsForView:slf];
             
             ((void (*)(UIView *, SEL))originalDeallocIMP)(slf, selector3);

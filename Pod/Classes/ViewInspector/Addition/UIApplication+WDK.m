@@ -8,7 +8,7 @@
 @import ObjectiveC.runtime;
 
 #import "UIApplication+WDK.h"
-#import "WDKRuntimeUtility.h"
+#import "WCObjCRuntimeUtility.h"
 
 NSNotificationName WDKShakeMotionNotification = @"kWDKShakeMotionNotification";
 NSNotificationName WDKInterfaceEventNotification = @"kWDKInterfaceEventNotification";
@@ -16,7 +16,7 @@ NSNotificationName WDKInterfaceEventNotification = @"kWDKInterfaceEventNotificat
 @implementation UIApplication (WDK)
 
 + (void)load {
-    [WDKRuntimeUtility exchangeSelectorForClass:self origin:@selector(sendEvent:) substitute:@selector(wdk_sendEvent_intercepted:)];
+    [WCObjCRuntimeUtility exchangeSelectorForClass:self origin:@selector(sendEvent:) substitute:@selector(wdk_sendEvent_intercepted:) classMethod:NO];
 }
 
 - (void)wdk_sendEvent_intercepted:(UIEvent *)event {

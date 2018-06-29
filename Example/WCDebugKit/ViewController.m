@@ -14,6 +14,7 @@
 @interface ViewController ()
 @property (nonatomic, assign) BOOL toggleEnabled;
 @property (nonatomic, strong) UIButton *buttonShowDebugPanel;
+@property (nonatomic, strong) UIImageView *imageView;
 @end
 
 @implementation ViewController
@@ -24,7 +25,16 @@
     
     [self test_install_debugPanel_on_multiple_views];
     [self test_showDebugPanel];
-    //[self test_enableStatusBarEntry_disable_status_bar_entry];
+    [self test_enableStatusBarEntry_disable_status_bar_entry];
+}
+
+#pragma mark - Getter
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"apache"]];
+    NSLog(@"%@", imageView);
 }
 
 #pragma mark - Test Methods

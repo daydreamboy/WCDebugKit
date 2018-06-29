@@ -36,6 +36,7 @@ A debug kit for iOS
   # WDK prefix short for WCDebugKit
 
   # subspec 'DebugPanel'
+  # Note: this a basic subspec
   s.subspec 'DebugPanel' do |ss|
   	ss.source_files = [
   		'Pod/Classes/DebugPanel/**/*'
@@ -67,7 +68,7 @@ A debug kit for iOS
       'Pod/Classes/CommonTools/WCInfoPlistTool.{h,m}',
       'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
       'Pod/Classes/CommonTools/WCNSObjectTool.{h,m}',
-      'Pod/Classes/CommonTools/WDKRuntimeUtility.{h,m}',
+      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
   	]
   	ss.public_header_files = [
 			'Pod/Classes/AppInfoViewer/WDKAppInfoViewer.h',
@@ -99,7 +100,26 @@ A debug kit for iOS
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
       'Pod/Classes/ViewInspector/**/*',
-      'Pod/Classes/CommonTools/WDKRuntimeUtility.{h,m}',
+      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
+      'Pod/Classes/CommonTools/WDKMacroUtility.h',
+  	]
+  end
+
+  # subspec 'ObjectExplorer'
+  s.subspec 'ObjectExplorer' do |ss|
+  	ss.dependency 'WCDebugKit/DebugPanel'
+  	ss.source_files = [
+      'Pod/Classes/ObjectExplorer/**/*',
+  	]
+  end
+
+  # subspec 'HookManager'
+  s.subspec 'HookManager' do |ss|
+  	ss.dependency 'WCDebugKit/DebugPanel'
+  	ss.source_files = [
+      'Pod/Classes/HookManager/**/*',
+      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
+      'Pod/Classes/CommonTools/WDKMacroUtility.h',
   	]
   end
 

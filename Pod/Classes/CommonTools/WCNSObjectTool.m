@@ -207,6 +207,24 @@
     return [NSClassFromString(className) wdk_parentClassHierarchy];
 }
 
++ (BOOL)checkObject:(id)object overridesSelector:(SEL)selector {
+    Class superClass = [object superclass];
+    BOOL isMethodOverrriden = NO;
+    
+    while (superClass != Nil) {
+        isMethodOverrriden = [object methodForSelector:selector] != [superClass instanceMethodForSelector:selector];
+        
+        if (isMethodOverrriden) {
+            // found super...super class has overriden the method
+            break;
+        }
+        
+        superClass = [superClass superclass];
+    }
+    
+    return isMethodOverrriden;
+}
+
 + (id)help {
     return [self classMethodsWithClassName:NSStringFromClass(self)];
 }

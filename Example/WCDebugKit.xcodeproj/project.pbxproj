@@ -10,6 +10,7 @@
 		2BF7F44D1F84B8E100B27A0F /* SubMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F44C1F84B8E100B27A0F /* SubMenuViewController.m */; };
 		2BF7F4581F91DA2C00B27A0F /* WDKDebugPluginsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F4551F91D98800B27A0F /* WDKDebugPluginsInfo.m */; };
 		2BF7F45B1F91F2C400B27A0F /* WDKDebugPlugins.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F45A1F91F2C100B27A0F /* WDKDebugPlugins.bundle */; };
+		4F843AC620E6040800BF8211 /* apache.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F843AC520E6040800BF8211 /* apache.png */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -62,6 +63,7 @@
 		2BF7F45A1F91F2C100B27A0F /* WDKDebugPlugins.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WDKDebugPlugins.bundle; sourceTree = "<group>"; };
 		32152C7AFC80B90055E20027 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4780E58D0E2544909FC1169F /* Pods-WCDebugKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCDebugKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WCDebugKit_Example/Pods-WCDebugKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		4F843AC520E6040800BF8211 /* apache.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apache.png; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* WCDebugKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WCDebugKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,6 +138,14 @@
 			path = WCDebugKit/DebugPluginsInfoClass;
 			sourceTree = SOURCE_ROOT;
 		};
+		4F843AC420E6040800BF8211 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4F843AC520E6040800BF8211 /* apache.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +183,7 @@
 		6003F593195388D20070C39A /* Example for WCDebugKit */ = {
 			isa = PBXGroup;
 			children = (
+				4F843AC420E6040800BF8211 /* Resources */,
 				2BF7F4531F91D98800B27A0F /* DebugPluginsInfoClass */,
 				2BF7F44E1F91D98300B27A0F /* DebugPlugins */,
 				6003F59C195388D20070C39A /* AppDelegate.h */,
@@ -250,7 +261,6 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				539009D164673830ECF94A6A /* [CP] Embed Pods Frameworks */,
-				934C99FF4770F1C13278CE04 /* [CP] Copy Pods Resources */,
 				4F94898B200F1F760030BC4A /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -323,6 +333,7 @@
 				2BF7F45B1F91F2C400B27A0F /* WDKDebugPlugins.bundle in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				4F843AC620E6040800BF8211 /* apache.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,21 +382,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		934C99FF4770F1C13278CE04 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WCDebugKit_Example/Pods-WCDebugKit_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
