@@ -11,6 +11,7 @@
 #import "WDKDebugGroup_Internal.h"
 #import "WDKViewExplorerWindow.h"
 #import "WCObjCRuntimeUtility.h"
+#import "WDKViewExplorerOverlayView.h"
 
 @implementation WDKViewInspector
 
@@ -30,7 +31,8 @@
     [arrM addObject:action];
     
     action = [WDKDebugAction actionWithName:NSLocalizedString(@"View Explorer", nil) actionBlock:^{
-        [WDKViewExplorerWindow enableViewExplorerWindow:YES];
+//        [WDKViewExplorerWindow enableViewExplorerWindow:YES];
+        [WDKViewExplorerOverlayView setEnabled:YES];
     }];
     [arrM addObject:action];
     

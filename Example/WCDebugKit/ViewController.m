@@ -15,6 +15,7 @@
 @property (nonatomic, assign) BOOL toggleEnabled;
 @property (nonatomic, strong) UIButton *buttonShowDebugPanel;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UITextField *textField;
 @end
 
 @implementation ViewController
@@ -26,15 +27,42 @@
     [self test_install_debugPanel_on_multiple_views];
     [self test_showDebugPanel];
     [self test_enableStatusBarEntry_disable_status_bar_entry];
+    [self.view addSubview:self.textField];
 }
-
-#pragma mark - Getter
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"apache"]];
-    NSLog(@"%@", imageView);
+    NSLog(@"%@", [imageView.image debugDescription]);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.textField becomeFirstResponder];
+}
+
+#pragma mark - Getter
+
+- (UITextField *)textField {
+    if (!_textField) {
+        UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 200)];
+        inputView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.4];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+        label.text = @"test";
+        [inputView addSubview:label];
+        
+        CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 60, screenSize.width - 2 * 10, 30)];
+        textField.borderStyle = UITextBorderStyleRoundedRect;
+//        textField.inputView = inputView;
+        
+        _textField = textField;
+    }
+    
+    return _textField;
 }
 
 #pragma mark - Test Methods

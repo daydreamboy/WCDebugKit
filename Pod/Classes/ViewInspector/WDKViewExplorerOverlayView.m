@@ -1,21 +1,18 @@
 //
-//  WDKViewExplorerViewController.m
+//  WDKViewExplorerOverlayView.m
 //  WCDebugKit
 //
-//  Created by wesley_chen on 23/10/2017.
+//  Created by wesley_chen on 2018/12/3.
 //
 
-#import "WDKViewExplorerViewController.h"
+#import "WDKViewExplorerOverlayView.h"
 #import "UIApplication+WDK.h"
 #import "WDKViewExplorerWindow.h"
+#import "WDKDebugActionsViewController.h"
+#import "WDKDebugPanelGerenalViewController.h"
+#import "WCViewControllerTool.h"
 
-typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
-    WDKViewExplorerModeDefault,
-    WDKViewExplorerModeSelect,
-    WDKViewExplorerModeMove,
-};
-
-@interface WDKViewExplorerViewController ()
+@interface WDKViewExplorerOverlayView ()
 @property (nonatomic, assign) WDKViewExplorerMode currentMode;
 @property (nonatomic, strong) UIView *panel;
 
@@ -30,53 +27,106 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
 @property (nonatomic, strong) UIView *selectedView;
 /// A colored transparent overlay to indicate that the view is selected.
 @property (nonatomic, strong) UIView *selectedViewOverlay;
-
-
 @end
 
-@implementation WDKViewExplorerViewController
+@implementation WDKViewExplorerOverlayView
+
+static WDKViewExplorerOverlayView *sInstance;
+static BOOL sEnabled;
+
+@dynamic enabled;
 
 #pragma mark - Public Methods
 
-- (BOOL)shouldReceiveTouchAtWindowPoint:(CGPoint)pointInWindowCoordinates {
-    BOOL shouldReceiveTouch = NO;
-    
-    CGPoint pointInLocalCoordinates = [self.view convertPoint:pointInWindowCoordinates fromView:nil];
-    
-    // Always if it's on the toolbar
-    if (CGRectContainsPoint(self.panel.frame, pointInLocalCoordinates)) {
-        shouldReceiveTouch = YES;
-    }
-    
-    // Always if we're in selection mode
-    if (!shouldReceiveTouch && self.currentMode == WDKViewExplorerModeSelect) {
-        shouldReceiveTouch = YES;
-    }
-    
-    // Always in move mode too
-    if (!shouldReceiveTouch && self.currentMode == WDKViewExplorerModeMove) {
-        shouldReceiveTouch = YES;
-    }
-    
-    // Always if we have a modal presented
-    if (!shouldReceiveTouch && self.presentedViewController) {
-        shouldReceiveTouch = YES;
-    }
-    
-    return shouldReceiveTouch;
++ (void)setEnabled:(BOOL)enabled {
+    sEnabled = enabled;
 }
+
++ (BOOL)enabled {
+    return sEnabled;
+}
+
++ (void)installOverlayToFrontestWindow {
+    if (sEnabled) {
+        UIWindow *topMostWindow = [[UIApplication sharedApplication].windows lastObject];
+        [self addOverlayToWindow:topMostWindow];
+    }
+}
+
++ (void)uninstallOverlay {
+    [sInstance removeFromSuperview];
+    sInstance = nil;
+    sEnabled = NO;
+}
+
+//- (BOOL)shouldReceiveTouchAtWindowPoint:(CGPoint)pointInWindowCoordinates {
+//    BOOL shouldReceiveTouch = NO;
+//    
+//    CGPoint pointInLocalCoordinates = [self convertPoint:pointInWindowCoordinates fromView:nil];
+//    
+//    // Always if it's on the toolbar
+//    if (CGRectContainsPoint(self.panel.frame, pointInLocalCoordinates)) {
+//        shouldReceiveTouch = YES;
+//    }
+//    
+//    // Always if we're in selection mode
+//    if (!shouldReceiveTouch && self.currentMode == WDKViewExplorerModeSelect) {
+//        shouldReceiveTouch = YES;
+//    }
+//    
+//    // Always in move mode too
+//    if (!shouldReceiveTouch && self.currentMode == WDKViewExplorerModeMove) {
+//        shouldReceiveTouch = YES;
+//    }
+//    
+//    // Always if we have a modal presented
+//    if (!shouldReceiveTouch && self.presentedViewController) {
+//        shouldReceiveTouch = YES;
+//    }
+//    
+//    return shouldReceiveTouch;
+//}
 
 #pragma mark -
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
++ (void)addOverlayToWindow:(UIWindow *)window {
+    if (sInstance.superview != window) {
+        [sInstance removeFromSuperview];
+        sInstance = [[WDKViewExplorerOverlayView alloc] initWithFrame:window.bounds];
+        [window addSubview:sInstance];
+    }
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.currentMode = WDKViewExplorerModeSelect;
+        [self addSubview:self.panel];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+        [self addGestureRecognizer:tapGesture];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWDKInterfaceEventNotification:) name:WDKInterfaceEventNotification object:nil];
+    }
+    return self;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    for (NSString *className in [self whiteListForInternalViewControllerClass]) {
+        if ([[WCViewControllerTool topViewControllerOnWindow:keyWindow] isKindOfClass:NSClassFromString(className)]) {
+            return NO;
+        }
+    }
     
-    self.currentMode = WDKViewExplorerModeSelect;
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    [self.view addGestureRecognizer:tapGesture];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleWDKInterfaceEventNotification:) name:WDKInterfaceEventNotification object:nil];
+    return [super pointInside:point withEvent:event];
+}
+
+- (NSArray<NSString *> *)whiteListForInternalViewControllerClass {
+    return @[
+             NSStringFromClass([WDKDebugActionsViewController class]),
+             NSStringFromClass([WDKDebugPanelGerenalViewController class]),
+             ];
 }
 
 #pragma mark - Getters
@@ -101,12 +151,13 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
 
 - (void)viewTapped:(UITapGestureRecognizer *)recognizer {
     if (self.currentMode == WDKViewExplorerModeSelect && recognizer.state == UIGestureRecognizerStateRecognized) {
-        CGPoint tapPointInView = [recognizer locationInView:self.view];
-        CGPoint tapPointInWindow = [self.view convertPoint:tapPointInView toView:nil];
+        CGPoint tapPointInView = [recognizer locationInView:self];
+        CGPoint tapPointInWindow = [self convertPoint:tapPointInView toView:nil];
         
         [self updateOutlineViewsForSelectionPoint:tapPointInWindow];
     }
 }
+
 
 #pragma mark - Private Methods
 
@@ -119,7 +170,7 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
     NSMutableDictionary *outlineViewsM = [NSMutableDictionary dictionary];
     for (UIView *view in visibleViewsContainsTapPoint) {
         UIView *outlineView = [self outlineViewForView:view];
-        [self.view addSubview:outlineView];
+        [self addSubview:outlineView];
         NSValue *key = [NSValue valueWithNonretainedObject:view];
         outlineViewsM[key] = outlineView;
     }
@@ -133,7 +184,7 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
     UIWindow *windowForSelection = [UIApplication sharedApplication].keyWindow;
     for (UIWindow *window in [[self.class allWindows] reverseObjectEnumerator]) {
         // ignore this view's window
-        if (window != self.view.window) {
+        if (window != self.window) {
             if ([window hitTest:tapPointInWindow withEvent:nil]) {
                 windowForSelection = window;
                 break;
@@ -158,7 +209,7 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
     // First convert to window coordinates since the view may be in a different window than our view.
     CGRect frameInWindow = [view convertRect:view.bounds toView:nil];
     // Then convert from the window to our view's coordinate space.
-    return [self.view convertRect:frameInWindow fromView:nil];
+    return [self convertRect:frameInWindow fromView:nil];
 }
 
 - (void)removeAllOutlinesViews {
@@ -173,7 +224,7 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
     NSMutableArray *views = [NSMutableArray array];
     for (UIWindow *window in [self.class allWindows]) {
         // exclude this view's window
-        if (window != self.view.window && [window pointInside:tapPointInWindow withEvent:nil]) {
+        if (window != self.window && [window pointInside:tapPointInWindow withEvent:nil]) {
             [views addObject:window];
             [views addObjectsFromArray:[self recursiveSubviewsContainsPoint:tapPointInWindow inView:window skipHiddenViews:skipHidden]];
         }
@@ -201,6 +252,28 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
             [subviewsAtPoint addObjectsFromArray:[self recursiveSubviewsContainsPoint:pointInSubview inView:subview skipHiddenViews:skipHidden]];
         }
     }
+    if (view.subviews.count == 0 && [view isKindOfClass:NSClassFromString(@"_UIRemoteKeyboardPlaceholderView")]) {
+        if ([view respondsToSelector:NSSelectorFromString(@"placeheldView")]) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warc-performSelector-leaks"
+            UIView *subview = [view performSelector:NSSelectorFromString(@"placeheldView")];
+#pragma GCC diagnostic pop
+            BOOL isHidden = subview.hidden || subview.alpha < 0.01;
+            if (!(skipHidden && isHidden)) {
+                BOOL subviewContainsPoint = CGRectContainsPoint(subview.frame, pointInView);
+                if (subviewContainsPoint) {
+                    [subviewsAtPoint addObject:subview];
+                }
+                
+                // Note: 1. if it contains point, so look up its subviews;
+                //       2. if it contains point, but maybe its subviews contains the point which is different from "hitTest", still need to look up its subviews
+                if (subviewsAtPoint || !subview.clipsToBounds) {
+                    CGPoint pointInSubview = [view convertPoint:pointInView toView:subview];
+                    [subviewsAtPoint addObjectsFromArray:[self recursiveSubviewsContainsPoint:pointInSubview inView:subview skipHiddenViews:skipHidden]];
+                }
+            }
+        }
+    }
     return subviewsAtPoint;
 }
 
@@ -209,30 +282,30 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
 - (void)setSelectedView:(UIView *)selectedView {
     if (![_selectedView isEqual:selectedView]) {
         /*
-        if (![self.viewContainsTapPoint containsObject:_selectedView]) {
-            [self stopObservingView:_selectedView];
-        }
+         if (![selfContainsTapPoint containsObject:_selectedView]) {
+         [self stopObservingView:_selectedView];
+         }
          */
         
         _selectedView = selectedView;
         
         /*
-        [self beginObservingView:selectedView];
+         [self beginObservingView:selectedView];
          */
-
+        
         if (selectedView) {
             if (!self.selectedViewOverlay) {
                 self.selectedViewOverlay = [[UIView alloc] init];
-                [self.view addSubview:self.selectedViewOverlay];
+                [self addSubview:self.selectedViewOverlay];
                 self.selectedViewOverlay.layer.borderWidth = 1.0;
             }
             UIColor *outlineColor = [self.class consistentRandomColorForObject:selectedView];
             self.selectedViewOverlay.backgroundColor = [outlineColor colorWithAlphaComponent:0.2];
             self.selectedViewOverlay.layer.borderColor = [outlineColor CGColor];
-            self.selectedViewOverlay.frame = [self.view convertRect:selectedView.bounds fromView:selectedView];
+            self.selectedViewOverlay.frame = [self convertRect:selectedView.bounds fromView:selectedView];
             
             // Make sure the selected overlay is in front of all the other subviews except the toolbar, which should always stay on top.
-            [self.view bringSubviewToFront:self.selectedViewOverlay];
+            [self bringSubviewToFront:self.selectedViewOverlay];
         }
         else {
             [self.selectedViewOverlay removeFromSuperview];
@@ -248,7 +321,7 @@ typedef NS_ENUM(NSUInteger, WDKViewExplorerMode) {
     UIWindow *window = touch.window;
     if (window != WDKViewExplorerWindow.currentViewExplorerWindow && touch.phase == UITouchPhaseEnded) {
         CGPoint tapPointInView = [touch locationInView:touch.view];
-        CGPoint tapPointInWindow = [self.view convertPoint:tapPointInView toView:nil];
+        CGPoint tapPointInWindow = [self convertPoint:tapPointInView toView:nil];
         
         [self updateOutlineViewsForSelectionPoint:tapPointInWindow];
     }

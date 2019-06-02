@@ -7,10 +7,13 @@
 
 #import "WDKViewExplorerWindow.h"
 #import "WDKViewExplorerViewController.h"
+#import <CoreGraphics/CoreGraphics.h>
 
 @implementation WDKViewExplorerWindow
 
 static WDKViewExplorerWindow *sWDKViewExplorerWindow_sharedInstance = nil;
+
+#pragma mark - Public Methods
 
 + (void)enableViewExplorerWindow:(BOOL)enabled {
     if (enabled) {
@@ -28,13 +31,17 @@ static WDKViewExplorerWindow *sWDKViewExplorerWindow_sharedInstance = nil;
     }
 }
 
++ (WDKViewExplorerWindow *)currentViewExplorerWindow {
+    return sWDKViewExplorerWindow_sharedInstance;
+}
+
 #pragma mark - Override Methods
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.windowLevel = UIWindowLevelStatusBar + 100;
+        self.windowLevel = 10000002;//pow(10, 3);//UIWindowLevelStatusBar + 100;
     }
     return self;
 }

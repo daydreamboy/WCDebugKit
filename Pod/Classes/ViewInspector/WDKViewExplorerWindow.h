@@ -10,5 +10,6 @@
 @interface WDKViewExplorerWindow : UIWindow
 
 + (void)enableViewExplorerWindow:(BOOL)enabled;
++ (WDKViewExplorerWindow *)currentViewExplorerWindow;
 
 @end

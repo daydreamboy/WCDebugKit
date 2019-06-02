@@ -21,6 +21,15 @@ SYNTHESIZE_ASSOCIATED_OBJ(wdk_original_image_name, setWdk_original_image_name, U
     image.wdk_original_image_name = name;
     return image;
 }
++ (UIImage *)imageNamed_intercepted:(NSString *)name inBundle:(NSBundle *)bundle compatibleWithTraitCollection:(UITraitCollection *)traitCollection {
+    UIImage *image = [self imageNamed_intercepted:name inBundle:bundle compatibleWithTraitCollection:traitCollection];
+    image.wdk_original_image_name = [NSString stringWithFormat:@"%@ (%@)", name, bundle];
+    return image;
+}
+- (NSString *)debugDescription_intercepted {
+    NSString *debugDescription = [self debugDescription_intercepted];
+    return [debugDescription stringByAppendingFormat:@" WCDebugKit info > image name: %@", self.wdk_original_image_name];
+}
 @end
 
 @interface WDKHookManager ()
@@ -49,9 +58,14 @@ SYNTHESIZE_ASSOCIATED_OBJ(wdk_original_image_name, setWdk_original_image_name, U
         
         if (enabled) {
             [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:) substitute:@selector(imageNamed_intercepted:) classMethod:YES];
+            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) classMethod:YES];
+            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription) substitute:@selector(debugDescription_intercepted) classMethod:NO];
+
         }
         else {
             [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:) substitute:@selector(imageNamed:) classMethod:YES];
+            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) classMethod:YES];
+            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription_intercepted) substitute:@selector(debugDescription) classMethod:NO];
         }
     }];
     [arrM addObject:action];

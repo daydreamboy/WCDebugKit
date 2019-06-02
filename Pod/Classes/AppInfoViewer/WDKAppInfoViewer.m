@@ -211,7 +211,7 @@
     
     WDKDebugPanelCellItem *item1 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
     item1.title = @"App Version";
-    item1.subtitle = [[self.class plistInfo] objectForKey:@"CFBundleShortVersionString"];
+    item1.subtitle = [[WCInfoPlistTool plistInfo] objectForKey:@"CFBundleShortVersionString"];
     [section1 addObject:item1];
     
     WDKDebugPanelCellItem *item2 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
