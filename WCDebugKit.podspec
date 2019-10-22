@@ -31,6 +31,7 @@ A debug kit for iOS
   s.ios.deployment_target = '8.0'
   s.source_files = [ 'Pod/Classes/WCDebugKit.h' ]
   s.public_header_files = [ 'Pod/Classes/WCDebugKit.h' ]
+  s.script_phase = { :name => 'create_universal_framework.sh', :script => 'bash "${PROJECT_DIR}/../scripts/create_universal_framework.sh"' }
 
   # Note: 
   # WDK prefix short for WCDebugKit
