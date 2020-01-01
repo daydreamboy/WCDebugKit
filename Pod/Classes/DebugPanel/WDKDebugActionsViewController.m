@@ -157,7 +157,7 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
     [self.tableView addSubview:self.refreshControl];
 }
 
-#pragma mark
+#pragma mark -
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

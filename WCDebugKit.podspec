@@ -29,7 +29,10 @@ A debug kit for iOS
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-  s.source_files = [ 'Pod/Classes/WCDebugKit.h' ]
+  s.source_files = [ 
+    'Pod/Classes/WCDebugKit.h', 
+    'Pod/Classes/WCDebugKit_Configuration.h' 
+  ]
   s.public_header_files = [ 'Pod/Classes/WCDebugKit.h' ]
   s.script_phase = { :name => 'create_universal_framework.sh', :script => 'bash "${PROJECT_DIR}/../scripts/create_universal_framework.sh"' }
 

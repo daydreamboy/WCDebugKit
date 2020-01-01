@@ -10,10 +10,8 @@
 #import "WDKDebugPanel_Internal.h"
 #import "WDKDebugActionsViewController.h"
 #import "WCObjCRuntimeUtility.h"
+#import "WCDebugKit_Configuration.h"
 #import <objc/runtime.h>
-
-#define WDK_RESOURCE_BUNDLE     @"WCDebugKit.bundle"
-#define WDK_BUILTIN_TOOLS       @"builtin_tools.plist"
 
 // 默认3次唤起DebugPanel（状态栏和entry views）
 #define WDK_DEFAULT_TAP_COUNT   3
@@ -69,6 +67,7 @@ static UIView *WDK_statusBarInstance = nil;
 
 #if DEBUG
 
+// Note: make sure the main project set other_flag has -ObjC
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -308,6 +307,7 @@ static WDKDebugPanel *WDK_sharedPanel;
             }
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:actionsViewController];
+            navController.modalPresentationStyle = UIModalPresentationFullScreen;
             
             if (hostViewController.isViewLoaded && hostViewController.view.window) {
                 // if hostViewController is visible, use it to present
@@ -336,11 +336,7 @@ static WDKDebugPanel *WDK_sharedPanel;
 #pragma mark - Load Tools
 
 - (void)loadBuiltinTools {
-    NSString *fileName = WDK_BUILTIN_TOOLS;
-    
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@/%@", [bundle bundlePath], WDK_RESOURCE_BUNDLE, fileName];
-    NSArray *tools = [NSArray arrayWithContentsOfFile:filePath];
+    NSArray *tools = WDK_BUILTIN_TOOLS;
     
     for (NSString *cls in tools) {
         id<WDKDebugPanelDataSource> dataSource = [[NSClassFromString(cls) alloc] init];
