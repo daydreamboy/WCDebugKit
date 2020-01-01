@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define WDKImageZoomView WDKInternalImageZoomView
+
 @interface WDKImageZoomView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, assign) NSUInteger index;
