@@ -1,6 +1,7 @@
 PODS:
   - WCDebugKit (0.1.0):
     - WCDebugKit/AppInfoViewer (= 0.1.0)
+    - WCDebugKit/CommonTools (= 0.1.0)
     - WCDebugKit/DebugPanel (= 0.1.0)
     - WCDebugKit/DeviceInfoViewer (= 0.1.0)
     - WCDebugKit/FileExplorer (= 0.1.0)
@@ -8,17 +9,21 @@ PODS:
     - WCDebugKit/ObjectExplorer (= 0.1.0)
     - WCDebugKit/ViewInspector (= 0.1.0)
   - WCDebugKit/AppInfoViewer (0.1.0):
+    - WCDebugKit/CommonTools
     - WCDebugKit/DebugPanel
+  - WCDebugKit/CommonTools (0.1.0)
   - WCDebugKit/DebugPanel (0.1.0)
   - WCDebugKit/DeviceInfoViewer (0.1.0):
     - WCDebugKit/DebugPanel
   - WCDebugKit/FileExplorer (0.1.0):
     - WCDebugKit/DebugPanel
   - WCDebugKit/HookManager (0.1.0):
+    - WCDebugKit/CommonTools
     - WCDebugKit/DebugPanel
   - WCDebugKit/ObjectExplorer (0.1.0):
     - WCDebugKit/DebugPanel
   - WCDebugKit/ViewInspector (0.1.0):
+    - WCDebugKit/CommonTools
     - WCDebugKit/DebugPanel
 
 DEPENDENCIES:
@@ -29,7 +34,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  WCDebugKit: 1eb87b39c3b1a8bf57b944c46c723581bfbd0205
+  WCDebugKit: d16aaa7843f205977885f12ca9461359c3adaf58
 
 PODFILE CHECKSUM: 56b073bea031102fd05d49cbef016ebb536042f5
 

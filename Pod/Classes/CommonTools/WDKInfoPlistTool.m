@@ -1,13 +1,13 @@
 //
-//  WCInfoPlistTool.m
+//  WDKInfoPlistTool.m
 //  Pods-WCDebugKit_Example
 //
 //  Created by wesley_chen on 19/01/2018.
 //
 
-#import "WCInfoPlistTool.h"
+#import "WDKInfoPlistTool.h"
 
-@implementation WCInfoPlistTool
+@implementation WDKInfoPlistTool
 
 + (NSDictionary *)plistInfo {
     static dispatch_once_t onceToken;

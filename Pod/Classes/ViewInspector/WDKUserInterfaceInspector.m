@@ -7,7 +7,7 @@
 //
 
 #import "WDKUserInterfaceInspector.h"
-#import "WCObjCRuntimeUtility.h"
+#import "WDKRuntimeTool.h"
 #import "WDKMacroUtility.h"
 #import <objc/message.h>
 #import <objc/runtime.h>
@@ -155,7 +155,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
         SEL selector2 = @selector(initWithFrame:);
         SEL selector3 = NSSelectorFromString(@"dealloc");// @selector(dealloc); // Error: ARC forbids use of 'dealloc' in a @selector
         
-        __block IMP originalInitWithCoderIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
+        __block IMP originalInitWithCoderIMP = [WDKRuntimeTool replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
             UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalInitWithCoderIMP)(slf, selector1, coder);
             
             [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
@@ -164,7 +164,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
             return retVal;
         }];
         
-        __block IMP originalInitWithFrameIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector2 onClass:[UIView class] withBlock:^UIView *(UIView *slf, CGRect frame) {
+        __block IMP originalInitWithFrameIMP = [WDKRuntimeTool replaceMethodWithSelector:selector2 onClass:[UIView class] withBlock:^UIView *(UIView *slf, CGRect frame) {
             UIView *retVal = ((UIView * (*)(UIView *, SEL, CGRect))originalInitWithFrameIMP)(slf, selector2, frame);
             
             [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
@@ -173,7 +173,7 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
             return retVal;
         }];
         
-        __block IMP originalDeallocIMP = [WCObjCRuntimeUtility replaceMethodWithSelector:selector3 onClass:[UIView class] withBlock:^void(__unsafe_unretained UIView *slf) {
+        __block IMP originalDeallocIMP = [WDKRuntimeTool replaceMethodWithSelector:selector3 onClass:[UIView class] withBlock:^void(__unsafe_unretained UIView *slf) {
             [WDKUserInterfaceInspector removeNotificationsForView:slf];
             
             ((void (*)(UIView *, SEL))originalDeallocIMP)(slf, selector3);

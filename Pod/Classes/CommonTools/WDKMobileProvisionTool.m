@@ -1,14 +1,14 @@
 //
-//  WCMobileProvisionTool.m
+//  WDKMobileProvisionTool.m
 //  Pods
 //
 //  Created by wesley chen on 2017/4/26.
 //
 //
 
-#import "WCMobileProvisionTool.h"
+#import "WDKMobileProvisionTool.h"
 
-@implementation WCMobileProvisionTool
+@implementation WDKMobileProvisionTool
 
 + (NSDictionary *)mobileprovisionInfo {
     static NSDictionary *infoDict = nil;

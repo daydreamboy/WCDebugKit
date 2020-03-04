@@ -8,7 +8,7 @@
 @import ObjectiveC.runtime;
 
 #import "UIApplication+WDK.h"
-#import "WCObjCRuntimeUtility.h"
+#import "WDKRuntimeTool.h"
 #import "WDKViewExplorerWindow.h"
 #import "WDKViewExplorerOverlayView.h"
 
@@ -18,7 +18,7 @@ NSNotificationName WDKInterfaceEventNotification = @"kWDKInterfaceEventNotificat
 @implementation UIApplication (WDK)
 
 + (void)load {
-    [WCObjCRuntimeUtility exchangeSelectorForClass:self origin:@selector(sendEvent:) substitute:@selector(wdk_sendEvent_intercepted:) classMethod:NO];
+    [WDKRuntimeTool exchangeSelectorForClass:self origin:@selector(sendEvent:) substitute:@selector(wdk_sendEvent_intercepted:) classMethod:NO];
 }
 
 - (void)wdk_sendEvent_intercepted:(UIEvent *)event {
@@ -41,7 +41,7 @@ NSNotificationName WDKInterfaceEventNotification = @"kWDKInterfaceEventNotificat
 
 @implementation UIWindow (WDK)
 + (void)load {
-    [WCObjCRuntimeUtility exchangeSelectorForClass:self origin:@selector(windowLevel) substitute:@selector(wdk_windowLevel_intercepted) classMethod:NO];
+    [WDKRuntimeTool exchangeSelectorForClass:self origin:@selector(windowLevel) substitute:@selector(wdk_windowLevel_intercepted) classMethod:NO];
 }
 
 - (UIWindowLevel)wdk_windowLevel_intercepted {

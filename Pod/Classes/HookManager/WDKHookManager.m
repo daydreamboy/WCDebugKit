@@ -7,7 +7,7 @@
 
 #import "WDKHookManager.h"
 #import "WDKDebugGroup_Internal.h"
-#import "WCObjCRuntimeUtility.h"
+#import "WDKRuntimeTool.h"
 #import "WDKMacroUtility.h"
 
 @interface UIImage ()
@@ -57,15 +57,15 @@ SYNTHESIZE_ASSOCIATED_OBJ(wdk_original_image_name, setWdk_original_image_name, U
         [WDKHookManager sharedInstance].hookImageEnabled = enabled;
         
         if (enabled) {
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:) substitute:@selector(imageNamed_intercepted:) classMethod:YES];
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) classMethod:YES];
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription) substitute:@selector(debugDescription_intercepted) classMethod:NO];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:) substitute:@selector(imageNamed_intercepted:) classMethod:YES];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) classMethod:YES];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription) substitute:@selector(debugDescription_intercepted) classMethod:NO];
 
         }
         else {
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:) substitute:@selector(imageNamed:) classMethod:YES];
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) classMethod:YES];
-            [WCObjCRuntimeUtility exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription_intercepted) substitute:@selector(debugDescription) classMethod:NO];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:) substitute:@selector(imageNamed:) classMethod:YES];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(imageNamed_intercepted:inBundle:compatibleWithTraitCollection:) substitute:@selector(imageNamed:inBundle:compatibleWithTraitCollection:) classMethod:YES];
+            [WDKRuntimeTool exchangeSelectorForClass:[UIImage class] origin:@selector(debugDescription_intercepted) substitute:@selector(debugDescription) classMethod:NO];
         }
     }];
     [arrM addObject:action];

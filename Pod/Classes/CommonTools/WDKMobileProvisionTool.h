@@ -1,5 +1,5 @@
 //
-//  WCMobileProvisionTool.h
+//  WDKMobileProvisionTool.h
 //  Pods
 //
 //  Created by wesley chen on 2017/4/26.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WCMobileProvisionTool : NSObject
+@interface WDKMobileProvisionTool : NSObject
 + (NSDictionary *)mobileprovisionInfo;
 
 + (NSString *)appReleaseMode;

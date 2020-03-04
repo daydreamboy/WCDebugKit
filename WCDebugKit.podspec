@@ -64,15 +64,19 @@ A debug kit for iOS
   	}
   end
 
+  s.subspec 'CommonTools' do |ss|
+  	ss.source_files = [
+  		'Pod/Classes/CommonTools/**/*'
+  	]
+  end
+
   # subspec 'AppInfoViewer'
   s.subspec 'AppInfoViewer' do |ss|
-  	ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/CommonTools'
+
   	ss.source_files = [
       'Pod/Classes/AppInfoViewer/**/*', 
-      'Pod/Classes/CommonTools/WCInfoPlistTool.{h,m}',
-      'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
-      'Pod/Classes/CommonTools/WCNSObjectTool.{h,m}',
-      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
   	]
   	ss.public_header_files = [
 			'Pod/Classes/AppInfoViewer/WDKAppInfoViewer.h',
@@ -81,7 +85,8 @@ A debug kit for iOS
 
   # subspec 'DeviceInfoViewer'
   s.subspec 'DeviceInfoViewer' do |ss|
-  	ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/DebugPanel'
+
   	ss.source_files = [
   		'Pod/Classes/DeviceInfoViewer/**/*',
   	]
@@ -95,17 +100,17 @@ A debug kit for iOS
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
       'Pod/Classes/FileExplorer/**/*',
-      'Pod/Classes/CommonTools/WCMobileProvisionTool.{h,m}',
+      'Pod/Classes/CommonTools/WDKMobileProvisionTool.{h,m}',
   	]
   end
 
   # subspec 'ViewInspector'
   s.subspec 'ViewInspector' do |ss|
-  	ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/CommonTools'
+
   	ss.source_files = [
       'Pod/Classes/ViewInspector/**/*',
-      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
-      'Pod/Classes/CommonTools/WDKMacroUtility.h',
   	]
   end
 
@@ -119,11 +124,11 @@ A debug kit for iOS
 
   # subspec 'HookManager'
   s.subspec 'HookManager' do |ss|
-  	ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/CommonTools'
+
   	ss.source_files = [
       'Pod/Classes/HookManager/**/*',
-      'Pod/Classes/CommonTools/WCObjCRuntimeUtility.{h,m}',
-      'Pod/Classes/CommonTools/WDKMacroUtility.h',
   	]
   end
 

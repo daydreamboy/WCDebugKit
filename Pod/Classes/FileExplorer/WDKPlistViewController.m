@@ -9,7 +9,7 @@
 #import "WDKPlistViewController.h"
 #import "WDKContextMenuCell.h"
 #import "UIAlertView+WDK.h"
-#import "WCMobileProvisionTool.h"
+#import "WDKMobileProvisionTool.h"
 
 #ifndef IOS8_OR_LATER
 #define IOS8_OR_LATER          ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)
@@ -528,7 +528,7 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
         id rootJSONObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
         
         if ([[filePath lastPathComponent] isEqualToString:@"embedded.mobileprovision"]) {
-            rootPlistObj = [WCMobileProvisionTool mobileprovisionInfo];
+            rootPlistObj = [WDKMobileProvisionTool mobileprovisionInfo];
         }
         
         if (rootPlistObj) {
@@ -690,11 +690,11 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
 - (NSString *)stringForValueObject:(id)valueObject {
     if ([valueObject isKindOfClass:[NSDictionary class]]) {
         NSUInteger count = [(NSDictionary *)valueObject count];
-        return [NSString stringWithFormat:@"(%ld %@)", count, count == 1 ? @"pair" : @"pairs"];
+        return [NSString stringWithFormat:@"(%ld %@)", (long)count, count == 1 ? @"pair" : @"pairs"];
     }
     else if ([valueObject isKindOfClass:[NSArray class]]) {
         NSUInteger count = [(NSArray *)valueObject count];
-        return [NSString stringWithFormat:@"(%ld %@)", count, count == 1 ? @"item" : @"items"];
+        return [NSString stringWithFormat:@"(%ld %@)", (long)count, count == 1 ? @"item" : @"items"];
     }
     else if ([valueObject isKindOfClass:[NSDate class]]) {
         return [(NSDate *)valueObject descriptionWithLocale:[NSLocale currentLocale]];

@@ -1,20 +1,20 @@
 //
-//  WCNSObjectTool.m
+//  WDKObjectTool.m
 //  WCDebugKit
 //
 //  Created by wesley_chen on 19/01/2018.
 //
 
-#import "WCNSObjectTool.h"
+#import "WDKObjectTool.h"
 #import <objc/runtime.h>
 
-@interface WCNSObjectTool ()
+@interface WDKObjectTool ()
 + (NSString *)formattedPropery:(objc_property_t)prop;
 + (NSArray *)formattedMethodsForProtocol:(Protocol *)proto required:(BOOL)required instance:(BOOL)instance;
 + (NSString *)decodeType:(const char *)cString;
 @end
 
-@implementation NSObject (WCNSObjectTool)
+@implementation NSObject (WDKObjectTool)
 
 + (NSArray<NSString *> *)wdk_allClasses {
     // Note: objc_copyClassList - get all registered classes on runtime
@@ -33,7 +33,7 @@
     objc_property_t *properties = class_copyPropertyList([self class], &count);
     NSMutableArray *result = [NSMutableArray array];
     for (unsigned int i = 0; i < count; i++) {
-        [result addObject:[WCNSObjectTool formattedPropery:properties[i]]];
+        [result addObject:[WDKObjectTool formattedPropery:properties[i]]];
     }
     free(properties);
     return result.count ? [result copy] : nil;
@@ -45,7 +45,7 @@
     Ivar *ivars = class_copyIvarList([self class], &count);
     NSMutableArray *result = [NSMutableArray array];
     for (unsigned int i = 0; i < count; i++) {
-        NSString *type = [WCNSObjectTool decodeType:ivar_getTypeEncoding(ivars[i])];
+        NSString *type = [WDKObjectTool decodeType:ivar_getTypeEncoding(ivars[i])];
         NSString *name = [NSString stringWithCString:ivar_getName(ivars[i]) encoding:NSUTF8StringEncoding];
         NSString *ivarDescription = [NSString stringWithFormat:@"%@ %@", type, name];
         [result addObject:ivarDescription];
@@ -93,15 +93,15 @@
 + (NSDictionary *)wdk_descriptionForProtocol:(Protocol *)protocol {
     NSMutableDictionary *methodsAndProperties = [NSMutableDictionary dictionary];
     
-    NSArray *requiredMethods = [[WCNSObjectTool formattedMethodsForProtocol:protocol required:YES instance:NO] arrayByAddingObjectsFromArray:[WCNSObjectTool formattedMethodsForProtocol:protocol required:YES instance:YES]];
+    NSArray *requiredMethods = [[WDKObjectTool formattedMethodsForProtocol:protocol required:YES instance:NO] arrayByAddingObjectsFromArray:[WDKObjectTool formattedMethodsForProtocol:protocol required:YES instance:YES]];
     
-    NSArray *optionalMethods = [[WCNSObjectTool formattedMethodsForProtocol:protocol required:NO instance:NO] arrayByAddingObjectsFromArray:[WCNSObjectTool formattedMethodsForProtocol:protocol required:NO instance:YES]];
+    NSArray *optionalMethods = [[WDKObjectTool formattedMethodsForProtocol:protocol required:NO instance:NO] arrayByAddingObjectsFromArray:[WDKObjectTool formattedMethodsForProtocol:protocol required:NO instance:YES]];
     
     unsigned int propertiesCount;
     NSMutableArray *propertyDescriptions = [NSMutableArray array];
     objc_property_t *properties = protocol_copyPropertyList(protocol, &propertiesCount);
     for (unsigned int i = 0; i < propertiesCount; i++) {
-        [propertyDescriptions addObject:[WCNSObjectTool formattedPropery:properties[i]]];
+        [propertyDescriptions addObject:[WDKObjectTool formattedPropery:properties[i]]];
     }
     
     if (requiredMethods.count) {
@@ -141,7 +141,7 @@
     for (unsigned int i = 0; i < outCount; i++) {
         NSString *methodDescription = [NSString stringWithFormat:@"%@ (%@)%@",
                                        type,
-                                       [WCNSObjectTool decodeType:method_copyReturnType(methods[i])],
+                                       [WDKObjectTool decodeType:method_copyReturnType(methods[i])],
                                        NSStringFromSelector(method_getName(methods[i]))];
         
         NSInteger args = method_getNumberOfArguments(methods[i]);
@@ -149,7 +149,7 @@
         unsigned int offset = 2; //1-st arg is object (@), 2-nd is SEL (:)
         
         for (unsigned int idx = offset; idx < args; idx++) {
-            NSString *returnType = [WCNSObjectTool decodeType:method_copyArgumentType(methods[i], (unsigned int)idx)];
+            NSString *returnType = [WDKObjectTool decodeType:method_copyArgumentType(methods[i], (unsigned int)idx)];
             selParts[idx - offset] = [NSString stringWithFormat:@"%@:(%@)arg%u",
                                       selParts[idx - offset],
                                       returnType,
@@ -163,7 +163,7 @@
 
 @end
 
-@implementation WCNSObjectTool
+@implementation WDKObjectTool
 
 #pragma mark - Public Methods
 
@@ -232,7 +232,7 @@
 #pragma mark - Safe KVC
 
 + (nullable id)safeValueWithObject:(NSObject *)object forKey:(NSString *)key {
-    return [WCNSObjectTool safeValueWithObject:object forKey:key typeClass:[NSObject class]];
+    return [WDKObjectTool safeValueWithObject:object forKey:key typeClass:[NSObject class]];
 }
 
 + (nullable id)safeValueWithObject:(NSObject *)object forKey:(NSString *)key typeClass:(Class)typeClass {

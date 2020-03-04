@@ -10,7 +10,7 @@
 #import "WDKUserInterfaceInspector.h"
 #import "WDKDebugGroup_Internal.h"
 #import "WDKViewExplorerWindow.h"
-#import "WCObjCRuntimeUtility.h"
+#import "WDKRuntimeTool.h"
 #import "WDKViewExplorerOverlayView.h"
 
 @implementation WDKViewInspector

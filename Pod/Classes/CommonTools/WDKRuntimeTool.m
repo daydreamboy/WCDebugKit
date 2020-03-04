@@ -1,15 +1,15 @@
 //
-//  WCObjCRuntimeUtility.m
+//  WDKRuntimeTool.m
 //  Pods
 //
 //  Created by wesley chen on 2017/4/26.
 //
 //
 
-#import "WCObjCRuntimeUtility.h"
+#import "WDKRuntimeTool.h"
 #import <objc/runtime.h>
 
-@implementation WCObjCRuntimeUtility
+@implementation WDKRuntimeTool
 
 + (IMP)replaceMethodWithSelector:(SEL)originalSelector onClass:(Class)class withBlock:(id)block {
     if (!block) {

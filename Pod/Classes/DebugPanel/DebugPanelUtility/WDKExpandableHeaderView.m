@@ -8,6 +8,7 @@
 
 #import "WDKExpandableHeaderView.h"
 #import <objc/runtime.h>
+#import "WDKMacroUtility.h"
 
 @interface WDKTableViewSectionInfo : NSObject
 @property (nonatomic, weak) id<WDKExpandableHeaderViewDelegate> expandableHeaderView_delegate;
@@ -135,8 +136,10 @@ static NSString *WDKTableViewSectionInfoObjectTag = @"WDKExpandableHeaderViewDel
         // Commit the animation
         [CATransaction begin];
         [info.tableView beginUpdates];
+        weakify(self);
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            _buttonIndicator.transform = CGAffineTransformMakeRotation(M_PI);
+            strongify(self);
+            self.buttonIndicator.transform = CGAffineTransformMakeRotation(M_PI);
         } completion:nil];
         [CATransaction setCompletionBlock:^{
             if ([info.expandableHeaderView_delegate respondsToSelector:@selector(sectionDidExpandAtIndex:expandableHeaderView:)]) {
@@ -166,8 +169,10 @@ static NSString *WDKTableViewSectionInfoObjectTag = @"WDKExpandableHeaderViewDel
             // Commit the animation
             [CATransaction begin];
             [info.tableView beginUpdates];
+            weakify(self);
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                _buttonIndicator.transform = CGAffineTransformMakeRotation(-2 * M_PI);
+                strongify(self);
+                self.buttonIndicator.transform = CGAffineTransformMakeRotation(-2 * M_PI);
             } completion:nil];
             [CATransaction setCompletionBlock:^{
                 if ([info.expandableHeaderView_delegate respondsToSelector:@selector(sectionDidCollapseAtIndex:expandableHeaderView:)]) {

@@ -1,5 +1,5 @@
 //
-//  WCNSObjectTool.h
+//  WDKObjectTool.h
 //  WCDebugKit
 //
 //  Created by wesley_chen on 19/01/2018.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSObject (WCNSObjectTool)
+@interface NSObject (WDKObjectTool)
 + (NSArray<NSString *> *)wdk_allClasses;
 
 + (NSArray<NSString *> *)wdk_properties;
@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface WCNSObjectTool : NSObject
+@interface WDKObjectTool : NSObject
 // get all classes registered in runtime
 + (NSArray<NSString *> *)allClasses;
 
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @implmentation BaseClass
  - (void)methodMaybeOverride {
-    BOOL overridden = [WCNSObjectTool checkObject:self overridesSelector:@selector(methodMaybeOverride)];
+    BOOL overridden = [WDKObjectTool checkObject:self overridesSelector:@selector(methodMaybeOverride)];
     ...
  }
  @end
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)checkObject:(id)object overridesSelector:(SEL)selector;
 
-// print help info by `po [WCNSObjectTool help]`
+// print help info by `po [WDKObjectTool help]`
 + (id)help;
 
 #pragma mark - Safe KVC

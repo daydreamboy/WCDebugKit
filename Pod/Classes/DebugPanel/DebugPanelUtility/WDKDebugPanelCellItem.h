@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, WDKDebugPanelCellAccessoryType) {
 // cell's interaction
 @property (nonatomic, copy) NSString *alertMessage; // If not nil, show the alertMessage when clicking on cell, and allow copy the alertMessage
 @property (nonatomic, copy) void (^selectAction)(UIViewController *viewController); // action for select a cell, when WDKDebugPanelCellAccessoryTypeDisclosureIndicator
-@property (nonatomic, copy) void (^deleteAction)(); // action for delete a cell, when `swipeable` is YES
+@property (nonatomic, copy) void (^deleteAction)(void); // action for delete a cell, when `swipeable` is YES
 @property (nonatomic, assign) BOOL swipeable; // allow action to swipe
 
 // WDKDebugPanelCellTypeSwitch

@@ -13,9 +13,9 @@
 #import "WDKDebugPanelGerenalViewController.h"
 #import "WDKDebugGroup_Internal.h"
 
-#import "WCMobileProvisionTool.h"
-#import "WCInfoPlistTool.h"
-#import "WCNSObjectTool.h"
+#import "WDKMobileProvisionTool.h"
+#import "WDKInfoPlistTool.h"
+#import "WDKObjectTool.h"
 
 #define wdk_tagColor        [UIColor orangeColor]
 #define wdk_versionColor    [UIColor blueColor]
@@ -153,31 +153,31 @@
     
     // Section 1
     NSArray<NSDictionary *> *section1 = @[
-        @{ kTitle: @"Bundle ID", kSubtitle: [WCInfoPlistTool bundleID], },
-        @{ kTitle: @"Bundle Name", kSubtitle: [WCInfoPlistTool bundleName], },
-        @{ kTitle: @"Bundle Display Name", kSubtitle: [WCInfoPlistTool bundleDisplayName], },
-        @{ kTitle: @"Build Number", kSubtitle: [WCInfoPlistTool buildNumber], },
-        @{ kTitle: @"Minimum supported iOS Version", kSubtitle: [WCInfoPlistTool minimumSupportediOSVersion], },
+        @{ kTitle: @"Bundle ID", kSubtitle: [WDKInfoPlistTool bundleID], },
+        @{ kTitle: @"Bundle Name", kSubtitle: [WDKInfoPlistTool bundleName], },
+        @{ kTitle: @"Bundle Display Name", kSubtitle: [WDKInfoPlistTool bundleDisplayName], },
+        @{ kTitle: @"Build Number", kSubtitle: [WDKInfoPlistTool buildNumber], },
+        @{ kTitle: @"Minimum supported iOS Version", kSubtitle: [WDKInfoPlistTool minimumSupportediOSVersion], },
         @{ kTitle: @"IdentifierForVendor", kSubtitle: [[UIDevice currentDevice] identifierForVendor].UUIDString, },
     ];
     
     // Section 2
     NSArray<NSDictionary *> *section2 = @[
-        @{ kTitle: @"App Release Mode", kSubtitle: [WCMobileProvisionTool appReleaseMode], },
-        @{ kTitle: @"AppID Name", kSubtitle: [WCMobileProvisionTool appIDName], },
-        @{ kTitle: @"AppID Prefix", kSubtitle: [WCMobileProvisionTool appIDPrefix], },
-        @{ kTitle: @"Entitlements - Apple Push", kSubtitle: ([WCMobileProvisionTool entitlementsAPSEnv].length ? [WCMobileProvisionTool entitlementsAPSEnv] : @"(not enabled)"), },
-        @{ kTitle: @"Entitlements - App ID", kSubtitle: [WCMobileProvisionTool entitlementsAppID], },
-        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WCMobileProvisionTool entitlementsSiriEnabled], },
-        @{ kTitle: @"Entitlements - TeamID", kSubtitle: [WCMobileProvisionTool entitlementsTeamID], },
-        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WCMobileProvisionTool entitlementsSiriEnabled], },
-        @{ kTitle: @"Entitlements - Debug Enabled", kSubtitle: [WCMobileProvisionTool entitlementsDebugEnabled], },
-        @{ kTitle: @"Entitlements - App Groups", kSubtitle: ([WCMobileProvisionTool entitlementsAppGroups].count ? @"(click to see more)" : @"(not enabled)"), kAlertMessage: ([WCMobileProvisionTool entitlementsAppGroups].count ? [[WCMobileProvisionTool entitlementsAppGroups] componentsJoinedByString:@"\n"]: @"(not enabled)") },
-        @{ kTitle: @"Entitlements - Keychain Sharing", kSubtitle: @"(click to see more)", kAlertMessage: NILABLE([[WCMobileProvisionTool entitlementsKeychainSharingBundleIDs] componentsJoinedByString:@"\n"]) },
-        @{ kTitle: @"Provision Profile Name", kSubtitle: [WCMobileProvisionTool provisionName], },
-        @{ kTitle: @"Provision Profile Expire Date", kSubtitle: [WCMobileProvisionTool provisionExpirationDate], },
-        @{ kTitle: @"Team Name", kSubtitle: [WCMobileProvisionTool teamName], },
-        @{ kTitle: @"UUID", kSubtitle: [WCMobileProvisionTool UUID], },
+        @{ kTitle: @"App Release Mode", kSubtitle: [WDKMobileProvisionTool appReleaseMode], },
+        @{ kTitle: @"AppID Name", kSubtitle: [WDKMobileProvisionTool appIDName], },
+        @{ kTitle: @"AppID Prefix", kSubtitle: [WDKMobileProvisionTool appIDPrefix], },
+        @{ kTitle: @"Entitlements - Apple Push", kSubtitle: ([WDKMobileProvisionTool entitlementsAPSEnv].length ? [WDKMobileProvisionTool entitlementsAPSEnv] : @"(not enabled)"), },
+        @{ kTitle: @"Entitlements - App ID", kSubtitle: [WDKMobileProvisionTool entitlementsAppID], },
+        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WDKMobileProvisionTool entitlementsSiriEnabled], },
+        @{ kTitle: @"Entitlements - TeamID", kSubtitle: [WDKMobileProvisionTool entitlementsTeamID], },
+        @{ kTitle: @"Entitlements - Siri Enabled", kSubtitle: [WDKMobileProvisionTool entitlementsSiriEnabled], },
+        @{ kTitle: @"Entitlements - Debug Enabled", kSubtitle: [WDKMobileProvisionTool entitlementsDebugEnabled], },
+        @{ kTitle: @"Entitlements - App Groups", kSubtitle: ([WDKMobileProvisionTool entitlementsAppGroups].count ? @"(click to see more)" : @"(not enabled)"), kAlertMessage: ([WDKMobileProvisionTool entitlementsAppGroups].count ? [[WDKMobileProvisionTool entitlementsAppGroups] componentsJoinedByString:@"\n"]: @"(not enabled)") },
+        @{ kTitle: @"Entitlements - Keychain Sharing", kSubtitle: @"(click to see more)", kAlertMessage: NILABLE([[WDKMobileProvisionTool entitlementsKeychainSharingBundleIDs] componentsJoinedByString:@"\n"]) },
+        @{ kTitle: @"Provision Profile Name", kSubtitle: [WDKMobileProvisionTool provisionName], },
+        @{ kTitle: @"Provision Profile Expire Date", kSubtitle: [WDKMobileProvisionTool provisionExpirationDate], },
+        @{ kTitle: @"Team Name", kSubtitle: [WDKMobileProvisionTool teamName], },
+        @{ kTitle: @"UUID", kSubtitle: [WDKMobileProvisionTool UUID], },
     ];
     
     NSArray * (^convertDictionaryToItem)(NSArray<NSDictionary *> *) = ^NSArray*(NSArray<NSDictionary *> *arr) {
@@ -211,7 +211,7 @@
     
     WDKDebugPanelCellItem *item1 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
     item1.title = @"App Version";
-    item1.subtitle = [[WCInfoPlistTool plistInfo] objectForKey:@"CFBundleShortVersionString"];
+    item1.subtitle = [[WDKInfoPlistTool plistInfo] objectForKey:@"CFBundleShortVersionString"];
     [section1 addObject:item1];
     
     WDKDebugPanelCellItem *item2 = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeValue1];
@@ -273,7 +273,7 @@
 }
 
 - (NSArray<WDKDebugGroup *> *)createClassList {
-    NSArray<NSString *> *classes = [WCNSObjectTool allClasses];
+    NSArray<NSString *> *classes = [WDKObjectTool allClasses];
     
     NSMutableArray *arrM = [NSMutableArray arrayWithCapacity:classes.count];
     for (NSString *className in classes) {
@@ -294,27 +294,27 @@
             };
             
             WDKDebugGroup *propertiesGroup = [WDKDebugGroup groupWithName:@"@property" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSArray *properties = [WCNSObjectTool propertiesWithClassName:className];
+                NSArray *properties = [WDKObjectTool propertiesWithClassName:className];
                 return convertToActions(properties);
             }];
             
             WDKDebugGroup *ivarsGroup = [WDKDebugGroup groupWithName:@"ivars" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSArray *ivars = [WCNSObjectTool ivarsWithClassName:className];
+                NSArray *ivars = [WDKObjectTool ivarsWithClassName:className];
                 return convertToActions(ivars);
             }];
             
             WDKDebugGroup *instanceMethodsGroup = [WDKDebugGroup groupWithName:@"-instanceMethods" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSArray *instanceMethods = [WCNSObjectTool instanceMethodsWithClassName:className];
+                NSArray *instanceMethods = [WDKObjectTool instanceMethodsWithClassName:className];
                 return convertToActions(instanceMethods);
             }];
             
             WDKDebugGroup *classMethodsGroup = [WDKDebugGroup groupWithName:@"+classMethods" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSArray *classMethods = [WCNSObjectTool classMethodsWithClassName:className];
+                NSArray *classMethods = [WDKObjectTool classMethodsWithClassName:className];
                 return convertToActions(classMethods);
             }];
             
             WDKDebugGroup *protocolsGroup = [WDKDebugGroup groupWithName:@"@protocols" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSArray *protocols = [WCNSObjectTool protocolsWithClassName:className];
+                NSArray *protocols = [WDKObjectTool protocolsWithClassName:className];
                 
                 NSMutableArray<WDKSubMenuAction *> *actions = [NSMutableArray arrayWithCapacity:protocols.count];
                 
@@ -323,17 +323,17 @@
                     
                     WDKSubMenuAction *action = [WDKSubMenuAction actionWithName:protocol subMenuBlock:^NSArray<WDKDebugGroup *> *{
                         WDKDebugGroup *section1 = [WDKDebugGroup groupWithName:@"required methods" actionsBlock:^NSArray<WDKDebugAction *> *{
-                            NSArray *requiredMethods = [WCNSObjectTool protocolRequiredMethodsWithProtocolName:firstLevelProtocol className:className];
+                            NSArray *requiredMethods = [WDKObjectTool protocolRequiredMethodsWithProtocolName:firstLevelProtocol className:className];
                             return convertToActions(requiredMethods);
                         }];
                         
                         WDKDebugGroup *section2 = [WDKDebugGroup groupWithName:@"optional methods" actionsBlock:^NSArray<WDKDebugAction *> *{
-                            NSArray *optionalMethods = [WCNSObjectTool protocolOptionalMethodsWithProtocolName:firstLevelProtocol className:className];
+                            NSArray *optionalMethods = [WDKObjectTool protocolOptionalMethodsWithProtocolName:firstLevelProtocol className:className];
                             return convertToActions(optionalMethods);
                         }];
                         
                         WDKDebugGroup *section3 = [WDKDebugGroup groupWithName:@"properties" actionsBlock:^NSArray<WDKDebugAction *> *{
-                            NSArray *properties = [WCNSObjectTool protocolPropertiesWithProtocolName:firstLevelProtocol className:className];
+                            NSArray *properties = [WDKObjectTool protocolPropertiesWithProtocolName:firstLevelProtocol className:className];
                             return convertToActions(properties);
                         }];
                         
@@ -348,7 +348,7 @@
             }];
             
             WDKDebugGroup *parentClassesGroup = [WDKDebugGroup groupWithName:@"class hierarchy" actionsBlock:^NSArray<WDKDebugAction *> *{
-                NSMutableArray *classNames = [NSMutableArray arrayWithArray:[WCNSObjectTool parentClassHierarchyWithClassName:className]];
+                NSMutableArray *classNames = [NSMutableArray arrayWithArray:[WDKObjectTool parentClassHierarchyWithClassName:className]];
                 
                 for (NSInteger i = 0; i < classNames.count; i++) {
                     
