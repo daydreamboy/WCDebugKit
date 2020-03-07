@@ -7,7 +7,7 @@
 
 #import "WDKObjectExplorerViewController.h"
 
-@interface WDKObjectExplorerViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface WDKObjectExplorerViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSString *filterText;

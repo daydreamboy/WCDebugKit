@@ -30,10 +30,10 @@ A debug kit for iOS
 
   s.ios.deployment_target = '8.0'
   s.source_files = [ 
-    'Pod/Classes/WCDebugKit.h', 
-    'Pod/Classes/WCDebugKit_Configuration.h' 
+    'SourceCode/Classes/WCDebugKit.h', 
+    'SourceCode/Classes/WCDebugKit_Configuration.h' 
   ]
-  s.public_header_files = [ 'Pod/Classes/WCDebugKit.h' ]
+  s.public_header_files = [ 'SourceCode/Classes/WCDebugKit.h' ]
   s.script_phase = { :name => 'create_universal_framework.sh', :script => 'bash "${PROJECT_DIR}/../scripts/create_universal_framework.sh"' }
 
   # Note: 
@@ -43,21 +43,21 @@ A debug kit for iOS
   # Note: this a basic subspec
   s.subspec 'DebugPanel' do |ss|
   	ss.source_files = [
-  		'Pod/Classes/DebugPanel/**/*'
+  		'SourceCode/Classes/DebugPanel/**/*'
   	]
   	ss.public_header_files = [
-			'Pod/Classes/DebugPanel/WDKDebugPanelPod.h',
-			'Pod/Classes/DebugPanel/WDKDebugPanel.h',
-			'Pod/Classes/DebugPanel/DebugActions/**/*.h',
+			'SourceCode/Classes/DebugPanel/WDKDebugPanelPod.h',
+			'SourceCode/Classes/DebugPanel/WDKDebugPanel.h',
+			'SourceCode/Classes/DebugPanel/DebugActions/**/*.h',
     ]
     ss.private_header_files = [
-      'Pod/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
-      'Pod/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
+      'SourceCode/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
+      'SourceCode/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
     ]
     # Note: exclude_files will remove files
     # ss.exclude_files = [
-    #   'Pod/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
-    #   'Pod/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
+    #   'SourceCode/Classes/DebugPanel/DebugActions/WDKDebugAction_Internal.h',
+    #   'SourceCode/Classes/DebugPanel/DebugActions/WDKDebugGroup_Internal.h'
     # ]
 		ss.resource_bundles = {
     	'WCDebugKit' => ['Pod/Assets/**/*']
@@ -66,7 +66,7 @@ A debug kit for iOS
 
   s.subspec 'CommonTools' do |ss|
   	ss.source_files = [
-  		'Pod/Classes/CommonTools/**/*'
+  		'SourceCode/Classes/CommonTools/**/*'
   	]
   end
 
@@ -76,10 +76,10 @@ A debug kit for iOS
     ss.dependency 'WCDebugKit/CommonTools'
 
   	ss.source_files = [
-      'Pod/Classes/AppInfoViewer/**/*', 
+      'SourceCode/Classes/AppInfoViewer/**/*', 
   	]
   	ss.public_header_files = [
-			'Pod/Classes/AppInfoViewer/WDKAppInfoViewer.h',
+			'SourceCode/Classes/AppInfoViewer/WDKAppInfoViewer.h',
 		]
   end
 
@@ -88,10 +88,10 @@ A debug kit for iOS
     ss.dependency 'WCDebugKit/DebugPanel'
 
   	ss.source_files = [
-  		'Pod/Classes/DeviceInfoViewer/**/*',
+  		'SourceCode/Classes/DeviceInfoViewer/**/*',
   	]
   	ss.public_header_files = [
-			'Pod/Classes/DeviceInfoViewer/WDKDeviceInfoViewer.h',
+			'SourceCode/Classes/DeviceInfoViewer/WDKDeviceInfoViewer.h',
 		]
   end
 
@@ -99,8 +99,8 @@ A debug kit for iOS
   s.subspec 'FileExplorer' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
-      'Pod/Classes/FileExplorer/**/*',
-      'Pod/Classes/CommonTools/WDKMobileProvisionTool.{h,m}',
+      'SourceCode/Classes/FileExplorer/**/*',
+      'SourceCode/Classes/CommonTools/WDKMobileProvisionTool.{h,m}',
   	]
   end
 
@@ -110,7 +110,7 @@ A debug kit for iOS
     ss.dependency 'WCDebugKit/CommonTools'
 
   	ss.source_files = [
-      'Pod/Classes/ViewInspector/**/*',
+      'SourceCode/Classes/ViewInspector/**/*',
   	]
   end
 
@@ -118,7 +118,7 @@ A debug kit for iOS
   s.subspec 'ObjectExplorer' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
   	ss.source_files = [
-      'Pod/Classes/ObjectExplorer/**/*',
+      'SourceCode/Classes/ObjectExplorer/**/*',
   	]
   end
 
@@ -128,7 +128,7 @@ A debug kit for iOS
     ss.dependency 'WCDebugKit/CommonTools'
 
   	ss.source_files = [
-      'Pod/Classes/HookManager/**/*',
+      'SourceCode/Classes/HookManager/**/*',
   	]
   end
 
@@ -137,7 +137,7 @@ A debug kit for iOS
 #    ss.dependency 'WCDebugKit/DebugPanel'
 #    ss.dependency 'FLEX', '= 2.4.0'
 #    ss.source_files = [
-#          'Pod/Classes/IntegratedTools/**/*',
+#          'SourceCode/Classes/IntegratedTools/**/*',
 #      ]
 #    end
 
