@@ -14,7 +14,7 @@ set -e
 set -x
 
 # Note: If this script use in podspec as script_phase field, set the pod_name to the target name
-pod_name="WCDebugKit"
+#pod_name="WCDebugKit"
 
 UNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal
 IPHONE_SIMULATOR_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PRODUCT_NAME}.framework/${PRODUCT_NAME}
@@ -74,10 +74,10 @@ if [ "Debug" == ${CONFIGURATION} ]; then
         lipo -create -output "${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}" "${IPHONE_SIMULATOR_OUTPUTFOLDER}" "${IPHONE_OS_OUTPUTFOLDER}"
 
         # Step 5. Convenience step to copy the framework to the project's directory
-        rsync -arv "${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework" "${PROJECT_DIR}"
+        rsync -arv "${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework" "${PROJECT_DIR}/../BinaryFiles/Framework"
 
         # Step 6. Convenience step to open the project's directory in Finder
-        open "${PROJECT_DIR}"
+        #open "${PROJECT_DIR}"
 
         # Step 7. Remove build folder
         rm -rf build/
@@ -131,10 +131,10 @@ if [ "Release" == ${CONFIGURATION} ]; then
 		fi
 
         # Step 5. Convenience step to copy the framework to the project's directory
-        rsync -arv "${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework" "${PROJECT_DIR}"
+        rsync -arv "${UNIVERSAL_OUTPUTFOLDER}/${PRODUCT_NAME}.framework" "${PROJECT_DIR}/../BinaryFiles/Framework"
 
         # Step 6. Convenience step to open the project's directory in Finder
-        open "${PROJECT_DIR}"
+        #open "${PROJECT_DIR}"
 
         # Step 7. Remove build folder
         rm -rf build/

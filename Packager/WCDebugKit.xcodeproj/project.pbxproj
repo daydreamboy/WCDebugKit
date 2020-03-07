@@ -653,7 +653,7 @@
 				4F1AC84223BC6B030023CE3A /* Sources */,
 				4F1AC84323BC6B030023CE3A /* Frameworks */,
 				4F1AC84423BC6B030023CE3A /* CopyFiles */,
-				4FF9B09F24124C1500D4145E /* Generate & Copy Universal Framework to BinaryFiles */,
+				4FF9B09F24124C1500D4145E /* Generate & Copy Universal Static Library to BinaryFiles */,
 			);
 			buildRules = (
 			);
@@ -672,7 +672,7 @@
 				4F1AC85123BC6B140023CE3A /* Sources */,
 				4F1AC85223BC6B140023CE3A /* Frameworks */,
 				4F1AC85323BC6B140023CE3A /* Resources */,
-				4FF9B0A024124C3000D4145E /* Generate & Copy Universal Framework to BinaryFiles */,
+				4FF9B0A024124C3000D4145E /* Generate & Copy Universal Dynamic Framework to BinaryFiles */,
 			);
 			buildRules = (
 			);
@@ -731,7 +731,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4FF9B09F24124C1500D4145E /* Generate & Copy Universal Framework to BinaryFiles */ = {
+		4FF9B09F24124C1500D4145E /* Generate & Copy Universal Static Library to BinaryFiles */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -740,16 +740,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Generate & Copy Universal Framework to BinaryFiles";
+			name = "Generate & Copy Universal Static Library to BinaryFiles";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#bash \"${PROJECT_DIR}/../scripts/create_universal_framework.sh\"\n";
+			shellScript = "bash \"${PROJECT_DIR}/scripts/create_universal_static_library.sh\"\n";
 		};
-		4FF9B0A024124C3000D4145E /* Generate & Copy Universal Framework to BinaryFiles */ = {
+		4FF9B0A024124C3000D4145E /* Generate & Copy Universal Dynamic Framework to BinaryFiles */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -758,14 +758,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Generate & Copy Universal Framework to BinaryFiles";
+			name = "Generate & Copy Universal Dynamic Framework to BinaryFiles";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#bash \"${PROJECT_DIR}/../scripts/create_universal_framework.sh\"\n";
+			shellScript = "bash \"${PROJECT_DIR}/scripts/create_universal_dynamic_framework.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
