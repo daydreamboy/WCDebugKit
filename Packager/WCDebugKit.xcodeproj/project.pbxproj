@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F15DABB2436F3BB0081FFBC /* WDKLLDBTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */; };
+		4F15DABC2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
+		4F15DABD2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
 		4F1AC85923BC6B140023CE3A /* Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC85723BC6B140023CE3A /* Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8CE23BC6B4D0023CE3A /* WDKIntegratedTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86223BC6B4D0023CE3A /* WDKIntegratedTools.h */; };
 		4F1AC8CF23BC6B4D0023CE3A /* WDKIntegratedTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86323BC6B4D0023CE3A /* WDKIntegratedTools.m */; };
@@ -128,6 +131,9 @@
 		4F1AC95023BC6B4E0023CE3A /* tag_summary.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AC8CB23BC6B4D0023CE3A /* tag_summary.json */; };
 		4F1AC95523BC6B8B0023CE3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1AC95423BC6B8B0023CE3A /* UIKit.framework */; };
 		4F1AC95623BC6B920023CE3A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1AC95423BC6B8B0023CE3A /* UIKit.framework */; };
+		4F2820FF241B6DE90032E16A /* WDKColorTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F2820FD241B6DE90032E16A /* WDKColorTool.h */; };
+		4F282100241B6DE90032E16A /* WDKColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2820FE241B6DE90032E16A /* WDKColorTool.m */; };
+		4F282101241B6DE90032E16A /* WDKColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2820FE241B6DE90032E16A /* WDKColorTool.m */; };
 		4F59BFD123BC7032004495E5 /* WCDebugKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC86423BC6B4D0023CE3A /* WCDebugKit.h */; };
 		4F59BFD223BC7054004495E5 /* WDKDebugPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC88423BC6B4D0023CE3A /* WDKDebugPanel.h */; };
 		4F59BFD323BC7060004495E5 /* WDKDebugPanelPod.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC88223BC6B4D0023CE3A /* WDKDebugPanelPod.h */; };
@@ -182,6 +188,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDKLLDBTool.h; sourceTree = "<group>"; };
+		4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDKLLDBTool.m; sourceTree = "<group>"; };
 		4F1AC84623BC6B030023CE3A /* libWCDebugKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWCDebugKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AC85523BC6B140023CE3A /* Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AC85723BC6B140023CE3A /* Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Framework.h; sourceTree = "<group>"; };
@@ -269,6 +277,8 @@
 		4F1AC8CA23BC6B4D0023CE3A /* plugin_tools_path.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = plugin_tools_path.plist; sourceTree = "<group>"; };
 		4F1AC8CB23BC6B4D0023CE3A /* tag_summary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tag_summary.json; sourceTree = "<group>"; };
 		4F1AC95423BC6B8B0023CE3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4F2820FD241B6DE90032E16A /* WDKColorTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDKColorTool.h; sourceTree = "<group>"; };
+		4F2820FE241B6DE90032E16A /* WDKColorTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDKColorTool.m; sourceTree = "<group>"; };
 		4F59BFDC23BC735B004495E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4F59BFF523BC7CAB004495E5 /* WCDebugKit_Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCDebugKit_Configuration.h; sourceTree = "<group>"; };
 		4FF9B0862412497400D4145E /* WDKInfoPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKInfoPlistTool.h; sourceTree = "<group>"; };
@@ -512,17 +522,21 @@
 			children = (
 				4FF9B08A2412497500D4145E /* WDKApplicationTool.h */,
 				4FF9B08F2412497500D4145E /* WDKApplicationTool.m */,
+				4F2820FD241B6DE90032E16A /* WDKColorTool.h */,
+				4F2820FE241B6DE90032E16A /* WDKColorTool.m */,
 				4FF9B0862412497400D4145E /* WDKInfoPlistTool.h */,
 				4FF9B08E2412497500D4145E /* WDKInfoPlistTool.m */,
+				4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */,
+				4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */,
+				4FFBB22C240E3D5300881907 /* WDKMacroRuntime.h */,
+				4FFBB22D240E3D5300881907 /* WDKMacroRuntime.m */,
+				4F1AC8B123BC6B4D0023CE3A /* WDKMacroUtility.h */,
 				4FF9B0882412497400D4145E /* WDKMobileProvisionTool.h */,
 				4FF9B08B2412497500D4145E /* WDKMobileProvisionTool.m */,
 				4FF9B08C2412497500D4145E /* WDKObjectTool.h */,
 				4FF9B08D2412497500D4145E /* WDKObjectTool.m */,
 				4FF9B0872412497400D4145E /* WDKRuntimeTool.h */,
 				4FF9B0892412497400D4145E /* WDKRuntimeTool.m */,
-				4FFBB22C240E3D5300881907 /* WDKMacroRuntime.h */,
-				4FFBB22D240E3D5300881907 /* WDKMacroRuntime.m */,
-				4F1AC8B123BC6B4D0023CE3A /* WDKMacroUtility.h */,
 			);
 			path = CommonTools;
 			sourceTree = "<group>";
@@ -624,7 +638,9 @@
 				4F1AC90423BC6B4D0023CE3A /* WDKDebugGroup.h in Headers */,
 				4FF9B0922412497500D4145E /* WDKMobileProvisionTool.h in Headers */,
 				4F1AC94C23BC6B4E0023CE3A /* UIApplication+WDK.h in Headers */,
+				4F2820FF241B6DE90032E16A /* WDKColorTool.h in Headers */,
 				4F1AC8FF23BC6B4D0023CE3A /* WDKToggleAction.h in Headers */,
+				4F15DABB2436F3BB0081FFBC /* WDKLLDBTool.h in Headers */,
 				4F1AC90323BC6B4D0023CE3A /* WDKSubMenuAction.h in Headers */,
 				4F1AC91623BC6B4E0023CE3A /* WDKTextEditViewController.h in Headers */,
 				4F1AC8F323BC6B4D0023CE3A /* WDKExpandableHeaderView.h in Headers */,
@@ -776,6 +792,7 @@
 			files = (
 				4F1AC90A23BC6B4D0023CE3A /* WDKToggleAction.m in Sources */,
 				4F1AC8EC23BC6B4D0023CE3A /* WDKDebugPanelGerenalViewController.m in Sources */,
+				4F15DABC2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */,
 				4F1AC94923BC6B4E0023CE3A /* WDKUserInterfaceInspector.m in Sources */,
 				4F1AC8F823BC6B4D0023CE3A /* WDKDebugActionsViewController.m in Sources */,
 				4F1AC94723BC6B4E0023CE3A /* WDKViewInspector.m in Sources */,
@@ -806,6 +823,7 @@
 				4F1AC91923BC6B4E0023CE3A /* WDKContextMenuCell.m in Sources */,
 				4FF9B0962412497500D4145E /* WDKMobileProvisionTool.m in Sources */,
 				4F1AC8D623BC6B4D0023CE3A /* WDKObjectExplorerViewController.m in Sources */,
+				4F282100241B6DE90032E16A /* WDKColorTool.m in Sources */,
 				4F1AC93A23BC6B4E0023CE3A /* WDKViewExplorerOverlayView.m in Sources */,
 				4F1AC90523BC6B4D0023CE3A /* WDKCustomPanelAction.m in Sources */,
 				4F1AC90C23BC6B4D0023CE3A /* WDKSubMenuAction.m in Sources */,
@@ -825,6 +843,7 @@
 			files = (
 				4F1AC91F23BC6B4E0023CE3A /* WDKInteractiveLabel.m in Sources */,
 				4F1AC92C23BC6B4E0023CE3A /* UIAlertView+WDK.m in Sources */,
+				4F15DABD2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */,
 				4F1AC93D23BC6B4E0023CE3A /* WDKViewExplorerWindow.m in Sources */,
 				4F1AC90623BC6B4D0023CE3A /* WDKCustomPanelAction.m in Sources */,
 				4F1AC8D723BC6B4D0023CE3A /* WDKObjectExplorerViewController.m in Sources */,
@@ -855,6 +874,7 @@
 				4F1AC90B23BC6B4D0023CE3A /* WDKToggleAction.m in Sources */,
 				4F1AC92423BC6B4E0023CE3A /* WDKDirectoryBrowserViewController.m in Sources */,
 				4F1AC91A23BC6B4E0023CE3A /* WDKContextMenuCell.m in Sources */,
+				4F282101241B6DE90032E16A /* WDKColorTool.m in Sources */,
 				4FF9B0972412497500D4145E /* WDKMobileProvisionTool.m in Sources */,
 				4F1AC8E923BC6B4D0023CE3A /* WDKDebugPanelSectionItem.m in Sources */,
 				4F1AC8D023BC6B4D0023CE3A /* WDKIntegratedTools.m in Sources */,
