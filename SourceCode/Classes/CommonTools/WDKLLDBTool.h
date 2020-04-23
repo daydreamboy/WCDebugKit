@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,35 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark > Output to File
 
 + (BOOL)dumpString:(NSString *)string outputToFileName:(nullable NSString *)fileName;
+
+#pragma mark > Read String from File
+
+/**
+ Read string from home file
+ 
+ @param inputFileName the home file. For simulator, located in ~. For device, located in NSHomeDirectory()
+ 
+ @return the content of the file
+ */
++ (nullable NSString *)stringWithInputFileName:(nullable NSString *)inputFileName;
+
+#pragma mark - Color
+
+#pragma mark > UIColor to NSString
+
++ (nullable NSString *)RGBHexStringFromUIColor:(UIColor *)color;
++ (nullable NSString *)RGBAHexStringFromUIColor:(UIColor *)color;
+
+#pragma mark > NSString to UIColor
+
+/**
+ Convert hex string to UIColor
+ 
+ @param string the hex string with foramt @"#RRGGBB" or @"#RRGGBBAA"
+ @return the UIColor object. return nil if string is not valid.
+ */
++ (nullable UIColor *)colorWithHexString:(NSString *)string;
++ (nullable UIColor *)colorWithHexString:(NSString *)string prefix:(nullable NSString *)prefix;
 
 #pragma mark - Array
 
