@@ -83,7 +83,7 @@
     
     filePath = [NSString pathWithComponents:components];
 #else
-    filePath = [NSHomeDirectory() stringByAppendingPathComponent:userHomeFileName];
+    filePath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0] stringByAppendingPathComponent:userHomeFileName];
 #endif
     
     BOOL success = [string writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
