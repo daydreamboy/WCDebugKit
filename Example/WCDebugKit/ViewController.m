@@ -104,7 +104,7 @@
 
 - (void)test_enableStatusBarEntry_disable_status_bar_entry {
 #if DEBUG
-    [WDKDebugPanel enableStatusBarEntry:NO];
+    [WDKDebugPanel enableStatusBarEntry:YES];
 #endif
 }
 

@@ -71,10 +71,14 @@ static UIView *WDK_statusBarInstance = nil;
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class statusBarClass = NSClassFromString(@"UIStatusBar");
-        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:) classMethod:NO];
-        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted) classMethod:NO];
+        Class statusBarClass1 = NSClassFromString(@"UIStatusBar");
+        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass1 origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:) classMethod:NO];
+        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass1 origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted) classMethod:NO];
         
+        // @see https://www.reddit.com/r/jailbreakdevelopers/comments/bsx3jz/adding_a_tap_gesture_to_iphone_x_type_statusbar/
+        Class statusBarClass2 = NSClassFromString(@"UIStatusBar_Modern");
+        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass2 origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:) classMethod:NO];
+        [WDKRuntimeTool exchangeSelectorForClass:statusBarClass2 origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted) classMethod:NO];
         
 #if TARGET_OS_SIMULATOR
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,6 +129,22 @@ static UIView *WDK_statusBarInstance = nil;
 - (void)dealloc_intercepted {
     WDK_statusBarInstance = nil;
     [self dealloc_intercepted];
+}
+
+#pragma mark - Utility
+
++ (BOOL)screenHasNotch {
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    
+    if ([keyWindow respondsToSelector:@selector(safeAreaInsets)]) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunguarded-availability-new"
+        return keyWindow.safeAreaInsets.bottom > 0 ? YES : NO;
+#pragma GCC diagnostic pop
+    }
+    else {
+        return NO;
+    }
 }
 
 #endif
