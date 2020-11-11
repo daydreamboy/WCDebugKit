@@ -30,6 +30,11 @@
     parentWindow;                                                       \
 })
 
+// >= `13.0`
+#ifndef IOS13_OR_LATER
+#define IOS13_OR_LATER          ([[[UIDevice currentDevice] systemVersion] compare:@"13.0" options:NSNumericSearch] != NSOrderedAscending)
+#endif
+
 // 如果将调试插件集成到WCDebugKit中，每个app中需定义名为WDKDebugPluginsInfo类，它实现WDKDebugPluginsDataSource协议中的方法
 static NSString *ODKPluginsRegisterClass = @"WDKDebugPluginsInfo";
 
@@ -79,6 +84,12 @@ static UIView *WDK_statusBarInstance = nil;
         Class statusBarClass2 = NSClassFromString(@"UIStatusBar_Modern");
         [WDKRuntimeTool exchangeSelectorForClass:statusBarClass2 origin:@selector(setFrame:) substitute:@selector(setFrame_intercepted:) classMethod:NO];
         [WDKRuntimeTool exchangeSelectorForClass:statusBarClass2 origin:NSSelectorFromString(@"dealloc") substitute:@selector(dealloc_intercepted) classMethod:NO];
+        
+        if (IOS13_OR_LATER) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [WDKDebugPanel installDebugPanelOnStatusBar];
+            });
+        }
         
 #if TARGET_OS_SIMULATOR
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -131,22 +142,6 @@ static UIView *WDK_statusBarInstance = nil;
     [self dealloc_intercepted];
 }
 
-#pragma mark - Utility
-
-+ (BOOL)screenHasNotch {
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    
-    if ([keyWindow respondsToSelector:@selector(safeAreaInsets)]) {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunguarded-availability-new"
-        return keyWindow.safeAreaInsets.bottom > 0 ? YES : NO;
-#pragma GCC diagnostic pop
-    }
-    else {
-        return NO;
-    }
-}
-
 #endif
 
 @end
@@ -184,8 +179,35 @@ static WDKDebugPanel *WDK_sharedPanel;
     UIView *statusBar = [UIView odt_statusBarInstance];
     if (!statusBar) {
         // @see https://stackoverflow.com/a/26451989
-        statusBar = (UIView *)[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
+        @try {
+            statusBar = (UIView *)[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"];
+        }
+        @catch (NSException *exception) {
+        }
     }
+    
+    if (!statusBar && IOS13_OR_LATER) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
+#pragma GCC diagnostic ignored "-Wunguarded-availability-new"
+        // @see https://juejin.im/post/5d650aede51d4561c41fb854
+        UIStatusBarManager *statusBarManager = [UIApplication sharedApplication].keyWindow.windowScene.statusBarManager;
+        if ([statusBarManager respondsToSelector:@selector(createLocalStatusBar)]) {
+            UIView *localStatusBar = [statusBarManager performSelector:@selector(createLocalStatusBar)];
+            if ([localStatusBar respondsToSelector:@selector(statusBar)]) {
+                statusBar = [localStatusBar performSelector:@selector(statusBar)];
+                
+                UIView *frontStatusBar = [[UIView alloc] initWithFrame: CGRectMake(0, 0, CGRectGetWidth(statusBarManager.statusBarFrame), 88)];
+                frontStatusBar.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.5];
+//                [statusBar addSubview:frontStatusBar];
+//                [[UIApplication sharedApplication].delegate.window addSubview:frontStatusBar];
+                
+                statusBar = frontStatusBar;
+            }
+        }
+#pragma GCC diagnostic pop
+    }
+    
     if (statusBar) {
 #if DEBUG
         NSLog(@"install DebugPanel on statusBar successfully");

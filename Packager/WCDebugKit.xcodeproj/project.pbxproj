@@ -412,12 +412,12 @@
 		4F1AC87023BC6B4D0023CE3A /* DebugPanel */ = {
 			isa = PBXGroup;
 			children = (
-				4F1AC87123BC6B4D0023CE3A /* WDKDebugPanel.m */,
-				4F1AC87223BC6B4D0023CE3A /* WDKDebugPanel_Internal.h */,
 				4F1AC87323BC6B4D0023CE3A /* DebugPanelUtility */,
 				4F1AC88223BC6B4D0023CE3A /* WDKDebugPanelPod.h */,
-				4F1AC88323BC6B4D0023CE3A /* WDKDebugActionsViewController.h */,
 				4F1AC88423BC6B4D0023CE3A /* WDKDebugPanel.h */,
+				4F1AC87223BC6B4D0023CE3A /* WDKDebugPanel_Internal.h */,
+				4F1AC87123BC6B4D0023CE3A /* WDKDebugPanel.m */,
+				4F1AC88323BC6B4D0023CE3A /* WDKDebugActionsViewController.h */,
 				4F1AC88523BC6B4D0023CE3A /* WDKDebugActionsViewController.m */,
 				4F1AC88623BC6B4D0023CE3A /* DebugActions */,
 			);
