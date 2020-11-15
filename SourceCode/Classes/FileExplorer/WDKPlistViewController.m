@@ -595,7 +595,7 @@ return YES;
     if (!data) {
         ReturnNotSupportedFile(nil, 0)
     }
-    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&errorL];
+    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&errorL];
     if (JSONObject) {
         ReturnSupportedFile(WDKPlistViewController_FileTypeJSON, JSONObject, nil, 0)
     }
