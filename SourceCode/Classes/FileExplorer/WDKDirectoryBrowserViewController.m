@@ -604,7 +604,7 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
-    else if ([self fileIsPlist:file] || [self fileIsJSON:file] || [self fileIsStrings:file]) {
+    else if ([WDKPlistViewController isSupportedFileWithFilePath:path fileType:nil rootObject:nil]) {
         WDKPlistViewController *vc = [[WDKPlistViewController alloc] initWithFilePath:path];
         [self.navigationController pushViewController:vc animated:YES];
     }

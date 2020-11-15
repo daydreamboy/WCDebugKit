@@ -10,6 +10,7 @@
 		2BF7F44D1F84B8E100B27A0F /* SubMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F44C1F84B8E100B27A0F /* SubMenuViewController.m */; };
 		2BF7F4581F91DA2C00B27A0F /* WDKDebugPluginsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF7F4551F91D98800B27A0F /* WDKDebugPluginsInfo.m */; };
 		2BF7F45B1F91F2C400B27A0F /* WDKDebugPlugins.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7F45A1F91F2C100B27A0F /* WDKDebugPlugins.bundle */; };
+		4F2205E325611D1900FA1997 /* SampleFiles in Resources */ = {isa = PBXBuildFile; fileRef = 4F2205E225611D1900FA1997 /* SampleFiles */; };
 		4F82DF5A20E689E9007035FC /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F82DF5720E689E9007035FC /* 2.jpg */; };
 		4F82DF5B20E689E9007035FC /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F82DF5820E689E9007035FC /* 3.jpg */; };
 		4F82DF5C20E689E9007035FC /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4F82DF5920E689E9007035FC /* 1.jpg */; };
@@ -66,6 +67,7 @@
 		2BF7F45A1F91F2C100B27A0F /* WDKDebugPlugins.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WDKDebugPlugins.bundle; sourceTree = "<group>"; };
 		32152C7AFC80B90055E20027 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4780E58D0E2544909FC1169F /* Pods-WCDebugKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCDebugKit_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WCDebugKit_Example/Pods-WCDebugKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		4F2205E225611D1900FA1997 /* SampleFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SampleFiles; sourceTree = "<group>"; };
 		4F82DF5720E689E9007035FC /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		4F82DF5820E689E9007035FC /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		4F82DF5920E689E9007035FC /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				6003F5A6195388D20070C39A /* ViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
+				4F2205E225611D1900FA1997 /* SampleFiles */,
 				6003F594195388D20070C39A /* Supporting Files */,
 				2BF7F44B1F84B8E100B27A0F /* SubMenuViewController.h */,
 				2BF7F44C1F84B8E100B27A0F /* SubMenuViewController.m */,
@@ -344,6 +347,7 @@
 			files = (
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				2BF7F45B1F91F2C400B27A0F /* WDKDebugPlugins.bundle in Resources */,
+				4F2205E325611D1900FA1997 /* SampleFiles in Resources */,
 				4F82DF5A20E689E9007035FC /* 2.jpg in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,

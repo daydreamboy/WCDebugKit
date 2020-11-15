@@ -10,6 +10,7 @@
 #import "WDKContextMenuCell.h"
 #import "UIAlertView+WDK.h"
 #import "WDKMobileProvisionTool.h"
+#import "WDKTextEditViewController.h"
 
 #ifndef IOS8_OR_LATER
 #define IOS8_OR_LATER          ([[[UIDevice currentDevice] systemVersion] compare:@"8.0" options:NSNumericSearch] != NSOrderedAscending)
@@ -450,18 +451,13 @@ typedef NS_ENUM(NSUInteger, WCPlistEditViewControllerMode) {
 
 #pragma mark - WDKPlistViewController
 
-#define kFilePath       @"kFilePath"
-#define kFileReadonly   @"kFileReadonly"
-#define kRootObject     @"kRootObject"
+// keys for fileInfoDict
+#define kFilePath           @"kFilePath"
+#define kFileReadonly       @"kFileReadonly"
+#define kRootObject         @"kRootObject"
+#define kPlistFileFormat    @"kPlistFileFormat"
+#define kFileType           @"kFileType"
 
-#define kFileType @"kFileType"
-typedef NS_ENUM(NSInteger, WDKPlistViewController_FileType) {
-    WDKPlistViewController_FileTypeUnsupported,
-    WDKPlistViewController_FileTypePlist,
-    WDKPlistViewController_FileTypeJSON,
-};
-
-#define kPlistFileFormat @"kPlistFileFormat"
 typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
     WDKPlistViewController_PlistFileFormatUnknown,
     WDKPlistViewController_PlistFileFormatOpenStepFormat = NSPropertyListOpenStepFormat,
@@ -470,12 +466,13 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
 };
 
 @interface WDKPlistViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate, UIActionSheetDelegate>
-@property (nonatomic, assign) NSPropertyListFormat fileFormat;
+@property (nonatomic, assign) NSPropertyListFormat plistFileFormat;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIBarButtonItem *actionsItem;
 @property (nonatomic, strong) NSError *errorOfReadingFile;
 @property (nonatomic, strong) id currentObj;
 @property (nonatomic, copy) NSArray<NSString *> *currentPathComponents;
+@property (nonatomic, strong) UIDocumentInteractionController *documentController;
 + (NSMutableDictionary *)fileInfoDict;
 @end
 
@@ -495,8 +492,9 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
         NSString *filePath = [[[self class] fileInfoDict] objectForKey:kFilePath];
         NSString *title = [NSString stringWithFormat:@"不能读取文件%@", [filePath lastPathComponent]];
         NSString *msg = [NSString stringWithFormat:@"code: %ld, %@", (long)error.code, error.localizedDescription];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -514,34 +512,21 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
         _currentPathComponents = @[@"root"];
         
         NSError *error = nil;
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        id rootPlistObj = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:&_fileFormat error:&error];
+        id rootObject = nil;
+        WDKPlistViewController_FileType fileType;
+        [[self class] isSupportedFileWithFilePath:filePath fileType:&fileType rootObject:&rootObject error:&error plistType:&_plistFileFormat];
+        _currentObj = rootObject;
         
-        [[[self class] fileInfoDict] removeAllObjects]; // Note: reset file into
+        [[[self class] fileInfoDict] removeAllObjects]; // Note: reset file info
         
-        BOOL fileIsReadonly = ![[NSFileManager defaultManager] isWritableFileAtPath:filePath];
-        
-        [[[self class] fileInfoDict] setObject:filePath forKey:kFilePath];
-        [[[self class] fileInfoDict] setObject:@(fileIsReadonly) forKey:kFileReadonly];
-        [[[self class] fileInfoDict] setObject:@(_fileFormat) forKey:kPlistFileFormat];
-        
-        id rootJSONObj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&error];
-        
-        if ([[filePath lastPathComponent] isEqualToString:@"embedded.mobileprovision"]) {
-            rootPlistObj = [WDKMobileProvisionTool mobileprovisionInfo];
-        }
-        
-        if (rootPlistObj) {
-            _currentObj = rootPlistObj;
+        if (_currentObj && !error) {
+            BOOL fileIsReadonly = ![[NSFileManager defaultManager] isWritableFileAtPath:filePath];
             
-            [[[self class] fileInfoDict] setObject:@(WDKPlistViewController_FileTypePlist) forKey:kFileType];
-            [[[self class] fileInfoDict] setObject:rootPlistObj forKey:kRootObject];
-        }
-        else if (rootJSONObj) {
-            _currentObj = rootJSONObj;
-            
-            [[[self class] fileInfoDict] setObject:@(WDKPlistViewController_FileTypeJSON) forKey:kFileType];
-            [[[self class] fileInfoDict] setObject:rootJSONObj forKey:kRootObject];
+            [[[self class] fileInfoDict] setObject:filePath forKey:kFilePath];
+            [[[self class] fileInfoDict] setObject:@(fileIsReadonly) forKey:kFileReadonly];
+            [[[self class] fileInfoDict] setObject:_currentObj forKey:kRootObject];
+            [[[self class] fileInfoDict] setObject:@(fileType) forKey:kFileType];
+            [[[self class] fileInfoDict] setObject:@(_plistFileFormat) forKey:kPlistFileFormat];
         }
         else {
             self.errorOfReadingFile = error;
@@ -552,7 +537,101 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
     return self;
 }
 
+- (void)dealloc {
+    [[[self class] fileInfoDict] removeAllObjects]; // Note: reset file info
+}
+
++ (BOOL)isSupportedFileWithFilePath:(NSString *)filePath fileType:(WDKPlistViewController_FileType * _Nullable)fileType rootObject:(id * _Nullable)rootObject {
+    return [self isSupportedFileWithFilePath:filePath fileType:fileType rootObject:rootObject error:nil plistType:nil];
+}
+
 #pragma mark - Internal Methods
+
+
++ (BOOL)isSupportedFileWithFilePath:(NSString *)filePath fileType:(WDKPlistViewController_FileType * _Nullable)fileType rootObject:(id * _Nullable)rootObject error:(NSError * _Nullable * _Nullable)error plistType:(NSPropertyListFormat * _Nullable)plistType {
+#define ReturnNotSupportedFile(errorL, plistTypeL) \
+if (fileType != NULL) { \
+    *fileType = WDKPlistViewController_FileTypeUnsupported; \
+} \
+if (rootObject != NULL) { \
+    *rootObject = nil; \
+} \
+if (error != NULL) { \
+    *error = errorL; \
+} \
+if (plistType != NULL) { \
+    *plistType = plistTypeL; \
+} \
+return NO;
+    
+#define ReturnSupportedFile(type, object, errorL, plistTypeL) \
+if (fileType != NULL) { \
+    *fileType = type; \
+} \
+if (rootObject != NULL) { \
+    *rootObject = object; \
+} \
+if (error != NULL) { \
+    *error = errorL; \
+} \
+if (plistType != NULL) { \
+    *plistType = plistTypeL; \
+} \
+return YES;
+    
+    if (![filePath isKindOfClass:[NSString class]]) {
+        ReturnNotSupportedFile(nil, 0)
+    }
+    
+    if ([[filePath lastPathComponent] isEqualToString:@"embedded.mobileprovision"]) {
+        NSDictionary *dict = [WDKMobileProvisionTool mobileprovisionInfo];
+        if (dict) {
+            ReturnSupportedFile(WDKPlistViewController_FileTypePlist, dict, nil, 0)
+        }
+    }
+    
+    NSError *errorL;
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    if (!data) {
+        ReturnNotSupportedFile(nil, 0)
+    }
+    id JSONObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&errorL];
+    if (JSONObject) {
+        ReturnSupportedFile(WDKPlistViewController_FileTypeJSON, JSONObject, nil, 0)
+    }
+    
+    NSPropertyListFormat format;
+    
+    id plistObject = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainersAndLeaves format:&format error:&errorL];
+    if (plistObject) {
+        if ([plistObject isKindOfClass:[NSString class]]) {
+            NSString *JSONString = (NSString *)plistObject;
+            NSData *JSONData = [JSONString dataUsingEncoding:NSUTF8StringEncoding];
+            if (JSONData) {
+                id JSONObject2 = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:&errorL];
+                if (JSONObject2) {
+                    ReturnSupportedFile(WDKPlistViewController_FileTypeJSONString, JSONObject2, nil, 0)
+                }
+            }
+        }
+        else {
+            ReturnSupportedFile(WDKPlistViewController_FileTypePlist, plistObject, nil, format)
+        }
+    }
+    
+    NSString *JSONString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if ([JSONString isKindOfClass:[NSString class]]) {
+        NSData *JSONData = [JSONString dataUsingEncoding:NSUTF8StringEncoding];
+        if (JSONData) {
+            id JSONObject = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingMutableLeaves | NSJSONReadingMutableContainers error:nil];
+            if (JSONObject) {
+                ReturnSupportedFile(WDKPlistViewController_FileTypeJSONString, JSONObject, nil, 0)
+            }
+        }
+    }
+    
+    ReturnNotSupportedFile(errorL, 0)
+}
 
 - (instancetype)initWithCurrentObject:(id)currentObject {
     self = [super init];
@@ -759,6 +838,33 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
                 }
                 break;
             }
+            case WDKPlistViewController_FileTypeJSONString: {
+                NSError *error;
+                NSData *data = [NSJSONSerialization dataWithJSONObject:rootObject options:kNilOptions error:&error];
+                NSString *JSONString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                if (JSONString) {
+                    
+                    NSDictionary *container = @{@"key": JSONString};
+                    NSError *error = nil;
+                    
+                    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:container options:kNilOptions error:&error];
+                    NSString *JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
+                    NSMutableString *JSONStringM = [NSMutableString stringWithString:JSONString];
+                    
+                    [JSONStringM deleteCharactersInRange:NSMakeRange(JSONString.length - 1, @"}".length)];
+                    [JSONStringM deleteCharactersInRange:NSMakeRange(0, @"{\"key\":".length)];
+                    
+                    if (!error) {
+                        [JSONStringM writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    }
+                    if (error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[[UIAlertView alloc] initWithTitle:@"保存出错" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                        });
+                    }
+                }
+                break;
+            }
             default:
                 break;
         }
@@ -900,11 +1006,26 @@ typedef NS_ENUM(NSInteger, WDKPlistViewController_PlistFileFormat) {
 #pragma mark - Actions
 
 - (void)actionsItemClicked:(id)sender {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"常用操作", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:nil];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"常用操作", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"添加节点", nil) style:UIAlertActionStyleDefault handler:nil]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"导出文件", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *filePath = [[[self class] fileInfoDict] objectForKey:kFilePath];
+        
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+        self.documentController.UTI = @"public.data";
+        [self.documentController presentOptionsMenuFromRect:CGRectZero inView:self.view animated:YES];
+    }]];
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"以文本内容显示", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *filePath = [[[self class] fileInfoDict] objectForKey:kFilePath];
+        
+        WDKTextEditViewController *vc = [[WDKTextEditViewController alloc] initWithFilePath:filePath];
+        [self.navigationController pushViewController:vc animated:YES];
+    }]];
     
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"添加节点", nil)];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"导出文件", nil)];
-    [actionSheet showInView:self.view];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDataSource

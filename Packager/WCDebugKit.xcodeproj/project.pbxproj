@@ -479,16 +479,16 @@
 			isa = PBXGroup;
 			children = (
 				4F1AC89923BC6B4D0023CE3A /* WDKDirectoryBrowserViewController.h */,
+				4F1AC8A723BC6B4D0023CE3A /* WDKDirectoryBrowserViewController.m */,
 				4F1AC89A23BC6B4D0023CE3A /* WDKImageBrowserViewController.m */,
+				4F1AC8A623BC6B4D0023CE3A /* WDKImageBrowserViewController.h */,
+				4F1AC8A923BC6B4D0023CE3A /* WDKFileExplorer.h */,
 				4F1AC89B23BC6B4D0023CE3A /* WDKFileExplorer.m */,
 				4F1AC89C23BC6B4D0023CE3A /* WDKTextEditViewController.h */,
-				4F1AC89D23BC6B4D0023CE3A /* WDKPlistViewController.h */,
-				4F1AC89E23BC6B4D0023CE3A /* Controls */,
-				4F1AC8A623BC6B4D0023CE3A /* WDKImageBrowserViewController.h */,
-				4F1AC8A723BC6B4D0023CE3A /* WDKDirectoryBrowserViewController.m */,
 				4F1AC8A823BC6B4D0023CE3A /* WDKTextEditViewController.m */,
-				4F1AC8A923BC6B4D0023CE3A /* WDKFileExplorer.h */,
+				4F1AC89D23BC6B4D0023CE3A /* WDKPlistViewController.h */,
 				4F1AC8AA23BC6B4D0023CE3A /* WDKPlistViewController.m */,
+				4F1AC89E23BC6B4D0023CE3A /* Controls */,
 				4F1AC8AB23BC6B4D0023CE3A /* Addition */,
 			);
 			path = FileExplorer;
@@ -497,13 +497,13 @@
 		4F1AC89E23BC6B4D0023CE3A /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				4F1AC89F23BC6B4D0023CE3A /* WDKInteractiveLabel.h */,
-				4F1AC8A023BC6B4D0023CE3A /* WDKContextMenuCell.m */,
+				4F1AC8A523BC6B4D0023CE3A /* WDKImageZoomView.h */,
 				4F1AC8A123BC6B4D0023CE3A /* WDKImageZoomView.m */,
 				4F1AC8A223BC6B4D0023CE3A /* WDKContextMenuItemDefines.h */,
+				4F1AC89F23BC6B4D0023CE3A /* WDKInteractiveLabel.h */,
 				4F1AC8A323BC6B4D0023CE3A /* WDKInteractiveLabel.m */,
 				4F1AC8A423BC6B4D0023CE3A /* WDKContextMenuCell.h */,
-				4F1AC8A523BC6B4D0023CE3A /* WDKImageZoomView.h */,
+				4F1AC8A023BC6B4D0023CE3A /* WDKContextMenuCell.m */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
