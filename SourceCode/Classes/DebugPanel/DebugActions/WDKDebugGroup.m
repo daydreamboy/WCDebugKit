@@ -11,7 +11,7 @@
 
 @interface WDKDebugGroup ()
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, strong, readwrite) NSArray<WDKDebugAction *> *actions;
+@property (nonatomic, strong, readwrite) NSMutableArray<WDKDebugAction *> *actions;
 @end
 
 @implementation WDKDebugGroup
@@ -28,9 +28,30 @@
 + (instancetype)groupWithName:(NSString *)name actions:(NSArray<WDKDebugAction *> *)actions {
     WDKDebugGroup *group = [[WDKDebugGroup alloc] init];
     group.name = name;
-    group.actions = actions;
+    group.actions = [actions mutableCopy];
     
     return group;
+}
+
++ (instancetype)groupWithName:(NSString *)name {
+    WDKDebugGroup *group = [[WDKDebugGroup alloc] init];
+    group.name = name;
+    
+    return group;
+}
+
+- (void)addAction:(WDKDebugAction *)action {
+    if ([action isKindOfClass:[WDKDebugAction class]]) {
+        [_actions addObject:action];
+    }
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _actions = [NSMutableArray array];
+    }
+    return self;
 }
 
 #pragma mark - NSCopying
