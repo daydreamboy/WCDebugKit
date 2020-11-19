@@ -412,8 +412,8 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
         WDKEnumAction *enumAction = (WDKEnumAction *)action;
         
         cell.textLabel.attributedText = attrString;
-        id enumValue;
-        if (enumAction.index < [enumAction.enums count]) {
+        id enumValue = @"";
+        if (enumAction.index >= 0 && enumAction.index < [enumAction.enums count]) {
             enumValue = enumAction.enums[enumAction.index];
         }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", enumValue];
@@ -513,7 +513,7 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
                     
                     WDKEnumAction *enumAction = (WDKEnumAction *)action;
                     
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:enumAction.prompt delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:enumAction.title message:enumAction.prompt delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
                     alert.odt_userInfo = enumAction;
                     
                     for (id enumValue in enumAction.enums) {
@@ -676,10 +676,9 @@ static BOOL TestCase_sToggleEnabled2 = NO;
 
 - (WDKEnumAction *)test_enum_action {
     NSArray *enumValues = @[@"High", @"Medium", @"Low"];
-    WDKEnumAction *enumAction = [WDKEnumAction actionWithName:@"Multiple choice (EnumAction)" enums:enumValues index:1 enumBlock:^(NSUInteger selectedIndex) {
+    WDKEnumAction *enumAction = [WDKEnumAction actionWithName:@"Multiple choice (EnumAction)" title:@"Log Level" subtitle:nil enums:enumValues index:1 enumBlock:^(NSUInteger selectedIndex) {
         NSLog(@"Multiple choice executed: %lu", (unsigned long)selectedIndex);
     }];
-    enumAction.prompt = @"Log Level";
     
     return enumAction;
 }

@@ -8,11 +8,14 @@
 
 #import "WCDebugKit.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface WDKEnumAction : WDKDebugAction
 
-@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong, readonly) NSArray *enums;
-@property (nonatomic, copy) NSString *prompt;
+@property (nonatomic, copy, readonly) NSString *title;
+@property (nonatomic, copy, readonly) NSString *prompt;
 
 /*
  *  Initializer
@@ -22,6 +25,8 @@
  *  @param index    the index of enum values
  *  @param block    the callback WON'T be called when user choose `Cancel`
  */
-+ (instancetype)actionWithName:(NSString *)name enums:(NSArray *)enums index:(NSUInteger)index enumBlock:(void (^)(NSUInteger selectedIndex))block;
++ (instancetype)actionWithName:(NSString *)name title:(NSString *)title subtitle:(nullable NSString *)subtitle enums:(NSArray *)enums index:(NSInteger)index enumBlock:(void (^)(NSUInteger selectedIndex))block;
 
 @end
+
+NS_ASSUME_NONNULL_END

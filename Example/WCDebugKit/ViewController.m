@@ -199,10 +199,9 @@
 
 - (WDKEnumAction *)test_enum_action {
     NSArray *enumValues = @[@"High", @"Medium", @"Low"];
-    WDKEnumAction *enumAction = [WDKEnumAction actionWithName:@"Multiple choice (EnumAction)" enums:enumValues index:1 enumBlock:^(NSUInteger selectedIndex) {
+    WDKEnumAction *enumAction = [WDKEnumAction actionWithName:@"Multiple choice (EnumAction)" title:@"Log Level" subtitle:nil enums:enumValues index:1 enumBlock:^(NSUInteger selectedIndex) {
         NSLog(@"Multiple choice executed: %lu", (unsigned long)selectedIndex);
     }];
-    enumAction.prompt = @"Log Level";
     
     return enumAction;
 }

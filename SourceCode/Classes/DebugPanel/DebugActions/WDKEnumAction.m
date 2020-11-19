@@ -11,13 +11,17 @@
 @interface WDKEnumAction ()
 @property (nonatomic, copy) void (^enumBlock)(NSUInteger selectedIndex);
 @property (nonatomic, strong) NSArray *enums;
+@property (nonatomic, copy, readwrite) NSString *title;
+@property (nonatomic, copy, readwrite) NSString *prompt;
 @end
 
 @implementation WDKEnumAction
 
-+ (instancetype)actionWithName:(NSString *)name enums:(NSArray *)enums index:(NSUInteger)index enumBlock:(void (^)(NSUInteger selectedIndex))block {
++ (instancetype)actionWithName:(NSString *)name title:(NSString *)title subtitle:(nullable NSString *)subtitle enums:(NSArray *)enums index:(NSInteger)index enumBlock:(void (^)(NSUInteger selectedIndex))block {
     WDKEnumAction *action = [WDKEnumAction actionWithName:name actionBlock:nil];
     action.shouldDismissPanel = NO;
+    action.title = title;
+    action.prompt = subtitle;
     action.enums = enums;
     action.index = index;
     action.enumBlock = block;

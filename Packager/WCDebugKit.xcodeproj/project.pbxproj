@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F02FC0B2566CE5300447A5F /* WDKScreenAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F02FC092566CE5300447A5F /* WDKScreenAdapter.h */; };
+		4F02FC0C2566CE5300447A5F /* WDKScreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */; };
+		4F02FC0D2566CE5300447A5F /* WDKScreenAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */; };
 		4F15DABB2436F3BB0081FFBC /* WDKLLDBTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */; };
 		4F15DABC2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
 		4F15DABD2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
@@ -188,6 +191,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4F02FC092566CE5300447A5F /* WDKScreenAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKScreenAdapter.h; sourceTree = "<group>"; };
+		4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKScreenAdapter.m; sourceTree = "<group>"; };
 		4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDKLLDBTool.h; sourceTree = "<group>"; };
 		4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDKLLDBTool.m; sourceTree = "<group>"; };
 		4F1AC84623BC6B030023CE3A /* libWCDebugKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWCDebugKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -544,6 +549,8 @@
 		4F1AC8B823BC6B4D0023CE3A /* ViewInspector */ = {
 			isa = PBXGroup;
 			children = (
+				4F02FC092566CE5300447A5F /* WDKScreenAdapter.h */,
+				4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */,
 				4F1AC8B923BC6B4D0023CE3A /* WDKViewExplorerOverlayView.m */,
 				4F1AC8BA23BC6B4D0023CE3A /* WDKViewExplorerWindow.m */,
 				4F1AC8BB23BC6B4D0023CE3A /* Tools */,
@@ -622,6 +629,7 @@
 				4F1AC85923BC6B140023CE3A /* Framework.h in Headers */,
 				4F1AC8F523BC6B4D0023CE3A /* WDKDebugPanelPod.h in Headers */,
 				4FF9B0952412497500D4145E /* WDKApplicationTool.h in Headers */,
+				4F02FC0B2566CE5300447A5F /* WDKScreenAdapter.h in Headers */,
 				4F1AC8D123BC6B4D0023CE3A /* WCDebugKit.h in Headers */,
 				4F1AC92A23BC6B4E0023CE3A /* UIAlertView+WDK.h in Headers */,
 				4FF9B0912412497500D4145E /* WDKRuntimeTool.h in Headers */,
@@ -801,6 +809,7 @@
 				4F1AC8FB23BC6B4D0023CE3A /* WDKDebugGroup.m in Sources */,
 				4F1AC8F123BC6B4D0023CE3A /* WDKNavBackButtonItem.m in Sources */,
 				4F1AC91423BC6B4D0023CE3A /* WDKFileExplorer.m in Sources */,
+				4F02FC0C2566CE5300447A5F /* WDKScreenAdapter.m in Sources */,
 				4F1AC92B23BC6B4E0023CE3A /* UIAlertView+WDK.m in Sources */,
 				4FF9B0992412497500D4145E /* WDKObjectTool.m in Sources */,
 				4F1AC93C23BC6B4E0023CE3A /* WDKViewExplorerWindow.m in Sources */,
@@ -852,6 +861,7 @@
 				4F1AC8E223BC6B4D0023CE3A /* WDKDebugPanelCellItem.m in Sources */,
 				4F1AC94E23BC6B4E0023CE3A /* UIApplication+WDK.m in Sources */,
 				4F1AC91523BC6B4D0023CE3A /* WDKFileExplorer.m in Sources */,
+				4F02FC0D2566CE5300447A5F /* WDKScreenAdapter.m in Sources */,
 				4F1AC91C23BC6B4E0023CE3A /* WDKImageZoomView.m in Sources */,
 				4F1AC92923BC6B4E0023CE3A /* WDKPlistViewController.m in Sources */,
 				4FF9B09A2412497500D4145E /* WDKObjectTool.m in Sources */,
