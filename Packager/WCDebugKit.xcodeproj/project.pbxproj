@@ -150,6 +150,7 @@
 		4F59BFD923BC71FF004495E5 /* WDKCustomPanelAction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC88723BC6B4D0023CE3A /* WDKCustomPanelAction.h */; };
 		4F59BFDD23BC735B004495E5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F59BFDC23BC735B004495E5 /* Foundation.framework */; };
 		4F59BFF623BC7CC1004495E5 /* WCDebugKit_Configuration.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F59BFF523BC7CAB004495E5 /* WCDebugKit_Configuration.h */; };
+		4FE275902607A75600F0DD02 /* WDKFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE2758F2607A75600F0DD02 /* WDKFileTool.m */; };
 		4FF9B0902412497500D4145E /* WDKInfoPlistTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FF9B0862412497400D4145E /* WDKInfoPlistTool.h */; };
 		4FF9B0912412497500D4145E /* WDKRuntimeTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FF9B0872412497400D4145E /* WDKRuntimeTool.h */; };
 		4FF9B0922412497500D4145E /* WDKMobileProvisionTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FF9B0882412497400D4145E /* WDKMobileProvisionTool.h */; };
@@ -289,6 +290,8 @@
 		4F2820FE241B6DE90032E16A /* WDKColorTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDKColorTool.m; sourceTree = "<group>"; };
 		4F59BFDC23BC735B004495E5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4F59BFF523BC7CAB004495E5 /* WCDebugKit_Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WCDebugKit_Configuration.h; sourceTree = "<group>"; };
+		4FE2758E2607A75600F0DD02 /* WDKFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKFileTool.h; sourceTree = "<group>"; };
+		4FE2758F2607A75600F0DD02 /* WDKFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKFileTool.m; sourceTree = "<group>"; };
 		4FF9B0862412497400D4145E /* WDKInfoPlistTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKInfoPlistTool.h; sourceTree = "<group>"; };
 		4FF9B0872412497400D4145E /* WDKRuntimeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKRuntimeTool.h; sourceTree = "<group>"; };
 		4FF9B0882412497400D4145E /* WDKMobileProvisionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKMobileProvisionTool.h; sourceTree = "<group>"; };
@@ -528,6 +531,8 @@
 		4F1AC8AE23BC6B4D0023CE3A /* CommonTools */ = {
 			isa = PBXGroup;
 			children = (
+				4FE2758E2607A75600F0DD02 /* WDKFileTool.h */,
+				4FE2758F2607A75600F0DD02 /* WDKFileTool.m */,
 				4FF9B08A2412497500D4145E /* WDKApplicationTool.h */,
 				4FF9B08F2412497500D4145E /* WDKApplicationTool.m */,
 				4F2820FD241B6DE90032E16A /* WDKColorTool.h */,
@@ -820,6 +825,7 @@
 				4F1AC92523BC6B4E0023CE3A /* WDKTextEditViewController.m in Sources */,
 				4FF9B09D2412497500D4145E /* WDKApplicationTool.m in Sources */,
 				4F1AC8DA23BC6B4D0023CE3A /* WDKHookManager.m in Sources */,
+				4FE275902607A75600F0DD02 /* WDKFileTool.m in Sources */,
 				4FF9B0932412497500D4145E /* WDKRuntimeTool.m in Sources */,
 				4F1AC93E23BC6B4E0023CE3A /* WCViewControllerTool.m in Sources */,
 				4F1AC91B23BC6B4E0023CE3A /* WDKImageZoomView.m in Sources */,
