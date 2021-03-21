@@ -87,12 +87,15 @@
             [WDKRuntimeTool exchangeSelectorForClass:[UIScreen class] origin:@selector(bounds) substitute:@selector(wdk_bounds) classMethod:NO];
             [WDKRuntimeTool exchangeSelectorForClass:[UIScreen class] origin:@selector(applicationFrame) substitute:@selector(wdk_applicationFrame) classMethod:NO];
             
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
             // UIWindow
             [WDKRuntimeTool exchangeSelectorForClass:[UIWindow class] origin:@selector(_sceneBounds) substitute:@selector(wdk_sceneBounds) classMethod:NO];
             [WDKRuntimeTool exchangeSelectorForClass:[UIWindow class] origin:@selector(_sceneReferenceBounds) substitute:@selector(wdk_sceneReferenceBounds) classMethod:NO];
             
             // UIViewController
             [WDKRuntimeTool exchangeSelectorForClass:[UIViewController class] origin:@selector(_defaultInitialViewFrame) substitute:@selector(wdk_defaultInitialViewFrame) classMethod:NO];
+#pragma GCC diagnostic pop
         }
     });
 }

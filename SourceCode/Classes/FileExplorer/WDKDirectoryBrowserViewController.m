@@ -15,6 +15,7 @@
 #import "WDKTextEditViewController.h"
 #import "WDKImageBrowserViewController.h"
 #import "WDKPlistViewController.h"
+#import "WDKDataTool.h"
 
 #define WDK_FAVORITE_PATHS_PLIST_PATH    [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/WCDebugKit/favorite_paths.plist"]
 
@@ -246,7 +247,7 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     self.imageFiles = [NSMutableArray array];
     
     for (NSString *file in self.filesFiltered) {
-        if ([self fileIsPicture:file]) {
+        if ([self fileIsPicture:[self pathForFile:file]]) {
             [self.imageFiles addObject:file];
         }
     }
@@ -428,10 +429,24 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     return [[file.lowercaseString pathExtension] isEqualToString:@"strings"];
 }
 
-- (BOOL)fileIsPicture:(NSString *)file {
-    NSString *ext = [[file pathExtension] lowercaseString];
+- (BOOL)fileIsPicture:(NSString *)filePath {
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
     
-    return [ext isEqualToString:@"png"] || [ext isEqualToString:@"jpg"];
+    NSArray<NSNumber *> *types = @[
+        @(WDKMIMETypePng),
+        @(WDKMIMETypeJpg),
+    ];
+    
+    __block WDKMIMETypeInfo *info;
+    [types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        WDKMIMEType type = [obj intValue];
+        info = [WDKDataTool checkMIMETypeWithData:data type:type];
+        if (info) {
+            *stop = YES;
+        }
+    }];
+    
+    return info != nil ? YES : NO;
 }
 
 - (BOOL)fileIsMatching:(NSString *)file extensions:(NSArray *)extensions {
@@ -510,7 +525,7 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     cell.allowCustomActionContextMenuItems = WDKContextMenuItemFavorite | WDKContextMenuItemView | WDKContextMenuItemCopy | WDKContextMenuItemShare | WDKContextMenuItemDeletion;
     cell.delegate = self;
     
-    if ([self fileIsPicture:file]) {
+    if ([self fileIsPicture:path]) {
         UIImage *img = [UIImage imageWithContentsOfFile:path];
         cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
         cell.imageView.image = img;
@@ -583,7 +598,7 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
         WDKDirectoryBrowserViewController *vc = [[WDKDirectoryBrowserViewController alloc] initWithPath:path];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if ([self fileIsPicture:file]) {
+    else if ([self fileIsPicture:path]) {
         NSMutableArray *images = [NSMutableArray array];
         NSUInteger currentIndex = 0;
         for (NSUInteger i = 0; i < [self.imageFiles count]; i++) {

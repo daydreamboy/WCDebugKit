@@ -98,9 +98,10 @@ A debug kit for iOS
   # subspec 'FileExplorer'
   s.subspec 'FileExplorer' do |ss|
   	ss.dependency 'WCDebugKit/DebugPanel'
+    ss.dependency 'WCDebugKit/CommonTools'
+
   	ss.source_files = [
       'SourceCode/Classes/FileExplorer/**/*',
-      'SourceCode/Classes/CommonTools/WDKMobileProvisionTool.{h,m}',
   	]
   end
 
@@ -131,6 +132,16 @@ A debug kit for iOS
       'SourceCode/Classes/HookManager/**/*',
   	]
   end
+
+    # subspec 'HeapExplorer'
+    s.subspec 'HeapExplorer' do |ss|
+      ss.dependency 'WCDebugKit/DebugPanel'
+      ss.dependency 'WCDebugKit/CommonTools'
+  
+      ss.source_files = [
+        'SourceCode/Classes/HeapExplorer/**/*',
+      ]
+    end
 
   # subspec 'IntegratedTools'
 #  s.subspec 'IntegratedTools' do |ss|

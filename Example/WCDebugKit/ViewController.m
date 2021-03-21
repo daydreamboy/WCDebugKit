@@ -10,6 +10,7 @@
 
 #import "WCDebugKit.h"
 #import "SubMenuViewController.h"
+#import "FLEXLiveObjectsTableViewController.h"
 
 @interface ViewController ()
 @property (nonatomic, assign) BOOL toggleEnabled;
@@ -112,6 +113,9 @@
 
 - (void)buttonShowDebugPanelClicked:(id)sender {
     [WDKDebugPanel showDebugPanel];
+    
+    //UIViewController *viewController = [[FLEXLiveObjectsTableViewController alloc] init];
+    //[self presentViewController:viewController animated:YES completion:nil];
 }
 
 #pragma mark - WDKDebugPanelDataSource

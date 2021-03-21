@@ -147,6 +147,41 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
     [[NSNotificationCenter defaultCenter] removeObserver:view name:WCColorizedViewBorderToggleDidChangeNotification object:nil];
 }
 
+//#define RTCall_SwizzleMethodWithReturn()
+
+#ifndef DELEGATE_SAFE_CALL3_WITH_RETURN
+#define DELEGATE_SAFE_CALL3_WITH_RETURN(delegate, sel, arg1, arg2, arg3) \
+    ({ \
+        id returnValue = nil; \
+        if ([delegate respondsToSelector:sel]) { \
+            typeof(arg1) param1 = arg1; \
+            typeof(arg2) param2 = arg2; \
+            typeof(arg3) param3 = arg3; \
+            void *tempReturnValue = nil; \
+            NSMethodSignature *methodSignature = [(NSObject *)delegate methodSignatureForSelector:sel]; \
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature]; \
+            invocation.target = delegate; \
+            invocation.selector = sel; \
+            [invocation setArgument:(void *)&param1 atIndex:2]; \
+            [invocation setArgument:(void *)&param2 atIndex:3]; \
+            [invocation setArgument:(void *)&param3 atIndex:4]; \
+            [invocation invoke]; \
+            [invocation getReturnValue:&tempReturnValue]; \
+            returnValue = (__bridge id)tempReturnValue; \
+        } \
+        returnValue; \
+    })
+#endif /* DELEGATE_SAFE_CALL3_WITH_RETURN */
+
+//#define RTCall_SwizzleMethodWithReturn(sel, clz, returnType) \
+//{ \
+//__block IMP originalIMP = [WDKRuntimeTool replaceMethodWithSelector:sel onClass:[clz class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
+//    UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalIMP)(slf, selector1, coder);
+//    return retVal;
+//}];
+//}
+
+
 #pragma mark > Override Methods
 + (void)load {
     static dispatch_once_t onceToken;
@@ -155,14 +190,52 @@ NSNotificationName WCColorizedViewBorderToggleDidChangeNotification = @"WCColori
         SEL selector2 = @selector(initWithFrame:);
         SEL selector3 = NSSelectorFromString(@"dealloc");// @selector(dealloc); // Error: ARC forbids use of 'dealloc' in a @selector
         
-        __block IMP originalInitWithCoderIMP = [WDKRuntimeTool replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
-            UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalInitWithCoderIMP)(slf, selector1, coder);
+        if (NSClassFromString(@"WDKRuntimeTool")) {
+            __block void (*originalInitWithCoderIMP)(void) = nil;
             
-            [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
-            [WDKUserInterfaceInspector addNotificationsForView:slf];
+            id block = ^UIView *(UIView *slf, NSCoder *coder) {
+                UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalInitWithCoderIMP)(slf, selector1, coder);
+                
+                [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
+                [WDKUserInterfaceInspector addNotificationsForView:slf];
+                
+                return retVal;
+            };
             
-            return retVal;
-        }];
+//            originalInitWithCoderIMP = DELEGATE_SAFE_CALL3_WITH_RETURN(NSClassFromString(@"WDKRuntimeTool"), NSSelectorFromString(@"replaceMethodWithSelector:onClass:withBlock:"), selector1, [UIView class], block);
+            
+            SEL sel = NSSelectorFromString(@"replaceMethodWithSelector:onClass:withBlock:");
+            id delegate = NSClassFromString(@"WDKRuntimeTool");
+            originalInitWithCoderIMP = ({
+                IMP returnValue = nil;
+                if ([delegate respondsToSelector:sel]) {
+                    typeof(selector1) param1 = selector1;
+                    typeof([UIView class]) param2 = [UIView class];
+                    typeof(block) param3 = block;
+                    void *tempReturnValue = nil;
+                    NSMethodSignature *methodSignature = [(NSObject *)delegate methodSignatureForSelector:sel];
+                    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+                    invocation.target = delegate;
+                    invocation.selector = sel;
+                    [invocation setArgument:(void *)&param1 atIndex:2];
+                    [invocation setArgument:(void *)&param2 atIndex:3];
+                    [invocation setArgument:(void *)&param3 atIndex:4];
+                    [invocation invoke];
+                    [invocation getReturnValue:&tempReturnValue];
+                    returnValue = (IMP)tempReturnValue;
+                }
+                returnValue;
+            });
+        }
+        
+//        __block IMP originalInitWithCoderIMP = [WDKRuntimeTool replaceMethodWithSelector:selector1 onClass:[UIView class] withBlock:^UIView *(UIView *slf, NSCoder *coder) {
+//            UIView *retVal = ((UIView * (*)(UIView *, SEL, NSCoder *))originalInitWithCoderIMP)(slf, selector1, coder);
+//
+//            [WDKUserInterfaceInspector setFrameBorderWithView:retVal];
+//            [WDKUserInterfaceInspector addNotificationsForView:slf];
+//
+//            return retVal;
+//        }];
         
         __block IMP originalInitWithFrameIMP = [WDKRuntimeTool replaceMethodWithSelector:selector2 onClass:[UIView class] withBlock:^UIView *(UIView *slf, CGRect frame) {
             UIView *retVal = ((UIView * (*)(UIView *, SEL, CGRect))originalInitWithFrameIMP)(slf, selector2, frame);

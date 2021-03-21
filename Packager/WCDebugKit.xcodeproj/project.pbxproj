@@ -552,20 +552,20 @@
 		4F1AC8B823BC6B4D0023CE3A /* ViewInspector */ = {
 			isa = PBXGroup;
 			children = (
+				4F1AC8C623BC6B4D0023CE3A /* Addition */,
+				4F1AC8BB23BC6B4D0023CE3A /* Tools */,
 				4F02FC092566CE5300447A5F /* WDKScreenAdapter.h */,
 				4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */,
-				4F1AC8B923BC6B4D0023CE3A /* WDKViewExplorerOverlayView.m */,
-				4F1AC8BA23BC6B4D0023CE3A /* WDKViewExplorerWindow.m */,
-				4F1AC8BB23BC6B4D0023CE3A /* Tools */,
 				4F1AC8BE23BC6B4D0023CE3A /* WDKUserInterfaceInspector.h */,
-				4F1AC8BF23BC6B4D0023CE3A /* WDKViewInspector.h */,
+				4F1AC8C423BC6B4D0023CE3A /* WDKUserInterfaceInspector.m */,
+				4F1AC8C223BC6B4D0023CE3A /* WDKViewExplorerOverlayView.h */,
+				4F1AC8B923BC6B4D0023CE3A /* WDKViewExplorerOverlayView.m */,
+				4F1AC8C523BC6B4D0023CE3A /* WDKViewExplorerViewController.h */,
 				4F1AC8C023BC6B4D0023CE3A /* WDKViewExplorerViewController.m */,
 				4F1AC8C123BC6B4D0023CE3A /* WDKViewExplorerWindow.h */,
-				4F1AC8C223BC6B4D0023CE3A /* WDKViewExplorerOverlayView.h */,
+				4F1AC8BA23BC6B4D0023CE3A /* WDKViewExplorerWindow.m */,
+				4F1AC8BF23BC6B4D0023CE3A /* WDKViewInspector.h */,
 				4F1AC8C323BC6B4D0023CE3A /* WDKViewInspector.m */,
-				4F1AC8C423BC6B4D0023CE3A /* WDKUserInterfaceInspector.m */,
-				4F1AC8C523BC6B4D0023CE3A /* WDKViewExplorerViewController.h */,
-				4F1AC8C623BC6B4D0023CE3A /* Addition */,
 			);
 			path = ViewInspector;
 			sourceTree = "<group>";
@@ -691,7 +691,6 @@
 				4F1AC84223BC6B030023CE3A /* Sources */,
 				4F1AC84323BC6B030023CE3A /* Frameworks */,
 				4F1AC84423BC6B030023CE3A /* CopyFiles */,
-				4FF9B09F24124C1500D4145E /* Generate & Copy Universal Static Library to BinaryFiles */,
 			);
 			buildRules = (
 			);
@@ -769,24 +768,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4FF9B09F24124C1500D4145E /* Generate & Copy Universal Static Library to BinaryFiles */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate & Copy Universal Static Library to BinaryFiles";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "bash \"${PROJECT_DIR}/scripts/create_universal_static_library.sh\"\n";
-		};
 		4FF9B0A024124C3000D4145E /* Generate & Copy Universal Dynamic Framework to BinaryFiles */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

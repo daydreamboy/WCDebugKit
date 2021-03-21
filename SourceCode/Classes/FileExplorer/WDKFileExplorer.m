@@ -11,9 +11,12 @@
 #import "WDKDirectoryBrowserViewController.h"
 #import "WDKTextEditViewController.h"
 #import "WDKPlistViewController.h"
+#import "WDKImageBrowserViewController.h"
 #import "WDKDebugPanelGerenalViewController.h"
 #import "WDKDebugPanelCellItem.h"
 #import "WDKDebugGroup_Internal.h"
+#import "WDKFileTool.h"
+#import "WDKDataTool.h"
 
 @implementation WDKFileExplorer
 
@@ -61,24 +64,43 @@
 
 #pragma mark -
 
+- (void)openPathWithViewController:(UIViewController *)viewController path:(NSString *)path {
+    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    if ([[[path pathExtension] lowercaseString] isEqualToString:@"plist"] ||
+        [[[path pathExtension] lowercaseString] isEqualToString:@"strings"] ||
+        [[[path pathExtension] lowercaseString] isEqualToString:@"json"]) {
+        WDKPlistViewController *vc = [[WDKPlistViewController alloc] initWithFilePath:path];
+        [viewController.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([WDKFileTool directoryExistsAtPath:path]) {
+        WDKDirectoryBrowserViewController *vc = [[WDKDirectoryBrowserViewController alloc] initWithPath:path];
+        [viewController.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        WDKMIMETypeInfo *info = [WDKDataTool checkMIMETypeWithData:data type:WDKMIMETypeJpg];
+        if (info) {
+            NSMutableArray *images = [NSMutableArray array];
+            UIImage *image = [UIImage imageWithContentsOfFile:path];
+            if (image) {
+                [images addObject:image];
+            }
+
+            WDKImageBrowserViewController *vc = [[WDKImageBrowserViewController alloc] initWithImages:images index:0];
+            [viewController.navigationController pushViewController:vc animated:YES];
+        }
+        else {
+            WDKTextEditViewController *vc = [[WDKTextEditViewController alloc] initWithFilePath:path];
+            [viewController.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
+
 - (void)pushDirectoryBrowserViewControllerWithViewController:(UIViewController *)viewController path:(NSString *)path {
     viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     WDKDirectoryBrowserViewController *vc = [[WDKDirectoryBrowserViewController alloc] initWithPath:path];
-    [viewController.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)pushTextEditViewControllerWithViewController:(UIViewController *)viewController path:(NSString *)path {
-    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    WDKTextEditViewController *vc = [[WDKTextEditViewController alloc] initWithFilePath:path];
-    [viewController.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)pushPlistViewControllerWithViewController:(UIViewController *)viewController path:(NSString *)path {
-    viewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    WDKPlistViewController *vc = [[WDKPlistViewController alloc] initWithFilePath:path];
     [viewController.navigationController pushViewController:vc animated:YES];
 }
 
@@ -108,40 +130,29 @@
     NSArray<WDKPathItem *> *paths = [WDKDirectoryBrowserViewController favoritePathItems];
     
     for (WDKPathItem *pathItem in paths) {
-        WDKDebugPanelCellItem *item = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeDefault];
-        item.accessoryType = WDKDebugPanelCellAccessoryTypeDisclosureIndicator;
+        WDKDebugPanelCellItem *cellItem = [WDKDebugPanelCellItem itemWithType:WDKDebugPanelCellTypeDefault];
+        cellItem.accessoryType = WDKDebugPanelCellAccessoryTypeDisclosureIndicator;
         
         BOOL isDirectory = NO;
         BOOL exists = [[NSFileManager defaultManager] fileExistsAtPath:pathItem.path isDirectory:&isDirectory];
         
-        item.swipeable = YES;
-        item.title = [pathItem.path lastPathComponent];
-        item.titleColor = exists ? (isDirectory ? [UIColor blueColor] : [UIColor blackColor]) : [UIColor redColor];
-        item.userInfo = pathItem;
+        cellItem.swipeable = YES;
+        cellItem.title = [pathItem.path lastPathComponent];
+        cellItem.titleColor = exists ? (isDirectory ? [UIColor blueColor] : [UIColor blackColor]) : [UIColor redColor];
+        cellItem.userInfo = pathItem;
         
-        __weak typeof(item) weak_item = item;
+        __weak typeof(cellItem) weak_item = cellItem;
         
-        item.selectAction = ^(UIViewController *viewController) {
-            if ([weak_item.titleColor isEqual:[UIColor blackColor]]) {
-                if ([[[pathItem.path pathExtension] lowercaseString] isEqualToString:@"plist"] ||
-                    [[[pathItem.path pathExtension] lowercaseString] isEqualToString:@"strings"] ||
-                    [[[pathItem.path pathExtension] lowercaseString] isEqualToString:@"json"]) {
-                    [self pushPlistViewControllerWithViewController:viewController path:pathItem.path];
-                }
-                else {
-                    [self pushTextEditViewControllerWithViewController:viewController path:pathItem.path];
-                }
-            }
-            else if ([weak_item.titleColor isEqual:[UIColor blueColor]]) {
-                [self pushDirectoryBrowserViewControllerWithViewController:viewController path:pathItem.path];
-            }
+        cellItem.selectAction = ^(UIViewController *viewController) {
+            WDKPathItem *pathItem = weak_item.userInfo;
+            [self openPathWithViewController:viewController path:pathItem.path];
         };
         
-        item.deleteAction = ^{
+        cellItem.deleteAction = ^{
             [WDKDirectoryBrowserViewController deleteFavoritePathItemWithItem:weak_item.userInfo];
         };
         
-        [arrM addObject:item];
+        [arrM addObject:cellItem];
     }
     
     return [@[arrM] mutableCopy];
