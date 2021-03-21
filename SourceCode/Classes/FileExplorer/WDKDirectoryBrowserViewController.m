@@ -15,7 +15,7 @@
 #import "WDKTextEditViewController.h"
 #import "WDKImageBrowserViewController.h"
 #import "WDKPlistViewController.h"
-#import "WDKDataTool.h"
+#import "WDKFileTool.h"
 
 #define WDK_FAVORITE_PATHS_PLIST_PATH    [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/WCDebugKit/favorite_paths.plist"]
 
@@ -433,20 +433,13 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     
     NSArray<NSNumber *> *types = @[
-        @(WDKMIMETypePng),
-        @(WDKMIMETypeJpg),
+        @(WCMIMETypeBmp),
+        @(WCMIMETypeIco),
+        @(WCMIMETypeJpg),
+        @(WCMIMETypePng),
     ];
     
-    __block WDKMIMETypeInfo *info;
-    [types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        WDKMIMEType type = [obj intValue];
-        info = [WDKDataTool checkMIMETypeWithData:data type:type];
-        if (info) {
-            *stop = YES;
-        }
-    }];
-    
-    return info != nil ? YES : NO;
+    return [WDKFileTool checkImageFileExistsAtPath:filePath imageTypes:types];
 }
 
 - (BOOL)fileIsMatching:(NSString *)file extensions:(NSArray *)extensions {

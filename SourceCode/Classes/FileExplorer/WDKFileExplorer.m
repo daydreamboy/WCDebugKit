@@ -16,7 +16,6 @@
 #import "WDKDebugPanelCellItem.h"
 #import "WDKDebugGroup_Internal.h"
 #import "WDKFileTool.h"
-#import "WDKDataTool.h"
 
 @implementation WDKFileExplorer
 
@@ -78,9 +77,14 @@
         [viewController.navigationController pushViewController:vc animated:YES];
     }
     else {
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        WDKMIMETypeInfo *info = [WDKDataTool checkMIMETypeWithData:data type:WDKMIMETypeJpg];
-        if (info) {
+        NSArray<NSNumber *> *types = @[
+            @(WCMIMETypeBmp),
+            @(WCMIMETypeIco),
+            @(WCMIMETypeJpg),
+            @(WCMIMETypePng),
+        ];
+        
+        if ([WDKFileTool checkImageFileExistsAtPath:path imageTypes:types]) {
             NSMutableArray *images = [NSMutableArray array];
             UIImage *image = [UIImage imageWithContentsOfFile:path];
             if (image) {

@@ -9,6 +9,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, WCMIMEType) {
+    WCMIMETypeBmp,
+    WCMIMETypeGif,
+    WCMIMETypeHeic,
+    WCMIMETypeHeif,
+    WCMIMETypeIco,
+    WCMIMETypeJpg,
+    WCMIMETypePng,
+    WCMIMETypeTtf,
+};
+
 @interface WDKFileTool : NSObject
 
 /**
@@ -18,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
  @return YES if the directory exists, or NO if the directory not exists or it's a file
  */
 + (BOOL)directoryExistsAtPath:(NSString *)path;
+
++ (BOOL)checkImageFileExistsAtPath:(NSString *)path imageTypes:(NSArray<NSNumber *> *)imageTypes;
 
 @end
 
