@@ -16,6 +16,7 @@
 #import "WDKImageBrowserViewController.h"
 #import "WDKPlistViewController.h"
 #import "WDKFileTool.h"
+#import "UIAlertController+FixAutoLayoutWarning.h"
 
 #define WDK_FAVORITE_PATHS_PLIST_PATH    [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches/WCDebugKit/favorite_paths.plist"]
 
@@ -65,30 +66,11 @@ static NSString *NSStringFromWDKPathType(WDKPathType pathType)
 }
 @end
 
-typedef NS_ENUM(NSInteger, WDKDirectoryBrowserActionSheetType) {
-    WDKDirectoryBrowserActionSheetTypeDeleteConfirm,    /**< 删除确认 */
-};
-
 typedef NS_ENUM(NSInteger, WDKActionSheetOperation) {
     WDKActionSheetOperationCancel = 0,
     WDKActionSheetOperationView = 1,
     WDKActionSheetOperationExport,
 };
-
-@interface UIActionSheet (WDKDirectoryBrowserViewController)
-@property (nonatomic, strong) id userInfo;
-@end
-
-@implementation UIActionSheet (WDKDirectoryBrowserViewController)
-static const char * const UserInfoObjectTag = "UserInfoObjectTag";
-@dynamic userInfo;
-- (void)setUserInfo:(id)userInfo {
-    objc_setAssociatedObject(self, UserInfoObjectTag, userInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (id)userInfo {
-    return objc_getAssociatedObject(self, UserInfoObjectTag);
-}
-@end
 
 // File Attributes
 static NSString *WDKFileAttributeFileSize = @"WDKFileAttributeFileSize";
@@ -628,29 +610,6 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     }
 }
 
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (actionSheet.tag == WDKDirectoryBrowserActionSheetTypeDeleteConfirm) {
-        if (buttonIndex == 0) {
-            NSError *error = nil;
-            NSString *fileName = actionSheet.userInfo;
-            NSString *filePath = [self pathForFile:fileName];
-            if (filePath.length && [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
-                NSMutableArray *arrM = [NSMutableArray arrayWithArray:self.files];
-                [arrM removeObject:fileName];
-                
-                self.files = arrM;
-                self.filesFiltered = [self.files copy];
-                [self.tableView reloadData];
-            }
-            else {
-                NSLog(@"delete file failed at path: %@, error: %@", filePath, error);
-            }
-        }
-    }
-}
-
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -741,10 +700,30 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     else if (item & WDKContextMenuItemDeletion) {
         NSLog(@"WDKContextMenuItemDeletion");
         NSString *title = [NSString stringWithFormat:@"%@%@?", NSLocalizedString(@"确认删除", nil), file];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:title delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:NSLocalizedString(@"删除", nil) otherButtonTitles:nil];
-        actionSheet.userInfo = file;
-        actionSheet.tag = WDKDirectoryBrowserActionSheetTypeDeleteConfirm;
-        [actionSheet showInView:self.view];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"删除", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            NSError *error = nil;
+            NSString *fileName = file;
+            NSString *filePath = [self pathForFile:fileName];
+            if (filePath.length && [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error]) {
+                NSMutableArray *arrM = [NSMutableArray arrayWithArray:self.files];
+                [arrM removeObject:fileName];
+                
+                self.files = arrM;
+                self.filesFiltered = [self.files copy];
+                [self.tableView reloadData];
+            }
+            else {
+                NSLog(@"delete file failed at path: %@, error: %@", filePath, error);
+            }
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"取消", nil) style:UIAlertActionStyleCancel handler:nil]];
+        
+        // Note: Fix UIAlertController auto layout warning https://stackoverflow.com/questions/55372093/uialertcontrollers-actionsheet-gives-constraint-error-on-ios-12-2-12-3
+        // @see https://stackoverflow.com/a/58666480
+        [alert pruneNegativeWidthConstraints];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
