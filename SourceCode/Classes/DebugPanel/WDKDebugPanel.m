@@ -53,6 +53,7 @@ static NSString *ODKPluginsRegisterClass = @"WDKDebugPluginsInfo";
 @property (nonatomic, assign) BOOL statusBarEntryEnabled;
 
 + (void)installDebugPanelOnStatusBar;
++ (void)registerTakeScreenshotNotification;
 + (void)toggleDebugPanel;
 
 @end
@@ -223,6 +224,8 @@ static WDKDebugPanel *WDK_sharedPanel;
         twoFingersTapRecognizer.numberOfTouchesRequired = 2;
         [statusBar addGestureRecognizer:twoFingersTapRecognizer];
     }
+    
+    [self registerTakeScreenshotNotification];
 }
 
 #pragma mark Public Methods
@@ -301,6 +304,10 @@ static WDKDebugPanel *WDK_sharedPanel;
     [vc reloadData];
 }
 
++ (void)registerTakeScreenshotNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:[WDKDebugPanel sharedPanel] selector:@selector(handleUIApplicationUserDidTakeScreenshotNotification:) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+}
+
 + (void)toggleDebugPanel {
     if (![WDKDebugPanel sharedPanel].presenting) {
         [[WDKDebugPanel sharedPanel] showDebugPanel:nil];
@@ -373,6 +380,12 @@ static WDKDebugPanel *WDK_sharedPanel;
     if (self.statusBarEntryEnabled) {
         [self showDebugPanel:nil];
     }
+}
+
+#pragma mark - NSNotification
+
+- (void)handleUIApplicationUserDidTakeScreenshotNotification:(NSNotification *)notification {
+    [[WDKDebugPanel sharedPanel] showDebugPanel:nil];
 }
 
 #pragma mark - Load Tools

@@ -429,14 +429,13 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     return [[file.lowercaseString pathExtension] isEqualToString:@"strings"];
 }
 
-- (BOOL)fileIsPicture:(NSString *)filePath {
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    
+- (BOOL)fileIsPicture:(NSString *)filePath {    
     NSArray<NSNumber *> *types = @[
         @(WCMIMETypeBmp),
         @(WCMIMETypeIco),
         @(WCMIMETypeJpg),
         @(WCMIMETypePng),
+        @(WCMIMETypeWebp),
     ];
     
     return [WDKFileTool checkImageFileExistsAtPath:filePath imageTypes:types];

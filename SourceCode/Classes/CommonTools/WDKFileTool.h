@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, WCMIMEType) {
     WCMIMETypeJpg,
     WCMIMETypePng,
     WCMIMETypeTtf,
+    WCMIMETypeWebp,
 };
 
 @interface WDKFileTool : NSObject
