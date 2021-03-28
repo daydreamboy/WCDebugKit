@@ -258,8 +258,9 @@
     }
     else {
         NSString *msg = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"请检查", nil), filename];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"读取配置文件出错", nil) message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"好的", nil) otherButtonTitles:nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"读取配置文件出错", nil) message:msg preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"好的", nil) style:UIAlertActionStyleDefault handler:nil]];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
     }
     
     NSMutableArray *allVersions = [NSMutableArray array];

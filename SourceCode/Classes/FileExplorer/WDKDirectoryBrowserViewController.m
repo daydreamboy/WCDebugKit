@@ -716,9 +716,10 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     NSString *file = self.filesFiltered[indexPath.row];
     NSString *path = [self pathForFile:file];
     
-    if (item & WDKContextMenuItemView) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:path delegate:nil cancelButtonTitle:NSLocalizedString(@"好的", nil) otherButtonTitles:nil];
-        [alert show];
+    if (item & WDKContextMenuItemView) {        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:path preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"好的", nil) style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
     else if (item & WDKContextMenuItemCopy) {
         [UIPasteboard generalPasteboard].string = path;

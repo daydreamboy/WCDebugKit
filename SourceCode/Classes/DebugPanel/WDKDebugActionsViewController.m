@@ -301,8 +301,9 @@ static const char * const WDK_UserInfoObjectTag = "UserInfoObjectTag";
         else {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 NSString *msg = [NSString stringWithFormat:@"code: %ld, %@", (long)error.code, error.localizedDescription];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"获取配置文件出错", nil) message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"好的", nil) otherButtonTitles:nil];
-                [alert show];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"读取配置文件出错", nil) message:msg preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"好的", nil) style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
                 
                 if (completion) {
                     completion(NO);

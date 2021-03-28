@@ -361,7 +361,9 @@ typedef NS_ENUM(NSUInteger, WCPlistEditViewControllerMode) {
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            [[[UIAlertView alloc] initWithTitle:@"保存出错" message:@"日期时间格式不对" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存出错" message:@"日期时间格式不对" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
     else if ([self.object isKindOfClass:[NSData class]]) {
@@ -832,7 +834,9 @@ return YES;
                     [JSONString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
                     if (error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[[UIAlertView alloc] initWithTitle:@"保存出错" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存出错" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil]];
+                            [self presentViewController:alert animated:YES completion:nil];
                         });
                     }
                 }
@@ -859,7 +863,9 @@ return YES;
                     }
                     if (error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[[UIAlertView alloc] initWithTitle:@"保存出错" message:error.localizedDescription delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存出错" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"确定", nil) style:UIAlertActionStyleDefault handler:nil]];
+                            [self presentViewController:alert animated:YES completion:nil];
                         });
                     }
                 }

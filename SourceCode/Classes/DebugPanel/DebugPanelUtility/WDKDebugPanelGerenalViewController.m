@@ -156,9 +156,10 @@
         }
     }
     else {
-        if (item.alertMessage) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:item.title message:item.alertMessage delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
-            [alert show];
+        if (item.alertMessage) {            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:item.title message:item.alertMessage preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"好的", nil) style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     }
 }
