@@ -79,7 +79,7 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
 
 #define WDK_SectionHeader_H 40.0f
 
-@interface WDKDirectoryBrowserViewController () <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UISearchBarDelegate, WDKInteractiveLabelDelegate, WDKContextMenuCellDelegate>
+@interface WDKDirectoryBrowserViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, WDKInteractiveLabelDelegate, WDKContextMenuCellDelegate>
 @property (nonatomic, copy) NSString *pwdPath;  /**< current folder path */
 @property (nonatomic, strong) NSArray *files;   /**< list name of files */
 @property (nonatomic, strong) NSArray *filesFiltered; /**< list name of filtered files */

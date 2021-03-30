@@ -13,6 +13,9 @@
 		4F15DABB2436F3BB0081FFBC /* WDKLLDBTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */; };
 		4F15DABC2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
 		4F15DABD2436F3BB0081FFBC /* WDKLLDBTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */; };
+		4F1713E426108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */; };
+		4F1713E526108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */; };
+		4F1713E626108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1713E326108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h */; };
 		4F1AC85923BC6B140023CE3A /* Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC85723BC6B140023CE3A /* Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8CE23BC6B4D0023CE3A /* WDKIntegratedTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86223BC6B4D0023CE3A /* WDKIntegratedTools.h */; };
 		4F1AC8CF23BC6B4D0023CE3A /* WDKIntegratedTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86323BC6B4D0023CE3A /* WDKIntegratedTools.m */; };
@@ -197,6 +200,8 @@
 		4F02FC0A2566CE5300447A5F /* WDKScreenAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKScreenAdapter.m; sourceTree = "<group>"; };
 		4F15DAB92436F3BB0081FFBC /* WDKLLDBTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WDKLLDBTool.h; sourceTree = "<group>"; };
 		4F15DABA2436F3BB0081FFBC /* WDKLLDBTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WDKLLDBTool.m; sourceTree = "<group>"; };
+		4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+FixAutoLayoutWarning.m"; sourceTree = "<group>"; };
+		4F1713E326108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+FixAutoLayoutWarning.h"; sourceTree = "<group>"; };
 		4F1AC84623BC6B030023CE3A /* libWCDebugKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWCDebugKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AC85523BC6B140023CE3A /* Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AC85723BC6B140023CE3A /* Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Framework.h; sourceTree = "<group>"; };
@@ -531,6 +536,8 @@
 		4F1AC8AE23BC6B4D0023CE3A /* CommonTools */ = {
 			isa = PBXGroup;
 			children = (
+				4F1713E326108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h */,
+				4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */,
 				4FE2758E2607A75600F0DD02 /* WDKFileTool.h */,
 				4FE2758F2607A75600F0DD02 /* WDKFileTool.m */,
 				4FF9B08A2412497500D4145E /* WDKApplicationTool.h */,
@@ -635,6 +642,7 @@
 				4F1AC8FA23BC6B4D0023CE3A /* WDKCustomPanelAction.h in Headers */,
 				4F1AC91723BC6B4E0023CE3A /* WDKPlistViewController.h in Headers */,
 				4F1AC94B23BC6B4E0023CE3A /* WDKViewExplorerViewController.h in Headers */,
+				4F1713E626108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h in Headers */,
 				4F1AC8D523BC6B4D0023CE3A /* WDKObjectExplorerViewController.h in Headers */,
 				4F1AC8E523BC6B4D0023CE3A /* WDKNavBackButtonItem.h in Headers */,
 				4F1AC8CE23BC6B4D0023CE3A /* WDKIntegratedTools.h in Headers */,
@@ -826,6 +834,7 @@
 				4FF9B09D2412497500D4145E /* WDKApplicationTool.m in Sources */,
 				4F1AC8DA23BC6B4D0023CE3A /* WDKHookManager.m in Sources */,
 				4FE275902607A75600F0DD02 /* WDKFileTool.m in Sources */,
+				4F1713E426108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */,
 				4FF9B0932412497500D4145E /* WDKRuntimeTool.m in Sources */,
 				4F1AC93E23BC6B4E0023CE3A /* WCViewControllerTool.m in Sources */,
 				4F1AC91B23BC6B4E0023CE3A /* WDKImageZoomView.m in Sources */,
@@ -875,6 +884,7 @@
 				4F1AC8F223BC6B4D0023CE3A /* WDKNavBackButtonItem.m in Sources */,
 				4F1AC8D323BC6B4D0023CE3A /* WDKDeviceInfoViewer.m in Sources */,
 				4F1AC93B23BC6B4E0023CE3A /* WDKViewExplorerOverlayView.m in Sources */,
+				4F1713E526108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */,
 				4F1AC8FC23BC6B4D0023CE3A /* WDKDebugGroup.m in Sources */,
 				4F1AC94A23BC6B4E0023CE3A /* WDKUserInterfaceInspector.m in Sources */,
 				4FFBB230240E3D5300881907 /* WDKMacroRuntime.m in Sources */,
