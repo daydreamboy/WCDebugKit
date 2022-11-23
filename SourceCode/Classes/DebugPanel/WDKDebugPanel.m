@@ -352,7 +352,18 @@ static WDKDebugPanel *WDK_sharedPanel;
             UIViewController *hostViewController = window.rootViewController;
             
             if (!hostViewController) {
-                hostViewController = [[[UIApplication sharedApplication].delegate window] rootViewController];
+                if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(window)]) {
+                    hostViewController = [[[UIApplication sharedApplication].delegate window] rootViewController];
+                }
+                else {
+                    // @see https://stackoverflow.com/a/57978362
+                    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                        if (window.isKeyWindow) {
+                            hostViewController = [window rootViewController];
+                            break;
+                        }
+                    }
+                }
             }
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:actionsViewController];
