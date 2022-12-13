@@ -16,11 +16,10 @@
 		4F1713E426108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */; };
 		4F1713E526108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */; };
 		4F1713E626108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1713E326108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h */; };
-		4F1AC85923BC6B140023CE3A /* Framework.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC85723BC6B140023CE3A /* Framework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8CE23BC6B4D0023CE3A /* WDKIntegratedTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86223BC6B4D0023CE3A /* WDKIntegratedTools.h */; };
 		4F1AC8CF23BC6B4D0023CE3A /* WDKIntegratedTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86323BC6B4D0023CE3A /* WDKIntegratedTools.m */; };
 		4F1AC8D023BC6B4D0023CE3A /* WDKIntegratedTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86323BC6B4D0023CE3A /* WDKIntegratedTools.m */; };
-		4F1AC8D123BC6B4D0023CE3A /* WCDebugKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86423BC6B4D0023CE3A /* WCDebugKit.h */; };
+		4F1AC8D123BC6B4D0023CE3A /* WCDebugKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86423BC6B4D0023CE3A /* WCDebugKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8D223BC6B4D0023CE3A /* WDKDeviceInfoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86623BC6B4D0023CE3A /* WDKDeviceInfoViewer.m */; };
 		4F1AC8D323BC6B4D0023CE3A /* WDKDeviceInfoViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC86623BC6B4D0023CE3A /* WDKDeviceInfoViewer.m */; };
 		4F1AC8D423BC6B4D0023CE3A /* WDKDeviceInfoViewer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC86723BC6B4D0023CE3A /* WDKDeviceInfoViewer.h */; };
@@ -55,19 +54,19 @@
 		4F1AC8F223BC6B4D0023CE3A /* WDKNavBackButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC87F23BC6B4D0023CE3A /* WDKNavBackButtonItem.m */; };
 		4F1AC8F323BC6B4D0023CE3A /* WDKExpandableHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88023BC6B4D0023CE3A /* WDKExpandableHeaderView.h */; };
 		4F1AC8F423BC6B4D0023CE3A /* WDKDebugPanelSectionItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88123BC6B4D0023CE3A /* WDKDebugPanelSectionItem.h */; };
-		4F1AC8F523BC6B4D0023CE3A /* WDKDebugPanelPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88223BC6B4D0023CE3A /* WDKDebugPanelPod.h */; };
+		4F1AC8F523BC6B4D0023CE3A /* WDKDebugPanelPod.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88223BC6B4D0023CE3A /* WDKDebugPanelPod.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8F623BC6B4D0023CE3A /* WDKDebugActionsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88323BC6B4D0023CE3A /* WDKDebugActionsViewController.h */; };
-		4F1AC8F723BC6B4D0023CE3A /* WDKDebugPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88423BC6B4D0023CE3A /* WDKDebugPanel.h */; };
+		4F1AC8F723BC6B4D0023CE3A /* WDKDebugPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88423BC6B4D0023CE3A /* WDKDebugPanel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8F823BC6B4D0023CE3A /* WDKDebugActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC88523BC6B4D0023CE3A /* WDKDebugActionsViewController.m */; };
 		4F1AC8F923BC6B4D0023CE3A /* WDKDebugActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC88523BC6B4D0023CE3A /* WDKDebugActionsViewController.m */; };
-		4F1AC8FA23BC6B4D0023CE3A /* WDKCustomPanelAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88723BC6B4D0023CE3A /* WDKCustomPanelAction.h */; };
+		4F1AC8FA23BC6B4D0023CE3A /* WDKCustomPanelAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88723BC6B4D0023CE3A /* WDKCustomPanelAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC8FB23BC6B4D0023CE3A /* WDKDebugGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC88823BC6B4D0023CE3A /* WDKDebugGroup.m */; };
 		4F1AC8FC23BC6B4D0023CE3A /* WDKDebugGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC88823BC6B4D0023CE3A /* WDKDebugGroup.m */; };
-		4F1AC8FD23BC6B4D0023CE3A /* WDKEnumAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88923BC6B4D0023CE3A /* WDKEnumAction.h */; };
-		4F1AC8FF23BC6B4D0023CE3A /* WDKToggleAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88B23BC6B4D0023CE3A /* WDKToggleAction.h */; };
+		4F1AC8FD23BC6B4D0023CE3A /* WDKEnumAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88923BC6B4D0023CE3A /* WDKEnumAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F1AC8FF23BC6B4D0023CE3A /* WDKToggleAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88B23BC6B4D0023CE3A /* WDKToggleAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC90223BC6B4D0023CE3A /* WDKDebugGroup_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88D23BC6B4D0023CE3A /* WDKDebugGroup_Internal.h */; };
-		4F1AC90323BC6B4D0023CE3A /* WDKSubMenuAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88E23BC6B4D0023CE3A /* WDKSubMenuAction.h */; };
-		4F1AC90423BC6B4D0023CE3A /* WDKDebugGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88F23BC6B4D0023CE3A /* WDKDebugGroup.h */; };
+		4F1AC90323BC6B4D0023CE3A /* WDKSubMenuAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88E23BC6B4D0023CE3A /* WDKSubMenuAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F1AC90423BC6B4D0023CE3A /* WDKDebugGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F1AC88F23BC6B4D0023CE3A /* WDKDebugGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F1AC90523BC6B4D0023CE3A /* WDKCustomPanelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC89023BC6B4D0023CE3A /* WDKCustomPanelAction.m */; };
 		4F1AC90623BC6B4D0023CE3A /* WDKCustomPanelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC89023BC6B4D0023CE3A /* WDKCustomPanelAction.m */; };
 		4F1AC90723BC6B4D0023CE3A /* WDKEnumAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AC89123BC6B4D0023CE3A /* WDKEnumAction.m */; };
@@ -139,10 +138,11 @@
 		4F23F899256FCD7B009FE147 /* WDKDebugAction_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F23F893256FCD7B009FE147 /* WDKDebugAction_Internal.h */; };
 		4F23F89A256FCD7B009FE147 /* WDKDebugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F23F894256FCD7B009FE147 /* WDKDebugAction.m */; };
 		4F23F89B256FCD7B009FE147 /* WDKDebugAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F23F894256FCD7B009FE147 /* WDKDebugAction.m */; };
-		4F23F89C256FCD7B009FE147 /* WDKDebugAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F23F895256FCD7B009FE147 /* WDKDebugAction.h */; };
+		4F23F89C256FCD7B009FE147 /* WDKDebugAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F23F895256FCD7B009FE147 /* WDKDebugAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F2820FF241B6DE90032E16A /* WDKColorTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F2820FD241B6DE90032E16A /* WDKColorTool.h */; };
 		4F282100241B6DE90032E16A /* WDKColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2820FE241B6DE90032E16A /* WDKColorTool.m */; };
 		4F282101241B6DE90032E16A /* WDKColorTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2820FE241B6DE90032E16A /* WDKColorTool.m */; };
+		4F41810C29481A0600086D72 /* WDKFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE2758F2607A75600F0DD02 /* WDKFileTool.m */; };
 		4F59BFD123BC7032004495E5 /* WCDebugKit.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC86423BC6B4D0023CE3A /* WCDebugKit.h */; };
 		4F59BFD223BC7054004495E5 /* WDKDebugPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC88423BC6B4D0023CE3A /* WDKDebugPanel.h */; };
 		4F59BFD323BC7060004495E5 /* WDKDebugPanelPod.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4F1AC88223BC6B4D0023CE3A /* WDKDebugPanelPod.h */; };
@@ -203,8 +203,7 @@
 		4F1713E226108D6100206762 /* UIAlertController+FixAutoLayoutWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+FixAutoLayoutWarning.m"; sourceTree = "<group>"; };
 		4F1713E326108D6100206762 /* UIAlertController+FixAutoLayoutWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+FixAutoLayoutWarning.h"; sourceTree = "<group>"; };
 		4F1AC84623BC6B030023CE3A /* libWCDebugKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWCDebugKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F1AC85523BC6B140023CE3A /* Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F1AC85723BC6B140023CE3A /* Framework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Framework.h; sourceTree = "<group>"; };
+		4F1AC85523BC6B140023CE3A /* WCDebugKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WCDebugKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1AC85823BC6B140023CE3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F1AC86223BC6B4D0023CE3A /* WDKIntegratedTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDKIntegratedTools.h; sourceTree = "<group>"; };
 		4F1AC86323BC6B4D0023CE3A /* WDKIntegratedTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDKIntegratedTools.m; sourceTree = "<group>"; };
@@ -346,7 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				4F1AC84623BC6B030023CE3A /* libWCDebugKit.a */,
-				4F1AC85523BC6B140023CE3A /* Framework.framework */,
+				4F1AC85523BC6B140023CE3A /* WCDebugKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -354,7 +353,6 @@
 		4F1AC85623BC6B140023CE3A /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				4F1AC85723BC6B140023CE3A /* Framework.h */,
 				4F1AC85823BC6B140023CE3A /* Info.plist */,
 			);
 			path = Framework;
@@ -652,7 +650,6 @@
 				4F1AC8F723BC6B4D0023CE3A /* WDKDebugPanel.h in Headers */,
 				4F1AC91123BC6B4D0023CE3A /* WDKDirectoryBrowserViewController.h in Headers */,
 				4F1AC94123BC6B4E0023CE3A /* WDKUserInterfaceInspector.h in Headers */,
-				4F1AC85923BC6B140023CE3A /* Framework.h in Headers */,
 				4F1AC8F523BC6B4D0023CE3A /* WDKDebugPanelPod.h in Headers */,
 				4FF9B0952412497500D4145E /* WDKApplicationTool.h in Headers */,
 				4F02FC0B2566CE5300447A5F /* WDKScreenAdapter.h in Headers */,
@@ -730,7 +727,7 @@
 			);
 			name = Framework;
 			productName = Framework;
-			productReference = 4F1AC85523BC6B140023CE3A /* Framework.framework */;
+			productReference = 4F1AC85523BC6B140023CE3A /* WCDebugKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -889,6 +886,7 @@
 				4F1AC94A23BC6B4E0023CE3A /* WDKUserInterfaceInspector.m in Sources */,
 				4FFBB230240E3D5300881907 /* WDKMacroRuntime.m in Sources */,
 				4F1AC8ED23BC6B4D0023CE3A /* WDKDebugPanelGerenalViewController.m in Sources */,
+				4F41810C29481A0600086D72 /* WDKFileTool.m in Sources */,
 				4FF9B09E2412497500D4145E /* WDKApplicationTool.m in Sources */,
 				4F1AC8E723BC6B4D0023CE3A /* WDKExpandableHeaderView.m in Sources */,
 				4FF9B0942412497500D4145E /* WDKRuntimeTool.m in Sources */,
@@ -1116,7 +1114,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wc.Framework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = WCDebugKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1186,7 +1184,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wc.Framework;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = WCDebugKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
