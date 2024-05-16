@@ -37,7 +37,7 @@ A debug kit for iOS
   s.public_header_files = [ 'SourceCode/Classes/WCDebugKit.h' ]
   s.script_phase = { 
     :name => 'create_universal_framework.sh', 
-    :script => 'bash "${PROJECT_DIR}/../Scripts/create_universal_framework.sh"' 
+    :script => 'bash "${PROJECT_DIR}/../scripts/create_universal_framework.sh"' 
   }
 
   # Note: 
