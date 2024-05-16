@@ -81,7 +81,7 @@
     if ([self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)]) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.title = [NSString stringWithFormat:@"%ld / %ld", (long)_currentIndex, (long)_images.count];
+    self.title = [NSString stringWithFormat:@"%ld / %ld", (long)(_currentIndex + 1), (long)_images.count];
 }
 
 - (NSUInteger)imageCount {
@@ -197,7 +197,7 @@
     
     NSUInteger pageIndex = [self currentPageIndexWithScrollView:self.pagingScrollView];
     _currentIndex = pageIndex;
-    self.title = [NSString stringWithFormat:@"%ld / %ld", (long)_currentIndex, (long)_images.count];
+    self.title = [NSString stringWithFormat:@"%ld / %ld", (long)(_currentIndex + 1), (long)_images.count];
 }
 
 #pragma mark - Actions

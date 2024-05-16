@@ -125,8 +125,19 @@
                 break;
             }
             case WCMIMETypeWebp: {
-                const unsigned char bytes[] = { 0x57, 0x45, 0x42, 0x50 };
-                isImageFile = (chunkData.length >= sizeof(bytes) && memcmp(byteOrder, bytes, sizeof(bytes)) == 0);
+                // @see https://www.iana.org/assignments/media-types/image/webp
+                // [0, 3] and [8, 14]
+                // 0x52, 0x49, 0x46, 0x46, XX XX XX XX, 0x57, 0x45, 0x42, 0x50, 0x56, 0x50, 0x38
+                // RIFF XXXX WEBPVP8
+                const unsigned char bytes1[] = { 0x52, 0x49, 0x46, 0x46 };
+                const unsigned char bytes2[] = { 0x57, 0x45, 0x42, 0x50, 0x56, 0x50, 0x38 };
+                
+                // [0, 3]
+                BOOL b1 = memcmp(byteOrder, bytes1, sizeof(bytes1)) == 0;
+                // [8, 14]
+                BOOL b2 = memcmp(byteOrder + 8, bytes2, sizeof(bytes2)) == 0;
+                
+                isImageFile = (chunkData.length >= 15 && b1 & b2);
                 break;
             }
             default:
