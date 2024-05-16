@@ -28,13 +28,17 @@ A debug kit for iOS
   s.source           = { :git => 'https://github.com/daydreamboy/WCDebugKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  # Note: 8.0 => 11.0 for Xcode14+
+  s.ios.deployment_target = '11.0'
   s.source_files = [ 
     'SourceCode/Classes/WCDebugKit.h', 
     'SourceCode/Classes/WCDebugKit_Configuration.h' 
   ]
   s.public_header_files = [ 'SourceCode/Classes/WCDebugKit.h' ]
-  s.script_phase = { :name => 'create_universal_framework.sh', :script => 'bash "${PROJECT_DIR}/../scripts/create_universal_framework.sh"' }
+  s.script_phase = { 
+    :name => 'create_universal_framework.sh', 
+    :script => 'bash "${PROJECT_DIR}/../Scripts/create_universal_framework.sh"' 
+  }
 
   # Note: 
   # WDK prefix short for WCDebugKit

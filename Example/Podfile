@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '11.0'
 
 target 'WCDebugKit_Example' do
   pod 'WCDebugKit', :path => '../'
@@ -9,4 +9,17 @@ target 'WCDebugKit_Example' do
   #pod 'WCDebugKit/DebugPanel', :path => '../'
   #pod 'WCDebugKit/FileExplorer', :path => '../'
   #pod 'WCDebugKit/IntegratedTools', :path => '../'
+end
+
+# Note: fix target `WCDebugKit-WCDebugKit` code signing
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+       if target.isa == 'PBXNativeTarget' && target.product_type == 'com.apple.product-type.bundle'
+         target.build_configurations.each do |config|
+           config.build_settings["CODE_SIGNING_ALLOWED"] = 'NO'
+         end
+       end
+    end
+  end
 end
