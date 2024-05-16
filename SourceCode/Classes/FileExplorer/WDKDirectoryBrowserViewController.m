@@ -76,6 +76,11 @@ typedef NS_ENUM(NSInteger, WDKActionSheetOperation) {
 static NSString *WDKFileAttributeFileSize = @"WDKFileAttributeFileSize";
 static NSString *WDKFileAttributeIsDirectory = @"WDKFileAttributeIsDirectory";
 static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNumberOfFilesInDirectory";
+static NSString *WDKFileAttributeOwnerName = @"WDKFileAttributeOwnerName";
+static NSString *WDKFileAttributeGroupName = @"WDKFileAttributeGroupName";
+static NSString *WDKFileAttributePosixPermissions = @"WDKFileAttributePosixPermissions";
+// for Debug
+static NSString *WDKFileAttributeOriginalAttributes = @"WDKFileAttributeOriginalAttributes";
 
 #define WDK_SectionHeader_H 40.0f
 
@@ -205,7 +210,11 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     if (self.pwdPath.length) {
         
         if (!self.isSearching) {
-            NSArray *fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.pwdPath error:nil];
+            NSError *error = nil;
+            NSArray *fileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.pwdPath error:&error];
+            if (error) {
+                NSLog(@"[WCDebugKit]<failed to list contents>|path:%@|error:%@|", self.pwdPath, error);
+            }
             self.files = [fileNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
             
             self.filesFiltered = [self.files copy];
@@ -287,27 +296,57 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     
     NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
     for (NSString *fileName in self.files) {
-        
-        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
         NSString *path = [self pathForFile:fileName];
-        NSArray *subFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+        NSDictionary *attributesDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
         
-        BOOL isDirectory = NO;
-        unsigned long long fileSize = [self sizefFileAtPath:path isDirectory:&isDirectory];
+        NSMutableDictionary *attributesM = [NSMutableDictionary dictionary];
+        BOOL isDirectory = [attributesDictionary[NSFileType] isEqualToString:NSFileTypeDirectory];
         
-        attributes[WDKFileAttributeIsDirectory] = @(isDirectory);
+        attributesM[WDKFileAttributeIsDirectory] = @(isDirectory);
+        attributesM[WDKFileAttributeOriginalAttributes] = attributesDictionary;
+        attributesM[WDKFileAttributeOwnerName] = attributesDictionary[NSFileOwnerAccountName];
+        attributesM[WDKFileAttributeGroupName] = attributesDictionary[NSFileGroupOwnerAccountName];
+        attributesM[WDKFileAttributePosixPermissions] = ({
+            NSString *retVal = nil;
+                
+            if (attributesDictionary) {
+                NSMutableString *rwx = [NSMutableString stringWithCapacity:9];
+                short permissions = [attributesDictionary[NSFilePosixPermissions] shortValue];
+                
+                // User
+                [rwx appendString:(permissions & S_IRUSR) ? @"r" : @"-"];
+                [rwx appendString:(permissions & S_IWUSR) ? @"w" : @"-"];
+                [rwx appendString:(permissions & S_IXUSR) ? @"x" : @"-"];
+
+                // Group
+                [rwx appendString:(permissions & S_IRGRP) ? @"r" : @"-"];
+                [rwx appendString:(permissions & S_IWGRP) ? @"w" : @"-"];
+                [rwx appendString:(permissions & S_IXGRP) ? @"x" : @"-"];
+
+                // Other
+                [rwx appendString:(permissions & S_IROTH) ? @"r" : @"-"];
+                [rwx appendString:(permissions & S_IWOTH) ? @"w" : @"-"];
+                [rwx appendString:(permissions & S_IXOTH) ? @"x" : @"-"];
+                
+                retVal = [rwx copy];
+            }
+            
+            retVal;
+        });
+        
         if (!isDirectory) {
             // file
-            attributes[WDKFileAttributeFileSize] = @(fileSize);
+            attributesM[WDKFileAttributeFileSize] = @([attributesDictionary[NSFileSize] unsignedLongLongValue]);
         }
         else {
             // directory
-            attributes[WDKFileAttributeNumberOfFilesInDirectory] = @(subFileNames.count);
+            NSArray *subFileNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+            attributesM[WDKFileAttributeNumberOfFilesInDirectory] = @(subFileNames.count);
             [directories addObject:[fileName copy]];
         }
         
-        if (attributes.count) {
-            dictM[fileName] = attributes;
+        if (attributesM.count) {
+            dictM[fileName] = attributesM;
         }
     }
     
@@ -326,10 +365,10 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
                 
                 NSString *path = [self pathForFile:fileName];
                 NSError *error = nil;
-                unsigned long long totalSize = [self sizeOfDirectoryAtPath:path error:&error];
+                long long totalSize = [self sizeOfDirectoryAtPath:path error:&error];
                 
                 NSMutableDictionary *attributes = weak_self.fileAttributes[fileName];
-                attributes[WDKFileAttributeFileSize] = (error == nil ? @(totalSize) : error);
+                attributes[WDKFileAttributeFileSize] = @(totalSize);
                 
                 // once a folder size is calculated, refresh table view to be more real time
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -353,33 +392,19 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
     return [self.pwdPath stringByAppendingPathComponent:file];
 }
 
-- (unsigned long long)sizefFileAtPath:(NSString *)path isDirectory:(BOOL *)isDirectory {
-    BOOL isDirectoryL = NO;
-    BOOL isExisted = [[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectoryL];
-    
-    *isDirectory = isDirectoryL;
-    if (isDirectoryL || !isExisted) {
-        // If the path is a directory, or no file at the path exists
-        return 0;
-    }
-    
-    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-    
-    return [attributes[NSFileSize] unsignedLongLongValue];
-}
-
-- (unsigned long long)sizeOfDirectoryAtPath:(NSString *)path error:(NSError **)error {
+- (long long)sizeOfDirectoryAtPath:(NSString *)path error:(NSError **)error {
     NSArray *filesArray = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:path error:error];
     if (*error) {
         NSLog(@"error: %@", *error);
+        return -1;
     }
     NSEnumerator *filesEnumerator = [filesArray objectEnumerator];
     NSString *fileName;
     unsigned long long fileSize = 0;
     
     while (fileName = [filesEnumerator nextObject]) {
-        NSDictionary *fileDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:[path stringByAppendingPathComponent:fileName] error:nil];
-        fileSize += [fileDictionary fileSize];
+        NSDictionary *attributesDictionary = [[NSFileManager defaultManager] attributesOfItemAtPath:[path stringByAppendingPathComponent:fileName] error:nil];
+        fileSize += [attributesDictionary fileSize];
     }
     
     return fileSize;
@@ -468,22 +493,25 @@ static NSString *WDKFileAttributeNumberOfFilesInDirectory = @"WDKFileAttributeNu
         sizeString = NSLocalizedString(@"正在计算大小...", nil);
     }
     else {
-        if ([attributes[WDKFileAttributeFileSize] isKindOfClass:[NSError class]]) {
-            NSError *error = (NSError *)attributes[WDKFileAttributeFileSize];
-            sizeString = error.localizedDescription;
+        long long fileSize = [attributes[WDKFileAttributeFileSize] longLongValue];
+        if (fileSize >= 0) {
+            sizeString = [self prettySizeWithBytes:fileSize];
         }
         else {
-            sizeString = [self prettySizeWithBytes:[attributes[WDKFileAttributeFileSize] unsignedLongLongValue]];
+            sizeString = @"Unknown size";
         }
     }
+    NSString *permissonString = attributes[WDKFileAttributePosixPermissions] != nil
+        ? [NSString stringWithFormat:@"%@ %@ %@", attributes[WDKFileAttributePosixPermissions], attributes[WDKFileAttributeOwnerName], attributes[WDKFileAttributeGroupName]]
+        : @"no permission";
     if (!isDir) {
         // file
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", sizeString];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", sizeString, permissonString];
     }
     else {
         // directory
         NSString *unit = [attributes[WDKFileAttributeNumberOfFilesInDirectory] isEqualToNumber:@(1)] ? @"file" : @"files";
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@ (%@)", attributes[WDKFileAttributeNumberOfFilesInDirectory], unit, sizeString];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@ (%@) (%@)", attributes[WDKFileAttributeNumberOfFilesInDirectory], unit, sizeString, permissonString];
     }
     cell.detailTextLabel.textColor = [UIColor grayColor];
     cell.accessoryType = isDir ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
